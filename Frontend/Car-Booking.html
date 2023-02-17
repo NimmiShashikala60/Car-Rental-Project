@@ -21,7 +21,7 @@
 <body>
 <div class="aside">
     <div class="logo">
-        <a href="#"><span>C</span>ar Rentel System</a>
+        <a href="#"><span>C</span>ar Rental</a>
     </div>
     <div class="navbar-toggler">
         <span></span>
@@ -36,11 +36,110 @@
         <li><a href="User-Information.html" class="active"><i class="fa fa-user"></i>User Information </a><li>
         <li><a href="Driver-Information.html" class="active"><i class="fa fa-car"></i>Driver Information </a><li>
         <li><a href="View-Schedule.html" class="active"><i class="fa fa-admin"></i>View Schedule </a><li>
+        <li><a href="Income.html" class="active"><i class="fa fa-admin"></i>Income</a><li>
 
 
     </ul>
 </div>
-<div class="main-content d-flex w-100 justify-content-between align-items-center"></div>
+<div class="main-content d-flex w-100 justify-content-between flex-column align-items-center">
+    <section class="d-flex">
+        <form class="mt-2 p-5 row w-50">
+            <div class="mb-2">
+                <label for="AdminId" class="form-label">Admin Id</label>
+                <input type="text" class="form-control" id="AdminId" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-2">
+                <label for="AdminName" class="form-label">Admin Name</label>
+                <input type="text" class="form-control" id="AdminName">
+            </div>
+            <div class="mb-2">
+                <label for="AdminEmail" class="form-label">Admin Email</label>
+                <input type="email" class="form-control" id="AdminEmail" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-2">
+                <label for="ContactNumber" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+            <button type="submit" class="btn btn-primary" id="Save">Save</button>
+
+        </form>
+
+        <form class="mt-2 p-5 row">
+            <div class="mb-3 col col-5">
+                <label for="AdminId" class="form-label">Admin Id</label>
+                <input type="text" class="form-control" id="AdminId" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 col col-5">
+                <label for="AdminName" class="form-label">Admin Name</label>
+                <input type="text" class="form-control" id="AdminName">
+            </div>
+            <div class="mb-3 col col-5">
+                <label for="AdminEmail" class="form-label">Admin Email</label>
+                <input type="email" class="form-control" id="AdminEmail" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 col col-5">
+                <label for="ContactNumber" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 col col-5">
+                <label for="ContactNumber" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 col col-5">
+                <label for="ContactNumber" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 col col-5">
+                <label for="ContactNumber" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+        </form>
+    </section>
+
+    <div class="p-5 w-100">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Admin Id</th>
+                <th scope="col">Admin Name</th>
+                <th scope="col">Admin Email</th>
+                <th scope="col">Contact Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td colspan="2"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td colspan="2"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 
 </body>
 </html>
