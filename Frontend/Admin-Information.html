@@ -132,30 +132,111 @@
    $("#AdminInformation").on("click", function () {
        var formData = $("#AdminInformation").serialize();
        $.ajax({
-           url:baseUrl+"customer",
-           method:"post",
-           data:formData,
-           dataType:"json",
-           success:function (res){
+           url: baseUrl + "customer",
+           method: "post",
+           data: formData,
+           dataType: "json",
+           success: function (res) {
                alert(res.message);
-
-               function loadAllAdmin() {
-
-               }
-
                loadAllAdmin();
            },
-           error:function (error){
-               var jsObject=JSON.parse(error.responseText);
+
+           error: function (error) {
+               var jsObject = JSON.parse(error.responseText);
                alert(jsObject.message);
            }
-       })
+       });
+   });
 
-   })
+
     $("#btnGetAll").click(function () {
         //send ajax request to the customer servlet
         loadAllAdmin();
     });
+    $("#btnAdminDelete").click(function () {
+        let id = $("#txtAdminID").val();
+        $.ajax({
+            url: baseURL+"customer?id=" + id + "",
+            method: "delete",
+            dataType:"json",
+            success: function (resp) {
+                alert(resp.message);
+                loadAllAdmin();
+            },
+            error:function (error){
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    });
+    $("#btnUpdate").click(function () {
+
+        let AdminID = $("#txtAdminID").val();
+        let AdminName = $("#txtAdminName").val();
+        let AdminEmail = $("#txtAdminEmail").val();
+        let AdminContact = $("#txtAdminContact").val();
+
+        var Admin = {
+            id: AdminID,
+            name: AdminName,
+            email: AdminEmail,
+            contact: AdminContact,
+        }
+
+        $.ajax({
+            url: baseURL+'customer',
+            method: 'put',
+            contentType:"application/json",
+            data:JSON.stringify(Admin),
+            dataType:"json",
+            success: function (res) {
+                alert(res.message);
+                loadAllAdmin();
+            },
+            error:function (error){
+                let cause= JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+
+        });
+    });
+    function loadAllAdmin() {
+        $("#tblAdmin").empty();
+        $.ajax({
+            url: baseURL+"customer",
+            dataType: "json",
+            success: function (resp) {
+                console.log(resp);
+                for (let adm of resp.data) {
+                    var row = '<tr><td>' + adm.id + '</td><td>' + adm.name + '</td><td>' + adm.email + '</td><td>' + adm.contact + '</td></tr>';
+                    $("#tblAdmin").append(row);
+                }
+                bindRowClickEvents();
+                setTextFieldValues("","","","");
+                $("#txtAdmin").focus();
+            }
+        });
+
+    }
+    function bindRowClickEvents() {
+        $("#tblAdmin>tr").click(function () {
+            let id = $(this).children(":eq(0)").text();
+            let name = $(this).children(":eq(1)").text();
+            let email = $(this).children(":eq(2)").text();
+            let contact = $(this).children(":eq(3)").text();
+
+            $('#txtAdminID').val(id);
+            $('#txtAdminName').val(name);
+            $('#txtAdminEmail').val(email);
+            $('#txtAdminContact').val(contact);
+
+        });
+    }
+    function setTextFieldValues(id, name, email, contact) {
+        $("#txtAdminID").val(id);
+        $("#txtAdminName").val(name);
+        $("#txtAdminEmail").val(email);
+        $("#txtAdminContact").val(contact);
+    }
 </script>
 </body>
 </html>
