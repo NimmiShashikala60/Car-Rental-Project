@@ -11,7 +11,7 @@
           rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="assets/bootstrap-5.2.1-dist/bootstrap-5.2.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/style.css">
@@ -144,7 +144,151 @@
     </section>
 
 </div>
-
 </div>
+<script src="assets/js/js/bootstrap.min.js"></script>
+<script src="assets/jquery-3.6.1.min.js"></script>
+
+<script>
+    let baseUrl="http://localhost:8080/car_rental/";
+
+
+    $("#ViewSchedule").on("click", function () {
+        var formData = $("#ViewSchedule").serialize();
+        $.ajax({
+            url: baseUrl + "customer",
+            method: "post",
+            data: formData,
+            dataType: "json",
+            success: function (res) {
+                alert(res.message);
+                loadViewSchedule();
+            },
+
+            error: function (error) {
+                var jsObject = JSON.parse(error.responseText);
+                alert(jsObject.message);
+            }
+        });
+    });
+
+
+    $("#btnGetAll").click(function () {
+        //send ajax request to the customer servlet
+        loadViewSchedule();
+    });
+    $("#btnScheduleDelete").click(function () {
+        let id = $("#txtVehicle.reg.num").val();
+        $.ajax({
+            url: baseURL+"customer?id=" + num + "",
+            method: "delete",
+            dataType:"json",
+            success: function (resp) {
+                alert(resp.message);
+                loadAllViewSchedule();
+            },
+            error:function (error){
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    });
+    $("#btnUpdate").click(function () {
+
+        let VehicleRegNum = $("#txtVehicleRegNum").val();
+        let VehicleType = $("#txtVehicleType").val();
+        let VehicleBrand = $("#txtVehicleBrand").val();
+        let NumberOfPassenger = $("#txtNumberOfPassenger").val();
+        let UserId = $("#txtUserId").val();
+        let UserContact = $("#txtUserContact").val();
+        let Date = $("#txtDate").val();
+
+
+        var Schedule = {
+            vehicleregnum: VehicleRegNum,
+            vehicletype: VehicleType,
+            vehiclebrand: VehicleBrand,
+            numberofpassenger: NumberOfPassenger,
+            userid: UserId,
+            usercontact: UserContact,
+            date: Date,
+        }
+
+        $.ajax({
+            url: baseURL+'customer',
+            method: 'put',
+            contentType:"application/json",
+            data:JSON.stringify(Schedule),
+            dataType:"json",
+            success: function (res) {
+                alert(res.message);
+                loadAllSchedule();
+            },
+            error:function (error){
+                let cause= JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+
+        });
+    });
+    function loadAllSchedule() {
+        $("#tblSchedule").empty();
+        $.ajax({
+            url: baseURL+"customer",
+            dataType: "json",
+            success: function (resp) {
+                console.log(resp);
+                for (let shc of resp.data) {
+                    var row = '<tr><td>' + shc.vehicleregnum + '</td><td>' + shc.vehicletype + '</td><td>' + shc.vehiclebrand + '</td><td>' + shc.numberofpassenger + '</td></tr>'+ shc.userid + '</td></tr>'+ shc.contact + '</td></tr>'+ shc.date + '</td></tr>';
+                    $("#tblAdmin").append(row);
+                }
+                bindRowClickEvents();
+                setTextFieldValues("","","","");
+                $("#txtSchedule").focus();
+            }
+        });
+
+    }
+    function bindRowClickEvents() {
+        $("#tblSchedule>tr").click(function () {
+            let vehicleregnum = $(this).children(":eq(0)").text();
+            let vehicletype = $(this).children(":eq(1)").text();
+            let vehiclebrand = $(this).children(":eq(2)").text();
+            let numberofpassenger = $(this).children(":eq(3)").text();
+            let userid = $(this).children(":eq(4)").text();
+            let usercontact = $(this).children(":eq(5)").text();
+            let date = $(this).children(":eq(6)").text();
+
+
+
+            $('#txtVehicleRegNum').val(vehicleregnum);
+            $('#txtVehicleType').val(vehicletype);
+            $('#txtVehicleBrand').val(vehiclebrand);
+            $('#txtNumberOfPassenger').val(numberofpassenger);
+            $('#txtUserid').val(userid);
+            $('#txtUserContact').val(usercontact);
+            $('#txtDate').val(date);
+
+        });
+    }
+    function setTextFieldValues(vehicleregnum, vehicletype, vehclebrand, numberofpassenger, userid, usercontact, date) {
+        $("#txtVehicleRegNum").val(vehicleregnum);
+        $("#txtVehicleType").val(vehicletype);
+        $("#txtVehicleBrand").val(vehclebrand);
+        $('#txtNumberOfPassenger').val(numberofpassenger);
+        $('#txtUserId').val(userid);
+        $('#txtUserContact').val(usercontact);
+        $('#txtDate').val(date);
+    }
+
+
+
+
+
+
+
+
+
+
+
+</script>
 </body>
 </html>

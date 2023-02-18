@@ -161,6 +161,7 @@
 <script src="assets/jquery-3.6.1.min.js"></script>
 <script>
     let baseUrl="http://localhost:8080/car_rental/";
+    loadAllUser();
 
 
             $("#UserInformation").on("click", function () {
@@ -190,7 +191,7 @@
             $("#btnUserDelete").click(function () {
                 let id = $("#txtUserID").val();
                 $.ajax({
-                    url: baseURL + "customer?id=" + id + "",
+                    url: baseURL + "customer?id=" + NIC + "",
                     method: "delete",
                     dataType: "json",
                     success: function (resp) {
@@ -204,16 +205,23 @@
             });
             $("#btnUpdate").click(function () {
 
-                let UserID = $("#txtUserID").val();
+                let UserNIC = $("#txtUserNIC").val();
                 let UserName = $("#txtUserName").val();
-                let UserEmail = $("#txtUserEmail").val();
+                let UserPassword = $("#txtUserPassword").val();
                 let UserContact = $("#txtUserContact").val();
+                let UserAddress = $("#txtUserAddress").val();
+                let UserBankName = $("#txtUserBankName").val();
+                let UserPayment = $("#txtUserPayment").val();
 
                 var User = {
-                    id: UserID,
+                    id: UserNIC,
                     name: UserName,
+                    password:UserPassword
                     email: UserEmail,
                     contact: UserContact,
+                    address: UserAddress,
+                    bankname: UserBankName,
+                    payment: UserPayment,
                 }
 
                 $.ajax({
@@ -241,8 +249,8 @@
                     dataType: "json",
                     success: function (resp) {
                         console.log(resp);
-                        for (let adm of resp.data) {
-                            var row = '<tr><td>' + adm.id + '</td><td>' + adm.name + '</td><td>' + adm.email + '</td><td>' + adm.contact + '</td></tr>';
+                        for (let usr of resp.data) {
+                            var row = '<tr><td>' + usr.nic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>' + usr.contact + '</td></tr>' + usr.address + '</td></tr>' + usr.bankname + '</td></tr>' + usr.payment + '</td></tr>';
                             $("#tblUser").append(row);
                         }
                         bindRowClickEvents();
@@ -257,22 +265,34 @@
                 $("#tblUser>tr").click(function () {
                     let id = $(this).children(":eq(0)").text();
                     let name = $(this).children(":eq(1)").text();
-                    let email = $(this).children(":eq(2)").text();
-                    let contact = $(this).children(":eq(3)").text();
+                    let password = $(this).children(":eq(2)").text();
+                    let email = $(this).children(":eq(4)").text();
+                    let contact = $(this).children(":eq(5)").text();
+                    let address = $(this).children(":eq(6)").text();
+                    let bankname = $(this).children(":eq(7)").text();
+                    let payment = $(this).children(":eq(8)").text();
 
-                    $('#txtUserID').val(id);
+                    $('#txtUserNIC').val(nic);
                     $('#txtUserName').val(name);
+                    $('#txtUserpassword').val(password);
                     $('#txtUserEmail').val(email);
                     $('#txtUserContact').val(contact);
+                    $('#txtUseraddress').val(address);
+                    $('#txtUserbankname').val(bankname);
+                    $('#txtUserpayment').val(payment);
 
                 });
             }
 
-            function setTextFieldValues(id, name, email, contact) {
+            function setTextFieldValues(id, name,password, email, contact, address, bankname, payment) {
                 $("#txtUserID").val(id);
                 $("#txtUserName").val(name);
-                $("#txtUserEmail").val(email);
+                $("#txtUserpassword").val(password);
+                $("#txtUseremail").val(email);
                 $("#txtUserContact").val(contact);
+                $("#txtUseraddress").val(address);
+                $("#txtUserbankname").val(bankname);
+                $("#txtUserpayment").val(payment);
             }
 
 
