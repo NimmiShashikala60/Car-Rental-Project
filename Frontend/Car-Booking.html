@@ -60,7 +60,7 @@
                 <label for="Time" class="form-label">Time:</label>
                 <input type="time" class="form-control" id="Time" aria-describedby="emailHelp">
             </div>
-            <button type="submit" class="btn btn-primary" id="Save">Save</button>
+            <button type="button" class="btn btn-primary" id="Save">Save</button>
 
         </form>
 
@@ -152,30 +152,20 @@
 <script>
     let baseurl="http://localhost:8080/car_rental/";
 
-    $("#Admin") .on("click" ,function ()){
-        baseurl
-    }
 
+    $("#Save").on("click",function () {
 
+        $.ajax({
+            url:baseUrl+"booking",
+            method:"post",
+            // dataType:"json",
+            // contentType: "application/json",
+            success:function () {
+                alert("saved")
+            }
+        })
 
-
-
-
-
-
-
-
-
-
-
-
-
+    })
 </script>
-
-
-
-
-
-
 </body>
 </html>
