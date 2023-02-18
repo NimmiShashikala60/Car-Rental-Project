@@ -31,9 +31,29 @@
       <input type="password" class="form-control" id="Password">
     </div>
 
-    <button class="btn btn-primary">Login</button>
+    <button class="btn btn-primary"name="login" id="login">Login</button>
   </form>
 </section>
+<script src="assets/js/js/bootstrap.min.js"></script>
+<script src="assets/jquery-3.6.1.min.js"></script>
+<script>
+  let baseUrl="http://localhost:8080/car_rental/";
 
+  $("#Save").on("click",function () {
+
+    $.ajax({
+      url:baseUrl+"login",
+      method:"post",
+      // dataType:"json",
+      // contentType: "application/json",
+      success:function () {
+        alert("saved")
+      }
+    })
+
+  })
+
+
+</script>
 </body>
 </html>

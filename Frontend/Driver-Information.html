@@ -67,10 +67,10 @@
                 <input type="text" class="form-control" id="DriverSalary" aria-describedby="emailHelp">
             </div>
             <section class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary" id="Save">Save</button>
-            <button type="submit" class="btn btn-primary" id="Update">Update</button>
-            <button type="submit" class="btn btn-primary" id="GetAll">GetAll</button>
-            <button type="submit" class="btn btn-primary" id="Delete">Delete</button>
+            <button type="button" class="btn btn-primary" id="Save">Save</button>
+            <button type="button" class="btn btn-primary" id="Update">Update</button>
+            <button type="button" class="btn btn-primary" id="GetAll">GetAll</button>
+            <button type="button" class="btn btn-primary" id="Delete">Delete</button>
             </section>
         </form>
 
@@ -133,7 +133,7 @@
 <script src="assets/jquery-3.6.1.min.js"></script>
 <script>
    let baseUrl="http://localhost:8080/car_rental/";
-   loadAllDriver()
+
 
 
    $("#DriverInformation").on("click", function () {
@@ -220,7 +220,7 @@
                    $("#tblDriver").append(row);
                }
                bindRowClickEvents();
-               setTextFieldValues("","","","");
+               setTextFieldValues("","","","","");
                $("#txtDriver").focus();
            }
        });
@@ -249,6 +249,20 @@
        $("#txtDriverContact").val(contact);
        $("#txtDriverSalary").val(salary);
    }
+
+   $("#Save").on("click",function () {
+
+       $.ajax({
+           url:baseUrl+"driver",
+           method:"post",
+           // dataType:"json",
+           // contentType: "application/json",
+           success:function () {
+               alert("saved")
+           }
+       })
+
+   })
 
 </script>
 </body>
