@@ -36,17 +36,60 @@
         <li><a href="Driver-Information.html" class="active"><i class="fa fa-car"></i>Driver Information </a><li>
         <li><a href="View-Schedule.html" class="active"><i class="fa fa-admin"></i>View Schedule </a><li>
         <li><a href="Income.html" class="active"><i class="fa fa-admin"></i>Income</a><li>
-
-
     </ul>
 </div>
 <div class="main-content d-flex justify-content-between gap-5 flex-column align-items-center">
+    <section class="w-50 h-100 p-5">
+        <h4>Car Routes</h4>
+        <form class="mt-2">
+            <div class="mb-3">
+                <label for="AdminId" class="form-label">Veh.Reg.Number</label>
+                <input type="text" class="form-control" name="AdminId" id="AdminId" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="AdminName" class="form-label">Veh.Brand</label>
+                <input type="text" class="form-control" name="AdminName" id="AdminName">
+            </div>
+            <div class="mb-3">
+                <label for="AdminEmail" class="form-label">Admin Email</label>
+                <input type="email" class="form-control" name="AdminEmail" id="AdminEmail" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="ContactNumber" class="form-label">Num.Of.Passenger</label>
+                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="ContactNumber" class="form-label">Transmission Type</label>
+                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="ContactNumber" class="form-label">Fuel Type</label>
+                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="ContactNumber" class="form-label">Daily Rate</label>
+                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="ContactNumber" class="form-label">Monthly Rate</label>
+                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+            </div>
+            <section class="d-flex gap-2">
+                <button type="button" class="btn btn-primary" id="Save">Save</button>
+                <button type="button" class="btn btn-primary" id="Update">Update</button>
+                <button type="button" class="btn btn-primary" id="GetAll">GetAll</button>
+                <button type="button" class="btn btn-primary" id="Delete">Delete</button>
+            </section>
+        </form>
+
+    </section>
 
     <section class="row" style="width: 60vw">
         <table class="table col-10">
             <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Veh.Reg.Number:</th>
                 <th scope="col">Veh.Brand:</th>
                 <th scope="col">Veh.Type:</th>
                 <th scope="col">Num.Of.Passenger</th>
@@ -66,9 +109,11 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
             <tr>
                 <th scope="row">2</th>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -87,10 +132,12 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
             <tr>
                 <th scope="row">4</th>
                 <td colspan="2"></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -105,6 +152,23 @@
 
 
 </div>
+<script src="assets/js/js/bootstrap.min.js"></script>
+<script src="assets/jquery-3.6.1.min.js"></script>
+<script>
+    let baseUrl="http://localhost:8080/car_rental/";
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 <section class="d-flex flex-column justify-content-start align-items-start gap-5" style="position: relative; margin-left: 300px">
     <div class="border border-1" style="width: 300px; height: 200px"></div>
     <button class="btn btn-primary">Save</button>

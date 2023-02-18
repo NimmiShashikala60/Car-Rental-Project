@@ -74,11 +74,11 @@
                 <label for="Date" class="form-label">Date:</label>
                 <input type="date" class="form-control" id="Date" aria-describedby="emailHelp">
             </div>
-            <section>
-            <button type="submit" class="btn btn-primary" id="Save">Save</button>
-            <button type="submit" class="btn btn-primary" id="Update">Update</button>
-            <button type="submit" class="btn btn-primary" id="GetAll">GetAll</button>
-            <button type="submit" class="btn btn-primary" id="Delete">Delete</button>
+            <section class="d-flex gap-2">
+            <button type="button" class="btn btn-primary" id="Save">Save</button>
+            <button type="button" class="btn btn-primary" id="Update">Update</button>
+            <button type="button" class="btn btn-primary" id="GetAll">GetAll</button>
+            <button type="button" class="btn btn-primary" id="Delete">Delete</button>
             </section>
         </form>
 
@@ -244,7 +244,7 @@
                     $("#tblAdmin").append(row);
                 }
                 bindRowClickEvents();
-                setTextFieldValues("","","","");
+                setTextFieldValues("","","","","","","");
                 $("#txtSchedule").focus();
             }
         });
@@ -281,6 +281,19 @@
         $('#txtUserContact').val(usercontact);
         $('#txtDate').val(date);
     }
+    $("#Save").on("click",function () {
+
+        $.ajax({
+            url:baseUrl+"schedule",
+            method:"post",
+            // dataType:"json",
+            // contentType: "application/json",
+            success:function () {
+                alert("saved")
+            }
+        })
+
+    })
 
 
 

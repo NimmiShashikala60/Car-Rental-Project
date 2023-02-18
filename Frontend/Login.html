@@ -38,6 +38,10 @@
 <script src="assets/jquery-3.6.1.min.js"></script>
 <script>
   let baseUrl="http://localhost:8080/car_rental/";
+  function setTextFieldValues(vehicleregnum, vehicletype, vehclebrand, numberofpassenger, userid, usercontact, date) {
+    $("#txtVehicleRegNum").val(vehicleregnum);
+    $("#txtVehicleType").val(vehicletype);
+  }
 
   $("#Save").on("click",function () {
 
