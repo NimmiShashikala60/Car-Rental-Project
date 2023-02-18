@@ -76,9 +76,9 @@
             </div>
             <section class="d-flex gap-2">
                 <button type="button" class="btn btn-primary" id="Save">Save</button>
-                <button type="button" class="btn btn-primary" id="Update">Update</button>
-                <button type="button" class="btn btn-primary" id="GetAll">GetAll</button>
-                <button type="button" class="btn btn-primary" id="Delete">Delete</button>
+                <button type="button" class="btn btn-primary"  id="Update">Update</button>
+                <button type="button" class="btn btn-primary"  id="GetAll">GetAll</button>
+                <button type="button" class="btn btn-primary"  id="Delete">Delete</button>
             </section>
         </form>
 
@@ -89,7 +89,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Veh.Reg.Number:</th>
+                <th scope="col">Veh.Reg.ID:</th>
                 <th scope="col">Veh.Brand:</th>
                 <th scope="col">Veh.Type:</th>
                 <th scope="col">Num.Of.Passenger</th>
@@ -152,26 +152,162 @@
 
 
 </div>
-<script src="assets/js/js/bootstrap.min.js"></script>
-<script src="assets/jquery-3.6.1.min.js"></script>
-<script>
-    let baseUrl="http://localhost:8080/car_rental/";
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
 <section class="d-flex flex-column justify-content-start align-items-start gap-5" style="position: relative; margin-left: 300px">
     <div class="border border-1" style="width: 300px; height: 200px"></div>
     <button class="btn btn-primary">Save</button>
 </section>
+<script src="assets/js/js/bootstrap.min.js"></script>
+<script src="assets/jquery-3.6.1.min.js"></script>
+<script>
+    let baseUrl="http://localhost:8080/car_rental/"
+
+
+    $("#CarRoutes").on("click", function () {
+        var formData = $("#CarRoutes").serialize();
+        $.ajax({
+            url: baseUrl + "customer",
+            method: "post",
+            data: formData,
+            dataType: "json",
+            success: function (res) {
+                alert(res.message);
+                loadAllRoutes();
+            },
+
+            error: function (error) {
+                var jsObject = JSON.parse(error.responseText);
+                alert(jsObject.message);
+            }
+        });
+    });
+
+
+    $("#btnGetAll").click(function () {
+        //send ajax request to the customer servlet
+        loadAllRoutes();
+    });
+    $("#btnDelete").click(function () {
+        let id = $("#txtVehRegId").val();
+        $.ajax({
+            url: baseURL+"customer?id=" + id + "",
+            method: "delete",
+            dataType:"json",
+            success: function (resp) {
+                alert(resp.message);
+                loadAllRoutes();
+            },
+            error:function (error){
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    });
+    $("#btnUpdate").click(function () {
+
+        let VehRegId = $("#txtVehRegId").val();
+        let VehBrand = $("#txtVehBrand").val();
+        let VeheType = $("#txtVehType").val();
+        let NumOfPassenger = $("#txtNumOfPassenger").val();
+        let TransmissionType = $("#txtTransmissionType").val();
+        let FuelType = $("#txtFuelType").val();
+        let DailyType = $("#txtDailyType").val();
+        let MonthlyRate = $("#txtMonthlyRate").val();
+
+        var Routes = {
+            id: VehRegId,
+            brand: VehBrand,
+            type: VeheType,
+            passenger: NumOfPassenger,
+            transmissiontype: TransmissionType,
+            fueltype: FuelType,
+            dailyrate: DailyRate,
+            monthlyrate: MonthlyRate,
+        }
+
+        $.ajax({
+            url: baseURL+'customer',
+            method: 'put',
+            contentType:"application/json",
+            data:JSON.stringify(Routes),
+            dataType:"json",
+            success: function (res) {
+                alert(res.message);
+                loadAllRoutes();
+            },
+            error:function (error){
+                let cause= JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+
+        });
+    });
+    function loadAllRoutes() {
+        $("#tblRoutes").empty();
+        $.ajax({
+            url: baseUrl+"customer",
+            dataType: "json",
+            success: function (resp) {
+                console.log(resp);
+                for (let rou of resp.data) {
+                    var row = '<tr><td>' + rou.id + '</td><td>' + rou.brand + '</td><td>' + rou.type + '</td><td>' + rou.passenger + '</td></tr>'+ rou.transmissiontype + '</td></tr>'+ rou.fueltype + '</td></tr>'+ rou.dailyrate + '</td></tr>'+ rou.monthlyrate + '</td></tr>';
+                    $("#tblAdmin").append(row);
+                }
+                bindRowClickEvents();
+                setTextFieldValues("","","","","","","","");
+                $("#txtRoutes").focus();
+            }
+        });
+
+    }
+    function bindRowClickEvents() {
+        $("#tblRoutes>tr").click(function () {
+            let id = $(this).children(":eq(0)").text();
+            let brand = $(this).children(":eq(1)").text();
+            let type = $(this).children(":eq(2)").text();
+            let passenger = $(this).children(":eq(3)").text();
+            let transmissiontype = $(this).children(":eq(4)").text();
+            let fueltype = $(this).children(":eq(5)").text();
+            let dailyrate = $(this).children(":eq(6)").text();
+            let monthlyrate = $(this).children(":eq(7)").text();
+
+            $('#txtID').val(id);
+            $('#txtBrand').val(brand);
+            $('#txtType').val(type);
+            $('#txtPassenger').val(passenger);
+            $('#txtTransmissionType').val(transmissiontype);
+            $('#txtFuelType').val(fueltype);
+            $('#txtDailyRate').val(dailyrate);
+            $('#txtMonthlyRate').val(monthlyrate);
+
+        });
+    }
+    function setTextFieldValues(id, brand, type, numofpassenger,transmissiontype,fueltype,dailyrate,monthlyrate) {
+        $("#txtID").val(id);
+        $("#txtBrand").val(brand);
+        $("#txtType").val(type);
+        $("#txtNumOfPassenger").val(numofpassenger);
+        $("#txtTransmission").val(transmissiontype);
+        $("#txtFuelType").val(fueltype);
+        $("#txtDailyRate").val(dailyrate);
+        $("#txtMonthlyRate").val(monthlyrate);
+    }
+
+    $("#Save").on("click",function () {
+
+        $.ajax({
+            url:baseUrl+"routes",
+            method:"post",
+            // dataType:"json",
+            // contentType: "application/json",
+            success:function () {
+                alert("saved")
+            }
+        })
+
+    })
+
+</script>
+
+
+
 </body>
 </html>
