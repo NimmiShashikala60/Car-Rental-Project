@@ -74,10 +74,12 @@
                 <label for="Date" class="form-label">Date:</label>
                 <input type="date" class="form-control" id="Date" aria-describedby="emailHelp">
             </div>
+            <section>
             <button type="submit" class="btn btn-primary" id="Save">Save</button>
             <button type="submit" class="btn btn-primary" id="Update">Update</button>
             <button type="submit" class="btn btn-primary" id="GetAll">GetAll</button>
             <button type="submit" class="btn btn-primary" id="Delete">Delete</button>
+            </section>
         </form>
 
     </section>
@@ -150,6 +152,7 @@
 
 <script>
     let baseUrl="http://localhost:8080/car_rental/";
+    loadAllSchedule();
 
 
     $("#ViewSchedule").on("click", function () {
