@@ -1,7 +1,7 @@
 :root
 {
     --bg-black-900:#fcfcfc;
-    --bg-black-100: #ceb9b9;
+    --bg-black-100: #39af14;
     --bg-black-50:#e8dfec;
     --text-black-900:#302e4d;
     --text-black-700:#504e70;
@@ -136,7 +136,7 @@ ul
 .aside .nav
 {
     margin-top: 50px;
-    background-color: #0a53be;
+    background-color: #d3c41c;
 }
 .aside .nav li
 {
