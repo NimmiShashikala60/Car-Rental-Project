@@ -1,17 +1,15 @@
 package lk.ijse.spring.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.ijse.spring.dto.AdminDTO;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping()
+@RequestMapping("/Admin")
 public class AdminInformationController {
 
-    @GetMapping
-    public void Customer(){
-        System.out.println("get invoked");
+    @PostMapping
+    public void SaveCustomer(AdminDTO dto){
+        System.out.println(dto.toString());
     }
 }
