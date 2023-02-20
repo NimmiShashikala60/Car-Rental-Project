@@ -44,11 +44,11 @@
         <form class="mt-2">
             <div class="mb-3">
                 <label for="AdminId" class="form-label">Veh.Reg.Number</label>
-                <input type="text" class="form-control" name="AdminId" id="AdminId" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="regNumber" id="regNumber" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="AdminName" class="form-label">Veh.Brand</label>
-                <input type="text" class="form-control" name="AdminName" id="AdminName">
+                <input type="text" class="form-control" name="vehBrand" id="vehBrand">
             </div>
             <div class="mb-3">
                 <label for="AdminEmail" class="form-label">Admin Email</label>
@@ -165,7 +165,7 @@
     $("#CarRoutes").on("click", function () {
         var formData = $("#CarRoutes").serialize();
         $.ajax({
-            url: baseUrl + "customer",
+            url: baseUrl + "carroute",
             method: "post",
             data: formData,
             dataType: "json",

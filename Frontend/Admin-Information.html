@@ -50,22 +50,22 @@
     <div class="main-content d-flex w-100 justify-content-between align-items-center">
         <section class="w-50 h-100 p-5">
             <h4>Admin Information</h4>
-            <form class="mt-2">
+            <form class="mt-2" id="adminForm">
                 <div class="mb-3">
                     <label for="AdminId" class="form-label">Admin Id</label>
-                    <input type="text" class="form-control" name="AdminId" id="AdminId" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" name="id" id="AdminId" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
                     <label for="AdminName" class="form-label">Admin Name</label>
-                    <input type="text" class="form-control" name="AdminName" id="AdminName">
+                    <input type="text" class="form-control" name="name" id="AdminName">
                 </div>
                 <div class="mb-3">
                     <label for="AdminEmail" class="form-label">Admin Email</label>
-                    <input type="email" class="form-control" name="AdminEmail" id="AdminEmail" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" name="email" id="AdminEmail" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
                     <label for="ContactNumber" class="form-label">Contact Number</label>
-                    <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" name="contact" id="ContactNumber" aria-describedby="emailHelp">
                 </div>
                 <section class="d-flex gap-2">
                     <button type="button" class="btn btn-primary" id="Save">Save</button>
@@ -134,51 +134,32 @@
     loadAllAdmin();
 
 
-   $("#AdminInformation").on("click", function () {
-       var formData = $("#AdminInformation").serialize();
-       $.ajax({
-           url: baseUrl + "customer",
-           method: "post",
-           data: formData,
-           dataType: "json",
-           success: function (res) {
-               alert(res.message);
-               loadAllAdmin();
-           },
-
-           error: function (error) {
-               var jsObject = JSON.parse(error.responseText);
-               alert(jsObject.message);
-           }
-       });
-   });
-
 
     $("#btnGetAll").click(function () {
         //send ajax request to the customer servlet
         loadAllAdmin();
     });
-    $("#btnAdminDelete").click(function () {
-        let id = $("#txtAdminID").val();
+    $("#Delete").click(function () {
+        let id = $("#AdminID").val();
         $.ajax({
-            url: baseURL+"customer?id=" + id + "",
+            url: baseUrl+`admin?id=${id}`,
             method: "delete",
             dataType:"json",
             success: function (resp) {
-                alert(resp.message);
+                alert(resp.massage);
                 loadAllAdmin();
             },
-            error:function (error){
-                alert(JSON.parse(error.responseText).message);
-            }
+            // error:function (error){
+            //     alert(JSON.parse(error.responseText).message);
+            // }
         });
     });
-    $("#btnUpdate").click(function () {
+    $("#Update").click(function () {
 
-        let AdminID = $("#txtAdminID").val();
-        let AdminName = $("#txtAdminName").val();
-        let AdminEmail = $("#txtAdminEmail").val();
-        let AdminContact = $("#txtAdminContact").val();
+        let AdminID = $("#AdminID").val();
+        let AdminName = $("#AdminName").val();
+        let AdminEmail = $("#AdminEmail").val();
+        let AdminContact = $("#AdminContact").val();
 
         var Admin = {
             id: AdminID,
@@ -188,13 +169,13 @@
         }
 
         $.ajax({
-            url: baseURL+'customer',
+            url: baseUrl+'admin',
             method: 'put',
             contentType:"application/json",
             data:JSON.stringify(Admin),
             dataType:"json",
             success: function (res) {
-                alert(res.message);
+                alert(res.massage);
                 loadAllAdmin();
             },
             error:function (error){
@@ -229,29 +210,32 @@
             let email = $(this).children(":eq(2)").text();
             let contact = $(this).children(":eq(3)").text();
 
-            $('#txtAdminID').val(id);
-            $('#txtAdminName').val(name);
-            $('#txtAdminEmail').val(email);
-            $('#txtAdminContact').val(contact);
+            $('#AdminID').val(id);
+            $('#AdminName').val(name);
+            $('#AdminEmail').val(email);
+            $('#AdminContact').val(contact);
 
         });
     }
     function setTextFieldValues(id, name, email, contact) {
-        $("#txtAdminID").val(id);
-        $("#txtAdminName").val(name);
-        $("#txtAdminEmail").val(email);
-        $("#txtAdminContact").val(contact);
+        $("#AdminID").val(id);
+        $("#AdminName").val(name);
+        $("#AdminEmail").val(email);
+        $("#AdminContact").val(contact);
     }
 
     $("#Save").on("click",function () {
 
+        let formData = $("#adminForm").serialize();
+
         $.ajax({
             url:baseUrl+"admin",
             method:"post",
+            data:formData,
              dataType:"json",
-             contentType: "application/json",
-            success:function () {
-                alert("saved")
+             // contentType: "application/json",
+            success:function (res) {
+                alert(res.massage)
             }
         })
 
