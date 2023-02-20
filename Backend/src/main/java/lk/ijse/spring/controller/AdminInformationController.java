@@ -43,8 +43,7 @@ public class AdminInformationController {
     @GetMapping
     public ResponseUtil getAllAdmin(){
         List<Admin> all = repo.findAll();
-        mapper.map(all,new TypeToken<AdminDTO>(){}.getType());
-       ArrayList<AdminDTO>allList= mapper.map(all,new TypeToken<ArrayList<AdminDTO>>(){}.getType());
+        ArrayList<AdminDTO>allList=mapper.map(all,new TypeToken<ArrayList<AdminDTO>>(){}.getType());
         return new ResponseUtil("ok","Successfully  :",allList);
     }
 
