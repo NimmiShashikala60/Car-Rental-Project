@@ -4,6 +4,8 @@ import lk.ijse.spring.dto.AdminDTO;
 import lk.ijse.spring.entity.Admin;
 import lk.ijse.spring.repo.AdminRepo;
 import lk.ijse.spring.util.ResponseUtil;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +21,20 @@ public class AdminInformationController {
 
     @Autowired
     private AdminRepo repo;
+
+    @Autowired
+    private ModelMapper mapper;
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil saveAdmin(@ModelAttribute AdminDTO dto){
         System.out.println(dto.toString());
         if (repo.existsById(dto.getId())){
             throw new RuntimeException("Admin Already exist");
+            //mapper.map(dto,Admin.class);
         }
+        Admin map=mapper.map(dto,Admin.class);
+        repo.save(map);
+
         Admin admin = new Admin(dto.getId(), dto.getName(), dto.getEmail(), dto.getContact());
         repo.save(admin);
         return new ResponseUtil("OK","Successfully Registered!",null);
@@ -34,7 +43,9 @@ public class AdminInformationController {
     @GetMapping
     public ResponseUtil getAllAdmin(){
         List<Admin> all = repo.findAll();
-        return new ResponseUtil("ok","Successfully  :",all);
+        mapper.map(all,new TypeToken<AdminDTO>(){}.getType());
+       ArrayList<AdminDTO>allList= mapper.map(all,new TypeToken<ArrayList<AdminDTO>>(){}.getType());
+        return new ResponseUtil("ok","Successfully  :",allList);
     }
 
     @PutMapping
@@ -43,6 +54,9 @@ public class AdminInformationController {
         if (!repo.existsById(dto.getId())){
             throw new RuntimeException("Admin doesn't exist");
         }
+        Admin map=mapper.map(dto,Admin.class);
+        repo.save(map);
+
         Admin admin = new Admin(dto.getId(), dto.getName(), dto.getEmail(), dto.getContact());
         repo.save(admin);
 
