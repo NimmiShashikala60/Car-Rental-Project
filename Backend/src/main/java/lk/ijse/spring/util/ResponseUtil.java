@@ -1,17 +1,18 @@
 package lk.ijse.spring.util;
 
+
 public class ResponseUtil{
     private String state;
     private String massage;
-    private String data;
+    private Object data;
 
-    public ResponseUtil() {
-    }
-
-    public ResponseUtil(String state, String massage, String data) {
+    public ResponseUtil(String state, String massage, Object data) {
         this.state = state;
         this.massage = massage;
         this.data = data;
+    }
+
+    public ResponseUtil() {
     }
 
     public String getState() {
@@ -30,11 +31,11 @@ public class ResponseUtil{
         this.massage = massage;
     }
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
@@ -43,7 +44,7 @@ public class ResponseUtil{
         return "ResponseUtil{" +
                 "state='" + state + '\'' +
                 ", massage='" + massage + '\'' +
-                ", data='" + data + '\'' +
+                ", data=" + data +
                 '}';
     }
 }

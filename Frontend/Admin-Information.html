@@ -81,44 +81,14 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Admin Id</th>
                     <th scope="col">Admin Name</th>
                     <th scope="col">Admin Email</th>
                     <th scope="col">Contact Number</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td colspan="2"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <tbody id="tblAdmin">
+
                 </tbody>
             </table>
         </section>
@@ -135,12 +105,12 @@
 
 
 
-    $("#btnGetAll").click(function () {
+    $("#GetAll").click(function () {
         //send ajax request to the customer servlet
         loadAllAdmin();
     });
     $("#Delete").click(function () {
-        let id = $("#AdminID").val();
+        let id = $("#AdminId").val();
         $.ajax({
             url: baseUrl+`admin?id=${id}`,
             method: "delete",
@@ -148,7 +118,7 @@
             success: function (resp) {
                 alert(resp.massage);
                 loadAllAdmin();
-            },
+            },   
             // error:function (error){
             //     alert(JSON.parse(error.responseText).message);
             // }
@@ -156,10 +126,10 @@
     });
     $("#Update").click(function () {
 
-        let AdminID = $("#AdminID").val();
+        let AdminID = $("#AdminId").val();
         let AdminName = $("#AdminName").val();
         let AdminEmail = $("#AdminEmail").val();
-        let AdminContact = $("#AdminContact").val();
+        let AdminContact = $("#ContactNumber").val();
 
         var Admin = {
             id: AdminID,
@@ -167,6 +137,8 @@
             email: AdminEmail,
             contact: AdminContact,
         }
+
+        console.log(Admin)
 
         $.ajax({
             url: baseUrl+'admin',
@@ -188,7 +160,7 @@
     function loadAllAdmin() {
         $("#tblAdmin").empty();
         $.ajax({
-            url: baseUrl+"customer",
+            url: baseUrl+"admin",
             dataType: "json",
             success: function (resp) {
                 console.log(resp);
@@ -210,18 +182,18 @@
             let email = $(this).children(":eq(2)").text();
             let contact = $(this).children(":eq(3)").text();
 
-            $('#AdminID').val(id);
+            $('#AdminId').val(id);
             $('#AdminName').val(name);
             $('#AdminEmail').val(email);
-            $('#AdminContact').val(contact);
+            $('#ContactNumber').val(contact);
 
         });
     }
     function setTextFieldValues(id, name, email, contact) {
-        $("#AdminID").val(id);
+        $("#AdminId").val(id);
         $("#AdminName").val(name);
         $("#AdminEmail").val(email);
-        $("#AdminContact").val(contact);
+        $("#ContactNumber").val(contact);
     }
 
     $("#Save").on("click",function () {
