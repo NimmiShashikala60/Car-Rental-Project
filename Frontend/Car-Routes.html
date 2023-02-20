@@ -43,12 +43,12 @@
         <h4>Car Routes</h4>
         <form class="mt-2">
             <div class="mb-3">
-                <label for="AdminId" class="form-label">Veh.Reg.Number</label>
-                <input type="text" class="form-control" name="regNumber" id="regNumber" aria-describedby="emailHelp">
+                <label for="AdminId" class="form-label">Veh.Reg.Id</label>
+                <input type="text" class="form-control" name="VehRegNumber" id="VehRegId" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="AdminName" class="form-label">Veh.Brand</label>
-                <input type="text" class="form-control" name="vehBrand" id="vehBrand">
+                <input type="text" class="form-control" name="VehBrand" id="VehBrand">
             </div>
             <div class="mb-3">
                 <label for="AdminEmail" class="form-label">Admin Email</label>
@@ -56,23 +56,23 @@
             </div>
             <div class="mb-3">
                 <label for="ContactNumber" class="form-label">Num.Of.Passenger</label>
-                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="NumOfPassenger" id="NumOfPassenger" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="ContactNumber" class="form-label">Transmission Type</label>
-                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="TransmissionType" id="TransmissionType" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="ContactNumber" class="form-label">Fuel Type</label>
-                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="FuelType" id="FuelType" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="ContactNumber" class="form-label">Daily Rate</label>
-                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="DailyRate" id="DailyRate" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="ContactNumber" class="form-label">Monthly Rate</label>
-                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="MonthlyRate" id="MonthlyRate" aria-describedby="emailHelp">
             </div>
             <section class="d-flex gap-2">
                 <button type="button" class="btn btn-primary" id="Save">Save</button>
@@ -89,7 +89,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Veh.Reg.ID:</th>
+                <th scope="col">Veh.Reg.Id:</th>
                 <th scope="col">Veh.Brand:</th>
                 <th scope="col">Veh.Type:</th>
                 <th scope="col">Num.Of.Passenger</th>
@@ -170,47 +170,47 @@
             data: formData,
             dataType: "json",
             success: function (res) {
-                alert(res.message);
-                loadAllRoutes();
+                alert(res.massage);
+                loadAllCarRoutes();
             },
 
             error: function (error) {
                 var jsObject = JSON.parse(error.responseText);
-                alert(jsObject.message);
+                alert(jsObject.massage);
             }
         });
     });
 
 
-    $("#btnGetAll").click(function () {
+    $("#GetAll").click(function () {
         //send ajax request to the customer servlet
-        loadAllRoutes();
+        loadAllCarRoutes();
     });
-    $("#btnDelete").click(function () {
+    $("#Delete").click(function () {
         let id = $("#txtVehRegId").val();
         $.ajax({
-            url: baseURL+"customer?id=" + id + "",
+            url: baseUrl+`vehreg?id=${id}`,
             method: "delete",
             dataType:"json",
             success: function (resp) {
-                alert(resp.message);
-                loadAllRoutes();
+                alert(resp.massage);
+                loadAllCarRoutes();
             },
-            error:function (error){
-                alert(JSON.parse(error.responseText).message);
-            }
+            // error:function (error){
+            //     alert(JSON.parse(error.responseText).message);
+            // }
         });
     });
-    $("#btnUpdate").click(function () {
+    $("#Update").click(function () {
 
-        let VehRegId = $("#txtVehRegId").val();
-        let VehBrand = $("#txtVehBrand").val();
-        let VeheType = $("#txtVehType").val();
-        let NumOfPassenger = $("#txtNumOfPassenger").val();
-        let TransmissionType = $("#txtTransmissionType").val();
-        let FuelType = $("#txtFuelType").val();
-        let DailyType = $("#txtDailyType").val();
-        let MonthlyRate = $("#txtMonthlyRate").val();
+        let VehRegId = $("#VehRegId").val();
+        let VehBrand = $("#VehBrand").val();
+        let VeheType = $("#VehType").val();
+        let NumOfPassenger = $("#NumOfPassenger").val();
+        let TransmissionType = $("#TransmissionType").val();
+        let FuelType = $("#FuelType").val();
+        let DailyType = $("#DailyType").val();
+        let MonthlyRate = $("#MonthlyRate").val();
 
         var Routes = {
             id: VehRegId,
@@ -219,47 +219,47 @@
             passenger: NumOfPassenger,
             transmissiontype: TransmissionType,
             fueltype: FuelType,
-            dailyrate: DailyRate,
+            dailyrate: DailyType,
             monthlyrate: MonthlyRate,
         }
 
         $.ajax({
-            url: baseURL+'customer',
+            url: baseUrl+'admin',
             method: 'put',
             contentType:"application/json",
             data:JSON.stringify(Routes),
             dataType:"json",
             success: function (res) {
-                alert(res.message);
-                loadAllRoutes();
+                alert(res.massage);
+                loadAllCarRoutes();
             },
             error:function (error){
-                let cause= JSON.parse(error.responseText).message;
+                let cause= JSON.parse(error.responseText).massage;
                 alert(cause);
             }
 
         });
     });
-    function loadAllRoutes() {
-        $("#tblRoutes").empty();
+    function loadAllCarRoutes() {
+        $("#tblCarRoutes").empty();
         $.ajax({
-            url: baseUrl+"customer",
+            url: baseUrl+"carroutes",
             dataType: "json",
             success: function (resp) {
                 console.log(resp);
                 for (let rou of resp.data) {
-                    var row = '<tr><td>' + rou.id + '</td><td>' + rou.brand + '</td><td>' + rou.type + '</td><td>' + rou.passenger + '</td></tr>'+ rou.transmissiontype + '</td></tr>'+ rou.fueltype + '</td></tr>'+ rou.dailyrate + '</td></tr>'+ rou.monthlyrate + '</td></tr>';
+                    var row = '<tr><td>' + rou.id + '</td><td>' + rou.brand + '</td><td>' + rou.type + '</td><td>' + rou.numofpassenger + '</td></tr>'+ rou.transmissiontype + '</td></tr>'+ rou.fueltype + '</td></tr>'+ rou.dailyrate + '</td></tr>'+ rou.monthlyrate + '</td></tr>';
                     $("#tblAdmin").append(row);
                 }
                 bindRowClickEvents();
                 setTextFieldValues("","","","","","","","");
-                $("#txtRoutes").focus();
+                $("#txtCarRoutes").focus();
             }
         });
 
     }
     function bindRowClickEvents() {
-        $("#tblRoutes>tr").click(function () {
+        $("#tblCarRoutes>tr").click(function () {
             let id = $(this).children(":eq(0)").text();
             let brand = $(this).children(":eq(1)").text();
             let type = $(this).children(":eq(2)").text();
@@ -269,34 +269,37 @@
             let dailyrate = $(this).children(":eq(6)").text();
             let monthlyrate = $(this).children(":eq(7)").text();
 
-            $('#txtID').val(id);
-            $('#txtBrand').val(brand);
-            $('#txtType').val(type);
-            $('#txtPassenger').val(passenger);
-            $('#txtTransmissionType').val(transmissiontype);
-            $('#txtFuelType').val(fueltype);
-            $('#txtDailyRate').val(dailyrate);
-            $('#txtMonthlyRate').val(monthlyrate);
+            $('#VehRegId').val(id);
+            $('#VehBrand').val(brand);
+            $('#VeheType').val(type);
+            $('#NumOfPassenger').val(passenger);
+            $('#TransmissionType').val(transmissiontype);
+            $('#FuelType').val(fueltype);
+            $('#DailyType').val(dailyrate);
+            $('#MonthlyRate').val(monthlyrate);
 
         });
     }
     function setTextFieldValues(id, brand, type, numofpassenger,transmissiontype,fueltype,dailyrate,monthlyrate) {
-        $("#txtID").val(id);
-        $("#txtBrand").val(brand);
-        $("#txtType").val(type);
-        $("#txtNumOfPassenger").val(numofpassenger);
-        $("#txtTransmission").val(transmissiontype);
-        $("#txtFuelType").val(fueltype);
-        $("#txtDailyRate").val(dailyrate);
-        $("#txtMonthlyRate").val(monthlyrate);
+        $("#VehRegId").val(id);
+        $("#VehBrand").val(brand);
+        $('#VeheType').val(type);
+        $("#NumOfPassenger").val(numofpassenger);
+        $("#TransmissionType").val(transmissiontype);
+        $("#FuelType").val(fueltype);
+        $("#DailyType").val(dailyrate);
+        $("#MonthlyRate").val(monthlyrate);
     }
 
     $("#Save").on("click",function () {
 
+        let formData = $("#CarRoutesForm").serialize();
+
         $.ajax({
             url:baseUrl+"routes",
             method:"post",
-            // dataType:"json",
+            data:formData,
+             dataType:"json",
             // contentType: "application/json",
             success:function () {
                 alert("saved")

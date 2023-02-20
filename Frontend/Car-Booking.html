@@ -46,19 +46,23 @@
         <form class="mt-2 p-5 row w-50">
             <div class="mb-2">
                 <label for="UserNIC" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" id="UserNIC" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="UserNIC" id="UserNIC" aria-describedby="emailHelp">
             </div>
             <div class="mb-2">
                 <label for="DriverId" class="form-label">Driver Id:</label>
-                <input type="text" class="form-control" id="DriverId">
+                <input type="text" class="form-control" name="DriverId" id="DriverId">
+            </div>
+            <div class="mb-2">
+                <label for="DriverId" class="form-label">Vehicle Id:</label>
+                <input type="text" class="form-control" name="VehicleId" id="VehicleId">
             </div>
             <div class="mb-2">
                 <label for="Date" class="form-label">Date:</label>
-                <input type="date" class="form-control" id="Date" aria-describedby="emailHelp">
+                <input type="date" class="form-control" name="Date" id="Date" aria-describedby="emailHelp">
             </div>
             <div class="mb-2">
                 <label for="Time" class="form-label">Time:</label>
-                <input type="time" class="form-control" id="Time" aria-describedby="emailHelp">
+                <input type="time" class="form-control" name="Time" id="Time" aria-describedby="emailHelp">
             </div>
             <button type="button" class="btn btn-primary" id="Save">Save</button>
 
@@ -67,31 +71,31 @@
         <form class="mt-2 p-5 row">
             <div class="mb-3 col col-5">
                 <label for="UserName" class="form-label">User Name:</label>
-                <input type="text" class="form-control" id="UserName" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="UserName" id="UserName" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col col-5">
                 <label for="UserNIC" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" id="UserNIC">
+                <input type="text" class="form-control" name="UserNIC" id="UserNIC">
             </div>
             <div class="mb-3 col col-5">
                 <label for="Address" class="form-label">Address:</label>
-                <input type="text" class="form-control" id="Address" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="Address" id="Address" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col col-5">
                 <label for="Date" class="form-label">Date:</label>
-                <input type="date" class="form-control" id="Date" aria-describedby="emailHelp">
+                <input type="date" class="form-control" name="Date" id="Date" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col col-5">
                 <label for="Time" class="form-label">Time:</label>
-                <input type="time" class="form-control" id="Time" aria-describedby="emailHelp">
+                <input type="time" class="form-control" name="Time" id="Time" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col col-5">
                 <label for="Payment" class="form-label">Payment:</label>
-                <input type="text" class="form-control" id="Payment" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="Payment" id="Payment" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col col-5">
                 <label for="BankName" class="form-label">Bank Name:</label>
-                <input type="text" class="form-control" id="BankName" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="BankName" id="BankName" aria-describedby="emailHelp">
             </div>
         </form>
     </section>
@@ -102,9 +106,10 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">User NIC</th>
+                <th scope="col">Driver Id</th>
+                <th scope="col">Vehicle Id</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
-                <th scope="col">Driver Id</th>
             </tr>
             </thead>
             <tbody>
