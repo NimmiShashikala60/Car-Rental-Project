@@ -132,9 +132,9 @@
                 loadAllUserInformation();
             });
             $("#Delete").click(function () {
-                let id = $("#id").val();
+                let id = $("#UserNic").val();
                 $.ajax({
-                    url: baseUrl+`user?id=${id}`,
+                    url: baseUrl+`user?nic=${nic}`,
                     method: "delete",
                     dataType: "json",
                     success: function (resp) {
@@ -147,7 +147,6 @@
                 });
             });
             $("#Update").click(function () {
-                let id = $("#id").val();
                 let userNic = $("#UserNic").val();
                 let name = $("#Name").val();
                 let password = $("#Password").val();

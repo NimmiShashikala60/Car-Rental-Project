@@ -1,16 +1,21 @@
-package lk.ijse.spring.dto;
-
+package lk.ijse.spring.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
-public class CarRoutesDTO {
+
+public class CarRoutes {
+    @Id
     private String VehicleId;
     private String VehicleBrand;
     private String VehicleType;
@@ -19,6 +24,4 @@ public class CarRoutesDTO {
     private String FuelType;
     private String DailyRate;
     private String MonthlyRate;
-
-
 }

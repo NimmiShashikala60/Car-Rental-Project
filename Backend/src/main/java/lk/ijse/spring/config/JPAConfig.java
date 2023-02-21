@@ -1,6 +1,8 @@
 package lk.ijse.spring.config;
 
+import lk.ijse.spring.entity.CarRoutes;
 import lk.ijse.spring.repo.AdminRepo;
+import lk.ijse.spring.repo.CarRoutesRepo;
 import lk.ijse.spring.repo.DriverRepo;
 import lk.ijse.spring.repo.UserRepo;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +23,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement   //AOP usage
-@EnableJpaRepositories(basePackageClasses = {AdminRepo.class, DriverRepo.class, UserRepo.class})
+@EnableJpaRepositories(basePackageClasses = {AdminRepo.class, DriverRepo.class, UserRepo.class, CarRoutesRepo.class})
 public class JPAConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource ds, JpaVendorAdapter ja){
