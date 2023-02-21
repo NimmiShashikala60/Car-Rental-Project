@@ -43,19 +43,15 @@
         <h4>Car Routes</h4>
         <form class="mt-2">
             <div class="mb-3">
-                <label for="AdminId" class="form-label">Veh.Reg.Id</label>
+                <label for="AdminId" class="form-label">Vehicle Id</label>
                 <input type="text" class="form-control" name="VehRegNumber" id="VehRegId" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="AdminName" class="form-label">Veh.Brand</label>
+                <label for="AdminName" class="form-label">Vehicle Brand</label>
                 <input type="text" class="form-control" name="VehBrand" id="VehBrand">
             </div>
             <div class="mb-3">
-                <label for="AdminEmail" class="form-label">Admin Email</label>
-                <input type="email" class="form-control" name="AdminEmail" id="AdminEmail" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="ContactNumber" class="form-label">Num.Of.Passenger</label>
+                <label for="ContactNumber" class="form-label">Occupied</label>
                 <input type="text" class="form-control" name="NumOfPassenger" id="NumOfPassenger" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
@@ -99,53 +95,8 @@
                 <th scope="col">Monthly Rate</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <tbody id="tblCarRoutes">
+
             </tbody>
         </table>
     </section>

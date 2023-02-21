@@ -46,27 +46,27 @@
     <h4>Daily Summery</h4>
     <form class="mt-2">
       <div class="mb-3">
-        <label for="RegisteredUsers" class="form-label">Registered Users:</label>
+        <label for="RegisteredUsers" class="form-label">User NIC:</label>
         <input type="text" class="form-control" id="RegisteredUsers">
       </div>
       <div class="mb-3">
-        <label for="MaintenceCar" class="form-label">Maintence Car:</label>
-        <input type="text" class="form-control" id="MaintenceCar">
+        <label for="ReservedCars" class="form-label">Vehicle Id:</label>
+        <input type="text" class="form-control" id="ReservedCars" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
-        <label for="BookingCar" class="form-label">Booking Cars:</label>
+        <label for="BookingCar" class="form-label">Driver Id:</label>
         <input type="text" class="form-control" id="BookingCar" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
-        <label for="Occupied" class="form-label">Occupied:</label>
-        <input type="text" class="form-control" id="Occupied" aria-describedby="emailHelp">
+        <label for="BookingCar" class="form-label">Occupied:</label>
+        <input type="text" class="form-control" id="BookingCar" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
         <label for="ActiveDay" class="form-label">Active Day:</label>
         <input type="text" class="form-control" id="ActiveDay" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
-        <label for="ReservedCars" class="form-label">Reserved Cars:</label>
+        <label for="ReservedCars" class="form-label">Reserved Car:</label>
         <input type="text" class="form-control" id="ReservedCars" aria-describedby="emailHelp">
       </div>
       <section class="d-flex gap-2">
@@ -84,59 +84,23 @@
       <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Registered Users</th>
-        <th scope="col">Maintence Car</th>
-        <th scope="col">Booking Cars</th>
+        <th scope="col">Users Id</th>
+        <th scope="col">Vehicle Id</th>
+        <th scope="col">Driver Id</th>
         <th scope="col">Occupied</th>
         <th scope="col">Active Day</th>
-        <th scope="col">Reserved Car Reg Num </th>
+        <th scope="col">Reserved Car</th>
       </tr>
       </thead>
-      <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td colspan="2"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
+      <tbody id="tblDailySummery">
+
       </tbody>
     </table>
   </section>
 
 </div>
-</div>
+
+
 <script src="assets/js/js/bootstrap.min.js"></script>
 <script src="assets/jquery-3.6.1.min.js"></script>
 
@@ -146,146 +110,137 @@
   $("#DailySummery").on("click", function () {
     var formData = $("#DailySummery").serialize();
     $.ajax({
-      url: baseUrl + "customer",
+      url: baseUrl + "dailySummary",
       method: "post",
       data: formData,
       dataType: "json",
       success: function (res) {
-        alert(res.message);
-        loadAllSummery();
+        alert(res.massage);
+        loadAllDailySummery();
       },
 
       error: function (error) {
         var jsObject = JSON.parse(error.responseText);
-        alert(jsObject.message);
+        alert(jsObject.massage);
       }
     });
   });
 
 
-  $("#btnGetAll").click(function () {
+  $("#GetAll").click(function () {
     //send ajax request to the customer servlet
-    loadAllSummery();
+    loadAllDailySummery();
   });
-  $("#btnDelete").click(function () {
-    let id = $("#txtRegUsers").val();
+  $("#Delete").click(function () {
+    let id = $("#UserId").val();
     $.ajax({
-      url: baseURL+"customer?id=" + id + "",
+      url: baseUrl+`user?id=${id}`,
       method: "delete",
       dataType:"json",
       success: function (resp) {
-        alert(resp.message);
-        loadAllSummery();
+        alert(resp.massage);
+        loadAllDailySummery();
       },
       error:function (error){
-        alert(JSON.parse(error.responseText).message);
+        alert(JSON.parse(error.responseText).massage);
       }
     });
   });
-  $("#btnUpdate").click(function () {
+  $("#Update").click(function () {
 
-    let RegisteredUsers = $("#txtRegisteredUsers").val();
-    let MaintenceCar = $("#txtMaintenceCar").val();
-    let BookingCars = $("#txtBookingCars").val();
-    let Occupied = $("#txtOccupied").val();
-    let ActiveDay = $("#txtActiveDay").val();
-    let ReservedCarRegNum = $("#txtReservedCarRegNum").val();
+    let UserId = $("#UserId").val();
+    let VehicleId = $("#Vehicle Id").val();
+    let DriverId = $("#DriverId").val();
+    let Occupied = $("#Occupied").val();
+    let ActiveDay = $("#ActiveDay").val();
+    let ReservedCar = $("#ReservedCar").val();
 
     var Summery = {
-      regnumUsers: RegisteredUsers,
-      maintence: MaintenceCar,
-      booking: BookingCars,
+      UserId: UserId,
+      vehicleId:VehicleId,
+      driverId:DriverId,
       occupied: Occupied,
-      activeday: ActiveDay,
-      reservedcarregnum: ReservedCarRegNum,
+      activeDay: ActiveDay,
+      reservedCar: ReservedCar,
     }
 
     $.ajax({
-      url: baseURL+'customer',
+      url: baseUrl+'DailySummery',
       method: 'put',
       contentType:"application/json",
       data:JSON.stringify(Summery),
       dataType:"json",
       success: function (res) {
-        alert(res.message);
-        loadAllSummary();
+        alert(res.massage);
+        loadAllDailySummary();
       },
       error:function (error){
-        let cause= JSON.parse(error.responseText).message;
+        let cause= JSON.parse(error.responseText).massage;
         alert(cause);
       }
 
     });
   });
-  function loadAllSummery() {
-    $("#tblSummery").empty();
+  function loadAllDailySummery() {
+    $("#tblDailySummery").empty();
     $.ajax({
-      url: baseUrl+"customer",
+      url: baseUrl+"dailySummery",
       dataType: "json",
       success: function (resp) {
         console.log(resp);
         for (let sum of resp.data) {
-          var row = '<tr><td>' + sum.regnumUsers + '</td><td>' + sum.maintence + '</td><td>' + sum.booking + '</td><td>' + sum.occupied + '</td></tr>'+ sum.activeday + '</td></tr>'+ adm.reservedcarregnum + '</td></tr>';
-          $("#tblSummery").append(row);
+          var row = '<tr><td>' + sum.UserId + '</td><td>' + sum.VehicleId + '</td><td>' + sum.DriverId + '</td><td>' + sum.occupied + '</td></tr>'+ sum.activeDay + '</td></tr>'+sum.reservedCar + '</td></tr>';
+          $("#tblDailySummery").append(row);
         }
         bindRowClickEvents();
         setTextFieldValues("","","","","","");
-        $("#txtSummery").focus();
+        $("#txtDailySummery").focus();
       }
     });
 
   }
   function bindRowClickEvents() {
-    $("#tblSummery>tr").click(function () {
-      let regnumUsers = $(this).children(":eq(0)").text();
-      let maintence = $(this).children(":eq(1)").text();
-      let booking = $(this).children(":eq(2)").text();
-      let occupied = $(this).children(":eq(3)").text();
-      let activeday = $(this).children(":eq(4)").text();
-      let reservedregnumcars = $(this).children(":eq(5)").text();
+    $("#tblDailySummery>tr").click(function () {
+      let UserId = $(this).children(":eq(0)").text();
+      let VehicleId = $(this).children(":eq(1)").text();
+      let DriverId = $(this).children(":eq(2)").text();
+      let Occupied = $(this).children(":eq(3)").text();
+      let ActiveDay = $(this).children(":eq(4)").text();
+      let ReservedCars = $(this).children(":eq(5)").text();
 
-      $('#txtRegNumUsers').val(regnumUsers);
-      $('#txtMaintence').val(maintence);
-      $('#txtBooking').val(booking);
-      $('#txtOccupied').val(occupied);
-      $('#txtActiveDay').val(activeday);
-      $('#txtReservedRegNumCars').val(reservedregnumcars);
+      $('#UserId').val(UserId);
+      $('#VehicleId').val(VehicleId);
+      $('#DriverId').val(DriverId);
+      $('#Occupied').val(Occupied);
+      $('#ActiveDay').val(ActiveDay);
+      $('#ReservedCar').val(ReservedCars);
 
     });
   }
-  function setTextFieldValues(regnumusers, maintence, booking, occupied, activeday, reservedregnumcars) {
-    $("#txtRegNumUsers").val(regnumusers);
-    $("#txtMaintence").val(maintence);
-    $("#txtBooking").val(booking);
-    $("#txtOccupied").val(occupied);
-    $("#txtActiveDay").val(activeday);
-    $("#txtReservedRegNumCars").val(reservedregnumcars);
+  function setTextFieldValues(UserId,VehicleId,DriverId,Occupied,ActiveDay,ReservedCar) {
+    $("#UserId").val(UserId);
+    $("#VehicleId").val(VehicleId);
+    $("#DriverId").val(DriverId);
+    $("#Occupied").val(Occupied);
+    $("#ActiveDay").val(ActiveDay);
+    $("#ReservedCar").val(ReservedCar);
   }
 
   $("#Save").on("click",function () {
+    let formData = $("#DailySummeryForm").serialize();
 
     $.ajax({
       url:baseUrl+"summery",
       method:"post",
-      // dataType:"json",
+      data:formData,
+      dataType:"json",
       // contentType: "application/json",
-      success:function () {
-        alert("saved")
+      success:function (res) {
+        alert(res.massage)
       }
     })
 
   })
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </body>
 </html>
