@@ -48,23 +48,23 @@
         <form class="mt-2">
             <div class="mb-3">
                 <label for="DriverId" class="form-label">Driver Id:</label>
-                <input type="text" class="form-control" id="Driver Id">
+                <input type="text" class="form-control" name="DriverId" id="Driver Id">
             </div>
             <div class="mb-3">
                 <label for="DriverName" class="form-label">Driver Name:</label>
-                <input type="text" class="form-control" id="DriverName">
+                <input type="text" class="form-control" name="DriverName" id="DriverName">
             </div>
             <div class="mb-3">
                 <label for="DriverAddress" class="form-label">Driver Address:</label>
-                <input type="text" class="form-control" id="DriverAddress" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="DriverAddress" id="DriverAddress" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="DriverContact" class="form-label">Driver Contact:</label>
-                <input type="text" class="form-control" id="DriverContact" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="DriverContact" id="DriverContact" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="DriverSalary" class="form-label">Driver Salary:</label>
-                <input type="text" class="form-control" id="DriverSalary" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="DriverSalary" id="DriverSalary" aria-describedby="emailHelp">
             </div>
             <section class="d-flex gap-2">
             <button type="button" class="btn btn-primary" id="Save">Save</button>
@@ -89,40 +89,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+
             </tbody>
         </table>
     </section>
@@ -139,70 +106,69 @@
    $("#DriverInformation").on("click", function () {
        var formData = $("#DriverInformation").serialize();
        $.ajax({
-           url: baseUrl + "customer",
+           url: baseUrl + "driver",
            method: "post",
            data: formData,
            dataType: "json",
            success: function (res) {
-               alert(res.message);
-               loadAllDriver();
+               alert(res.massage);
+               loadAllDriverInformation();
            },
 
            error: function (error) {
                var jsObject = JSON.parse(error.responseText);
-               alert(jsObject.message);
+               alert(jsObject.massage);
            }
        });
    });
 
 
-   $("#btnGetAll").click(function () {
+   $("#GetAll").click(function () {
        //send ajax request to the customer servlet
-       loadAllAdmin();
+       loadAllDriver();
    });
-   $("#btnDriverDelete").click(function () {
-       let id = $("#txtDriverID").val();
+   $("#Delete").click(function () {
+       let id = $("#DriverId").val();
        $.ajax({
-           url: baseURL+"customer?id=" + id + "",
+           url: baseUrl+`driver?id=${id}`,
            method: "delete",
            dataType:"json",
            success: function (resp) {
-               alert(resp.message);
+               alert(resp.massage);
                loadAllDriver();
            },
-           error:function (error){
-               alert(JSON.parse(error.responseText).message);
-           }
+           // error:function (error){
+           //     alert(JSON.parse(error.responseText).message);
+           // }
        });
    });
-   $("#btnUpdate").click(function () {
-
-       let DriverID = $("#txtDriverID").val();
-       let DriverName = $("#txtDriverName").val();
-       let DriverAddress = $("#txtDriverAddress").val();
-       let DriverContact = $("#txtDriverContact").val();
-       let DriverSalary = $("#txtDriverSalary").val();
+   $("#Update").click(function () {
+       let DriverId = $("#DriverId").val();
+       let DriverName = $("#DriverName").val();
+       let DriverAddress = $("#DriverAddress").val();
+       let DriverContact = $("#DriverContact").val();
+       let DriverSalary = $("#DriverSalary").val();
 
        var Driver = {
-           id: DriverID,
-           name: DriverName,
-           email: DriverAddress,
-           contact: DriverContact,
-           salary: DriverSalary,
+           DriverId: DriverId,
+           DriverName: DriverName,
+           DriverAddress: DriverAddress,
+           DriverContact: DriverContact,
+           DriverSalary: DriverSalary,
        }
 
        $.ajax({
-           url: baseURL+'customer',
+           url: baseUrl+'driver',
            method: 'put',
            contentType:"application/json",
            data:JSON.stringify(Driver),
            dataType:"json",
            success: function (res) {
-               alert(res.message);
+               alert(res.massage);
                loadAllDriver();
            },
            error:function (error){
-               let cause= JSON.parse(error.responseText).message;
+               let cause= JSON.parse(error.responseText).massage;
                alert(cause);
            }
 
@@ -211,12 +177,12 @@
    function loadAllDriver() {
        $("#tblDriver").empty();
        $.ajax({
-           url: baseURL+"customer",
+           url: baseUrl+"driver",
            dataType: "json",
            success: function (resp) {
                console.log(resp);
                for (let dri of resp.data) {
-                   var row = '<tr><td>' + dri.id + '</td><td>' + dri.name + '</td><td>' + dri.address + '</td><td>' + dri.contact + '</td></tr>'+ dri.salary + '</td></tr>';
+                   var row = '<tr><td>' + dri.DriverId + '</td><td>' + dri.DriverName + '</td><td>' + dri.DriverAddress + '</td><td>' + dri.DriverContact + '</td></tr>'+ dri.DriverSalary + '</td></tr>';
                    $("#tblDriver").append(row);
                }
                bindRowClickEvents();
@@ -228,37 +194,39 @@
    }
    function bindRowClickEvents() {
        $("#tblDriver>tr").click(function () {
-           let id = $(this).children(":eq(0)").text();
-           let name = $(this).children(":eq(1)").text();
-           let address = $(this).children(":eq(2)").text();
-           let contact = $(this).children(":eq(3)").text();
-           let salary = $(this).children(":eq(4)").text();
+           let DriverId = $(this).children(":eq(0)").text();
+           let DriverName = $(this).children(":eq(1)").text();
+           let DriverAddress = $(this).children(":eq(2)").text();
+           let DriverContact = $(this).children(":eq(3)").text();
+           let DriverSalary = $(this).children(":eq(4)").text();
 
-           $('#txtDriverID').val(id);
-           $('#txtDriverName').val(name);
-           $('#txtDriverAddress').val(address);
-           $('#txtDriverContact').val(contact);
-           $('#txtDriverSalary').val(salary);
+           $('#DriverId').val(DriverId);
+           $('#DriverName').val(DriverName);
+           $('#DriverAddress').val(DriverAddress);
+           $('#DriverContact').val(DriverContact);
+           $('#DriverSalary').val(DriverSalary);
 
        });
    }
-   function setTextFieldValues(id, name, address, contact, salary) {
-       $("#txtAdminID").val(id);
-       $("#txtDriverName").val(name);
-       $("#txtDriverAddress").val(address);
-       $("#txtDriverContact").val(contact);
-       $("#txtDriverSalary").val(salary);
+   function setTextFieldValues(DriverId,DriveName,DriverAddress,DriverContact,DriverSalary) {
+       $("#DriverId").val(DriverId);
+       $("#DriverName").val(DriveName);
+       $("#DriverAddress").val(DriverAddress);
+       $("#DriverContact").val(DriverContact);
+       $("#DriverSalary").val(DriverSalary);
    }
 
    $("#Save").on("click",function () {
+       let formData = $("#driverForm").serialize();
 
        $.ajax({
            url:baseUrl+"driver",
            method:"post",
-           // dataType:"json",
+           data:formData
+           dataType:"json",
            // contentType: "application/json",
-           success:function () {
-               alert("saved")
+           success:function (res) {
+               alert(res.massage)
            }
        })
 

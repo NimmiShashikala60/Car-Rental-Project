@@ -93,7 +93,7 @@
                 <th scope="col">Contact Number</th>
             </tr>
             </thead>
-            <tbody id="tblUser">
+            <tbody id="tblUserInformation">
 
             </tbody>
         </table>
@@ -184,7 +184,7 @@
             });
 
             function loadAllUser() {
-                $("#tblUser").empty();
+                $("#tblUserInformation").empty();
                 $.ajax({
                     url: baseUrl + "user",
                     dataType: "json",
@@ -203,7 +203,7 @@
             }
 
             function bindRowClickEvents() {
-                $("#tblUser>tr").click(function () {
+                $("#tblUserInformation>tr").click(function () {
                     let UserNIC = $(this).children(":eq(0)").text();
                     let Name = $(this).children(":eq(1)").text();
                     let Password = $(this).children(":eq(2)").text();
@@ -233,7 +233,7 @@
             }
     $("#Save").on("click",function () {
 
-        let formData = $("#UserForm").serialize();
+        let formData = $("#UserInformationForm").serialize();
 
         $.ajax({
             url:baseUrl+"user",
