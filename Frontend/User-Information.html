@@ -45,31 +45,30 @@
 <div class="main-content d-flex w-100 justify-content-between align-items-center">
     <section class="w-25 h-100 p-5">
         <h4>User Information</h4>
-        <form class="mt-2">
-
+        <form class="mt-2" id="userForm">
             <div class="mb-3">
-                <label for="NIC" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" name="User NIC" id="User NIC">
+                <label for="UserNic" class="form-label">User NIC:</label>
+                <input type="text" class="form-control" name="UserNic" id="UserNic">
             </div>
             <div class="mb-3">
-                <label for="Name" class="form-label">Name:</label>
-                <input type="text" class="form-control" name="Name" id="Name">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" name="Name" id="name">
             </div>
             <div class="mb-3">
-                <label for="Password" class="form-label">Password:</label>
-                <input type="text" class="form-control" name="Password" id="Password" aria-describedby="emailHelp">
+                <label for="password" class="form-label">Password:</label>
+                <input type="text" class="form-control" name="Password" id="password" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="Email" class="form-label">Email:</label>
-                <input type="text" class="form-control" name="Email" id="Email" aria-describedby="emailHelp">
+                <label for="email" class="form-label">Email:</label>
+                <input type="text" class="form-control" name="Email" id="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="ActiveDay" class="form-label">Contact Number:</label>
-                <input type="text" class="form-control" name="ContactNumber" id="ContactNumber" aria-describedby="emailHelp">
+                <label for="contact" class="form-label">Contact:</label>
+                <input type="text" class="form-control" name="Contact" id="contact" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="Address" class="form-label">Address:</label>
-                <input type="text" class="form-control" name="Address" id="Address" aria-describedby="emailHelp">
+                <label for="address" class="form-label">Address:</label>
+                <input type="text" class="form-control" name="address" id="address" aria-describedby="emailHelp">
             </div>
             <section class="d-flex gap-2">
             <button type="button" class="btn btn-primary" id="Save">Save</button>
@@ -86,11 +85,12 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Id</th>
                 <th scope="col">User NIC</th>
                 <th scope="col">Name</th>
                 <th scope="col">Password</th>
                 <th scope="col">Email</th>
-                <th scope="col">Contact Number</th>
+                <th scope="col">Contact</th>
             </tr>
             </thead>
             <tbody id="tblUserInformation">
@@ -105,42 +105,41 @@
 <script src="assets/jquery-3.6.1.min.js"></script>
 <script>
     let baseUrl="http://localhost:8080/car_rental/";
-    loadAllUser();
 
 
-            $("#UserInformation").on("click", function () {
-                var formData = $("#UserInformation").serialize();
-                $.ajax({
-                    url: baseUrl + "customer",
-                    method: "post",
-                    data: formData,
-                    dataType: "json",
-                    success: function (res) {
-                        alert(res.massage);
-                        loadAllUser();
-                    },
-
-                    error: function (error) {
-                        var jsObject = JSON.parse(error.responseText);
-                        alert(jsObject.massage);
-                    }
-                });
-            });
+            // $("#UserInformation").on("click", function () {
+            //     var formData = $("#userForm").serialize();
+            //     $.ajax({
+            //         url: baseUrl + "user",
+            //         method: "post",
+            //         data: formData,
+            //         dataType: "json",
+            //         success: function (res) {
+            //             alert(res.massage);
+            //             loadAllUserInformation();
+            //         },
+            //
+            //         error: function (error) {
+            //             var jsObject = JSON.parse(error.responseText);
+            //             alert(jsObject.massage);
+            //         }
+            //     });
+            // });
 
 
             $("#GetAll").click(function () {
                 //send ajax request to the customer servlet
-                loadAllUser();
+                loadAllUserInformation();
             });
             $("#Delete").click(function () {
-                let id = $("#NIC").val();
+                let id = $("#id").val();
                 $.ajax({
-                    url: baseUrl+`admin?NIC=${NIC}`,
+                    url: baseUrl+`user?id=${id}`,
                     method: "delete",
                     dataType: "json",
                     success: function (resp) {
                         alert(resp.massage);
-                        loadAllUser();
+                        loadAllUserInformation();
                     },
                     // error: function (error) {
                     //     alert(JSON.parse(error.responseText).message);
@@ -148,21 +147,22 @@
                 });
             });
             $("#Update").click(function () {
-
-                let UserNIC = $("#UserNIC").val();
-                let Name = $("#Name").val();
-                let Password = $("#Password").val();
-                let Email = $("#Email").val();
-                let ContactNumber = $("#ContactNumber").val();
-                let Address = $("#Address").val();
+                let id = $("#id").val();
+                let userNic = $("#UserNic").val();
+                let name = $("#Name").val();
+                let password = $("#Password").val();
+                let email = $("#Email").val();
+                let contact = $("#Contact").val();
+                let address = $("#Address").val();
 
                 var User = {
-                    UserNIC: UserNIC,
-                    Name: Name,
-                    Password:Password,
-                    Email: Email,
-                    ContactNumber: ContactNumber,
-                    Address: Address,
+                    id:id,
+                    userNic: userNic,
+                    name: name,
+                    password:password,
+                    email: email,
+                    contact: contact,
+                    address: address,
                 }
 
                 $.ajax({
@@ -173,7 +173,7 @@
                     dataType: "json",
                     success: function (res) {
                         alert(res.massage);
-                        loadAllUser();
+                        loadAllUserInformation();
                     },
                     error: function (error) {
                         let cause = JSON.parse(error.responseText).massage;
@@ -182,16 +182,19 @@
 
                 });
             });
+    loadAllUserInformation();
 
-            function loadAllUser() {
+
+    function loadAllUserInformation() {
                 $("#tblUserInformation").empty();
                 $.ajax({
                     url: baseUrl + "user",
+                    method:"get",
                     dataType: "json",
                     success: function (resp) {
                         console.log(resp);
                         for (let usr of resp.data) {
-                            var row = '<tr><td>' + usr.UserNIC + '</td><td>' + usr.Name + '</td><td>' + usr.Password + '</td><td>' + usr.Email + '</td></tr>' + usr.ContactNumber + '</td></tr>' + usr.Address + '</td></tr>';
+                            var row = '<tr><td>' + usr.id +'<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>' + usr.contact + '</td></tr>' + usr.address + '</td></tr>';
                             $("#tblUser").append(row);
                         }
                         bindRowClickEvents();
@@ -204,36 +207,40 @@
 
             function bindRowClickEvents() {
                 $("#tblUserInformation>tr").click(function () {
-                    let UserNIC = $(this).children(":eq(0)").text();
-                    let Name = $(this).children(":eq(1)").text();
-                    let Password = $(this).children(":eq(2)").text();
-                    let Email = $(this).children(":eq(3)").text();
-                    let ContactNumber = $(this).children(":eq(4)").text();
-                    let Address = $(this).children(":eq(5)").text();
+                    let id = $(this).children(":eq(0)").text();
+                    let userNic = $(this).children(":eq(1)").text();
+                    let name = $(this).children(":eq(2)").text();
+                    let password = $(this).children(":eq(3)").text();
+                    let email = $(this).children(":eq(4)").text();
+                    let contact = $(this).children(":eq(5)").text();
+                    let address = $(this).children(":eq(6)").text();
 
-                    $('#UserNIC').val(UserNIC);
-                    $('#Name').val(Name);
-                    $('#password').val(Password);
-                    $('#Email').val(Email);
-                    $('#ContactNumber').val(ContactNumber);
-                    $('#Address').val(Address);
+
+                    $('#id').val(id);
+                    $('#userNIC').val(userNic);
+                    $('#name').val(name);
+                    $('#password').val(password);
+                    $('#Email').val(email);
+                    $('#Contact').val(contact);
+                    $('#Address').val(address);
 
                 });
             }
 
-            function setTextFieldValues(UserId,Name,Password,Email,ContactNumber,Address) {
-                $("#UserID").val(UserId);
-                $("#Name").val(Name);
-                $("#Password").val(Password);
-                $("#Email").val(Email);
-                $("#ContactNumber").val(ContactNumber);
-                $("#Address").val(Address);
+            function setTextFieldValues(id,userNic,name,password,email,contact,address) {
+                $("#id").val(id);
+                $("#userNic").val(userNic);
+                $("#name").val(name);
+                $("#password").val(password);
+                $("#email").val(email);
+                $("#contact").val(contact);
+                $("#address").val(address);
 
 
             }
     $("#Save").on("click",function () {
 
-        let formData = $("#UserInformationForm").serialize();
+        let formData = $("#UserForm").serialize();
 
         $.ajax({
             url:baseUrl+"user",
@@ -243,6 +250,7 @@
             // contentType: "application/json",
             success:function (res) {
                 alert(res.massage)
+                loadAllUserInformation();
             }
         })
 

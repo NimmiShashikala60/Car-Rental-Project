@@ -47,32 +47,28 @@
         <form class="mt-2">
 
             <div class="mb-3">
-                <label for="Vehicle.reg.num" class="form-label">Vehicle Id:</label>
-                <input type="text" class="form-control" id="Vehicle.reg.num">
+                <label for="ScheduleId" class="form-label">Schedule Id:</label>
+                <input type="text" class="form-control" name="ScheduleId" id="ScheduleId">
             </div>
             <div class="mb-3">
-                <label for="VehicleType" class="form-label">Vehicle Type:</label>
-                <input type="text" class="form-control" id="VehicleType">
+                <label for="VehicleId" class="form-label">Vehicle Id:</label>
+                <input type="text" class="form-control" name="VehicleId" id="VehicleId">
             </div>
             <div class="mb-3">
-                <label for="VehicleBrand" class="form-label">Vehicle Brand:</label>
-                <input type="text" class="form-control" id="VehicleBrand" aria-describedby="emailHelp">
+                <label for="DriverId" class="form-label">Driver Id:</label>
+                <input type="text" class="form-control" name="DriverId" id="DriverId" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="Number.of.passenger" class="form-label">Occupied:</label>
-                <input type="text" class="form-control" id="Number.of.passenger" aria-describedby="emailHelp">
+                <label for="UserNIC" class="form-label">User NIC:</label>
+                <input type="text" class="form-control" name="UserNIC" id="UserNIC" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="UserId" class="form-label">User Id:</label>
-                <input type="text" class="form-control" id="UserId" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="UserContact" class="form-label">User Contact:</label>
-                <input type="text" class="form-control" id="UserContact" aria-describedby="emailHelp">
+                <label for="Time" class="form-label">Time:</label>
+                <input type="text" class="form-control" name="Time" id="Time" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="Date" class="form-label">Date:</label>
-                <input type="date" class="form-control" id="Date" aria-describedby="emailHelp">
+                <input type="date" class="form-control" name="Date" id="Date" aria-describedby="emailHelp">
             </div>
             <section class="d-flex gap-2">
             <button type="button" class="btn btn-primary" id="Save">Save</button>
@@ -89,207 +85,163 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Vehicle.reg.num</th>
-                <th scope="col">Vehicle Type</th>
-                <th scope="col">Vehicle Brand</th>
-                <th scope="col">Number.of.passenger</th>
-                <th scope="col">User Id</th>
-                <th scope="col">User Contact</th>
+                <th scope="col">Schedule Id</th>
+                <th scope="col">Vehicle Id</th>
+                <th scope="col">Driver Id</th>
+                <th scope="col">User NIC</th>
+                <th scope="col">Time</th>
                 <th scope="col">Date</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <tbody id="tblViewSchedule">
+
             </tbody>
         </table>
     </section>
 
 </div>
-</div>
+
 <script src="assets/js/js/bootstrap.min.js"></script>
 <script src="assets/jquery-3.6.1.min.js"></script>
 
 <script>
     let baseUrl="http://localhost:8080/car_rental/";
-    loadAllSchedule();
+    loadAllViewSchedule();
 
 
     $("#ViewSchedule").on("click", function () {
         var formData = $("#ViewSchedule").serialize();
         $.ajax({
-            url: baseUrl + "customer",
+            url: baseUrl + "viewSchedule",
             method: "post",
             data: formData,
             dataType: "json",
             success: function (res) {
-                alert(res.message);
-                loadViewSchedule();
+                alert(res.massage);
+                loadAllViewSchedule();
             },
 
             error: function (error) {
                 var jsObject = JSON.parse(error.responseText);
-                alert(jsObject.message);
+                alert(jsObject.massage);
             }
         });
     });
 
 
-    $("#btnGetAll").click(function () {
+    $("#GetAll").click(function () {
         //send ajax request to the customer servlet
-        loadViewSchedule();
+        loadAllViewSchedule();
     });
-    $("#btnScheduleDelete").click(function () {
-        let id = $("#txtVehicle.reg.num").val();
+    $("#Delete").click(function () {
+        let id = $("#ScheduleId").val();
         $.ajax({
-            url: baseURL+"customer?id=" + num + "",
+            url: baseUrl+`schedule?id=${id}`,
             method: "delete",
             dataType:"json",
             success: function (resp) {
-                alert(resp.message);
+                alert(resp.massage);
                 loadAllViewSchedule();
             },
             error:function (error){
-                alert(JSON.parse(error.responseText).message);
+                alert(JSON.parse(error.responseText).massage);
             }
         });
     });
-    $("#btnUpdate").click(function () {
+    $("#Update").click(function () {
 
-        let VehicleRegNum = $("#txtVehicleRegNum").val();
-        let VehicleType = $("#txtVehicleType").val();
-        let VehicleBrand = $("#txtVehicleBrand").val();
-        let NumberOfPassenger = $("#txtNumberOfPassenger").val();
-        let UserId = $("#txtUserId").val();
-        let UserContact = $("#txtUserContact").val();
-        let Date = $("#txtDate").val();
+        let ScheduleId = $("#ScheduleId").val();
+        let VehicleId = $("#VehicleId").val();
+        let DriverId = $("#DriverId").val();
+        let UserNIC = $("#UserNIC").val();
+        let Time= $("#Time").val();
+        let Date = $("#Date").val();
 
 
         var Schedule = {
-            vehicleregnum: VehicleRegNum,
-            vehicletype: VehicleType,
-            vehiclebrand: VehicleBrand,
-            numberofpassenger: NumberOfPassenger,
-            userid: UserId,
-            usercontact: UserContact,
-            date: Date,
+            ScheduleId :ScheduleId ,
+            VehicleId: VehicleId,
+            DriverId: DriverId,
+            UserNIC:  UserNIC,
+            Time: Time,
+            Date:Date,
+
         }
 
         $.ajax({
-            url: baseURL+'customer',
+            url: baseUrl+'schedule',
             method: 'put',
             contentType:"application/json",
             data:JSON.stringify(Schedule),
             dataType:"json",
             success: function (res) {
-                alert(res.message);
-                loadAllSchedule();
+                alert(res.massage);
+                loadAllViewSchedule();
             },
             error:function (error){
-                let cause= JSON.parse(error.responseText).message;
+                let cause= JSON.parse(error.responseText).massage;
                 alert(cause);
             }
 
         });
     });
-    function loadAllSchedule() {
-        $("#tblSchedule").empty();
+    function loadAllViewSchedule() {
+        $("#tblViewSchedule").empty();
         $.ajax({
-            url: baseURL+"customer",
+            url: baseUrl+"schedule",
             dataType: "json",
             success: function (resp) {
                 console.log(resp);
                 for (let shc of resp.data) {
-                    var row = '<tr><td>' + shc.vehicleregnum + '</td><td>' + shc.vehicletype + '</td><td>' + shc.vehiclebrand + '</td><td>' + shc.numberofpassenger + '</td></tr>'+ shc.userid + '</td></tr>'+ shc.contact + '</td></tr>'+ shc.date + '</td></tr>';
-                    $("#tblAdmin").append(row);
+                    var row = '<tr><td>' + shc.ScheduleId + '</td><td>' + shc.VehicleId + '</td><td>' + shc.DriverId + '</td><td>' + shc.UserNIC + '</td></tr>'+ shc.Time + '</td></tr>'+ shc.Data + '</td></tr>'+ shc.date + '</td></tr>';
+                    $("#tblViewSchedule").append(row);
                 }
                 bindRowClickEvents();
-                setTextFieldValues("","","","","","","");
-                $("#txtSchedule").focus();
+                setTextFieldValues("","","","","","");
+                $("#txtViewSchedule").focus();
             }
         });
 
     }
     function bindRowClickEvents() {
-        $("#tblSchedule>tr").click(function () {
-            let vehicleregnum = $(this).children(":eq(0)").text();
-            let vehicletype = $(this).children(":eq(1)").text();
-            let vehiclebrand = $(this).children(":eq(2)").text();
-            let numberofpassenger = $(this).children(":eq(3)").text();
-            let userid = $(this).children(":eq(4)").text();
-            let usercontact = $(this).children(":eq(5)").text();
-            let date = $(this).children(":eq(6)").text();
+        $("#tblViewSchedule>tr").click(function () {
+            let ScheduleId = $(this).children(":eq(0)").text();
+            let VehicleId = $(this).children(":eq(1)").text();
+            let DriverId = $(this).children(":eq(2)").text();
+            let UserNIC = $(this).children(":eq(3)").text();
+            let Time = $(this).children(":eq(4)").text();
+            let Date = $(this).children(":eq(5)").text();
 
 
-
-            $('#txtVehicleRegNum').val(vehicleregnum);
-            $('#txtVehicleType').val(vehicletype);
-            $('#txtVehicleBrand').val(vehiclebrand);
-            $('#txtNumberOfPassenger').val(numberofpassenger);
-            $('#txtUserid').val(userid);
-            $('#txtUserContact').val(usercontact);
-            $('#txtDate').val(date);
+            $('#ScheduleId').val(ScheduleId);
+            $('#VehicleId ').val(VehicleId );
+            $('#DriverId').val(DriverId);
+            $('#UserNIC').val(UserNIC);
+            $('#Time').val(Time);
+            $('#Date').val(Date);
 
         });
     }
-    function setTextFieldValues(vehicleregnum, vehicletype, vehclebrand, numberofpassenger, userid, usercontact, date) {
-        $("#txtVehicleRegNum").val(vehicleregnum);
-        $("#txtVehicleType").val(vehicletype);
-        $("#txtVehicleBrand").val(vehclebrand);
-        $('#txtNumberOfPassenger').val(numberofpassenger);
-        $('#txtUserId').val(userid);
-        $('#txtUserContact').val(usercontact);
-        $('#txtDate').val(date);
+    function setTextFieldValues(ScheduleId,VehicleId,DriverId,UserNIC,Time,Date) {
+        $("#ScheduleId").val(ScheduleId);
+        $("#VehicleId").val(VehicleId);
+        $("#DriverId").val(DriverId);
+        $('#UserNIC').val(UserNIC);
+        $('#Time').val(Time);
+        $('#Date').val(Date);
+
     }
     $("#Save").on("click",function () {
+        let formData = $("#ViewScheduleForm").serialize();
 
         $.ajax({
             url:baseUrl+"schedule",
             method:"post",
-            // dataType:"json",
+            data:formData,
+             dataType:"json",
             // contentType: "application/json",
-            success:function () {
-                alert("saved")
+            success:function (res) {
+                alert(res.massage)
             }
         })
 

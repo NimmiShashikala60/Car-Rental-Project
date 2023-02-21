@@ -45,26 +45,26 @@
 <div class="main-content d-flex w-100 justify-content-between align-items-center">
     <section class="w-25 h-100 p-5">
         <h4>Driver Information</h4>
-        <form class="mt-2">
+        <form class="mt-2" id="driverForm">
             <div class="mb-3">
-                <label for="DriverId" class="form-label">Driver Id:</label>
-                <input type="text" class="form-control" name="DriverId" id="Driver Id">
+                <label for="driverId" class="form-label">driver Id:</label>
+                <input type="text" class="form-control" name="driverId" id="DriverId">
             </div>
             <div class="mb-3">
-                <label for="DriverName" class="form-label">Driver Name:</label>
-                <input type="text" class="form-control" name="DriverName" id="DriverName">
+                <label for="driverName" class="form-label">driver Name:</label>
+                <input type="text" class="form-control" name="driverName" id="DriverName">
             </div>
             <div class="mb-3">
-                <label for="DriverAddress" class="form-label">Driver Address:</label>
-                <input type="text" class="form-control" name="DriverAddress" id="DriverAddress" aria-describedby="emailHelp">
+                <label for="driverAddress" class="form-label">driver Address:</label>
+                <input type="text" class="form-control" name="driverAddress" id="driverAddress" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="DriverContact" class="form-label">Driver Contact:</label>
-                <input type="text" class="form-control" name="DriverContact" id="DriverContact" aria-describedby="emailHelp">
+                <label for="driverContact" class="form-label">driver Contact:</label>
+                <input type="text" class="form-control" name="driverContact" id="driverContact" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="DriverSalary" class="form-label">Driver Salary:</label>
-                <input type="text" class="form-control" name="DriverSalary" id="DriverSalary" aria-describedby="emailHelp">
+                <label for="driverSalary" class="form-label">driver Salary:</label>
+                <input type="text" class="form-control" name="driverSalary" id="driverSalary" aria-describedby="emailHelp">
             </div>
             <section class="d-flex gap-2">
             <button type="button" class="btn btn-primary" id="Save">Save</button>
@@ -80,7 +80,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Driver Id</th>
                 <th scope="col">Driver Name</th>
                 <th scope="col">Driver Address</th>
@@ -88,7 +87,7 @@
                 <th scope="col">Driver Salary</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tblDriver">
 
             </tbody>
         </table>
@@ -104,7 +103,7 @@
 
 
    $("#DriverInformation").on("click", function () {
-       var formData = $("#DriverInformation").serialize();
+       var formData = $("#driverForm").serialize();
        $.ajax({
            url: baseUrl + "driver",
            method: "post",
@@ -125,7 +124,7 @@
 
    $("#GetAll").click(function () {
        //send ajax request to the customer servlet
-       loadAllDriver();
+       loadAllDriverInformation();
    });
    $("#Delete").click(function () {
        let id = $("#DriverId").val();
@@ -135,7 +134,7 @@
            dataType:"json",
            success: function (resp) {
                alert(resp.massage);
-               loadAllDriver();
+               loadAllDriverInformation();
            },
            // error:function (error){
            //     alert(JSON.parse(error.responseText).message);
@@ -145,17 +144,20 @@
    $("#Update").click(function () {
        let DriverId = $("#DriverId").val();
        let DriverName = $("#DriverName").val();
-       let DriverAddress = $("#DriverAddress").val();
-       let DriverContact = $("#DriverContact").val();
-       let DriverSalary = $("#DriverSalary").val();
+       let DriverAddress = $("#driverAddress").val();
+       let DriverContact = $("#driverContact").val();
+       let DriverSalary = $("#driverSalary").val();
+
+
 
        var Driver = {
-           DriverId: DriverId,
-           DriverName: DriverName,
-           DriverAddress: DriverAddress,
-           DriverContact: DriverContact,
-           DriverSalary: DriverSalary,
+           driverId: DriverId,
+           driverName: DriverName,
+           driverAddress: DriverAddress,
+           driverContact: DriverContact,
+           driverSalary: DriverSalary,
        }
+       console.log(Driver)
 
        $.ajax({
            url: baseUrl+'driver',
@@ -165,7 +167,7 @@
            dataType:"json",
            success: function (res) {
                alert(res.massage);
-               loadAllDriver();
+               loadAllDriverInformation();
            },
            error:function (error){
                let cause= JSON.parse(error.responseText).massage;
@@ -174,15 +176,18 @@
 
        });
    });
-   function loadAllDriver() {
+
+   loadAllDriverInformation();
+   function loadAllDriverInformation() {
        $("#tblDriver").empty();
        $.ajax({
            url: baseUrl+"driver",
+           method:"get",
            dataType: "json",
            success: function (resp) {
                console.log(resp);
                for (let dri of resp.data) {
-                   var row = '<tr><td>' + dri.DriverId + '</td><td>' + dri.DriverName + '</td><td>' + dri.DriverAddress + '</td><td>' + dri.DriverContact + '</td></tr>'+ dri.DriverSalary + '</td></tr>';
+                   var row = '<tr><td>' + dri.driverId + '</td><td>' + dri.driverName + '</td><td>' + dri.driverAddress + '</td><td>' + dri.driverContact + '</td><td>'+ dri.driverSalary + '</td></tr>';
                    $("#tblDriver").append(row);
                }
                bindRowClickEvents();
@@ -194,26 +199,26 @@
    }
    function bindRowClickEvents() {
        $("#tblDriver>tr").click(function () {
-           let DriverId = $(this).children(":eq(0)").text();
-           let DriverName = $(this).children(":eq(1)").text();
-           let DriverAddress = $(this).children(":eq(2)").text();
-           let DriverContact = $(this).children(":eq(3)").text();
-           let DriverSalary = $(this).children(":eq(4)").text();
+           let driverId = $(this).children(":eq(0)").text();
+           let driverName = $(this).children(":eq(1)").text();
+           let driverAddress = $(this).children(":eq(2)").text();
+           let driverContact = $(this).children(":eq(3)").text();
+           let driverSalary = $(this).children(":eq(4)").text();
 
-           $('#DriverId').val(DriverId);
-           $('#DriverName').val(DriverName);
-           $('#DriverAddress').val(DriverAddress);
-           $('#DriverContact').val(DriverContact);
-           $('#DriverSalary').val(DriverSalary);
+           $('#DriverId').val(driverId);
+           $('#DriverName').val(driverName);
+           $('#driverAddress').val(driverAddress);
+           $('#driverContact').val(driverContact);
+           $('#driverSalary').val(driverSalary);
 
        });
    }
-   function setTextFieldValues(DriverId,DriveName,DriverAddress,DriverContact,DriverSalary) {
-       $("#DriverId").val(DriverId);
-       $("#DriverName").val(DriveName);
-       $("#DriverAddress").val(DriverAddress);
-       $("#DriverContact").val(DriverContact);
-       $("#DriverSalary").val(DriverSalary);
+   function setTextFieldValues(driverId,driveName,driverAddress,driverContact,driverSalary) {
+       $("#DriverId").val(driverId);
+       $("#DriverName").val(driveName);
+       $("#driverAddress").val(driverAddress);
+       $("#driverContact").val(driverContact);
+       $("#driverSalary").val(driverSalary);
    }
 
    $("#Save").on("click",function () {
@@ -222,11 +227,12 @@
        $.ajax({
            url:baseUrl+"driver",
            method:"post",
-           data:formData
+           data:formData,
            dataType:"json",
            // contentType: "application/json",
            success:function (res) {
                alert(res.massage)
+               loadAllDriverInformation();
            }
        })
 

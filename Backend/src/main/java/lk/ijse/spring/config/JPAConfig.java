@@ -1,6 +1,8 @@
 package lk.ijse.spring.config;
 
 import lk.ijse.spring.repo.AdminRepo;
+import lk.ijse.spring.repo.DriverRepo;
+import lk.ijse.spring.repo.UserRepo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -19,7 +21,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement   //AOP usage
-@EnableJpaRepositories(basePackageClasses = {AdminRepo.class})
+@EnableJpaRepositories(basePackageClasses = {AdminRepo.class, DriverRepo.class, UserRepo.class})
 public class JPAConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource ds, JpaVendorAdapter ja){

@@ -54,28 +54,28 @@
         <h4>Income</h4>
         <form class="mt-2">
             <div class="mb-3">
-                <label for="DailyPayment" class="form-label">Vehicle Reg No:</label>
-                <input type="text" class="form-control" id="DailyPayment" aria-describedby="emailHelp">
+                <label for="DailyPayment" class="form-label">Vehicle Id:</label>
+                <input type="text" class="form-control" name="VehicleId" id="VehicleId" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="DailyPayment" class="form-label">Daily Payment:</label>
-                <input type="text" class="form-control" id="DailyPayment" aria-describedby="emailHelp">
+                <label for="DailyPayment" class="form-label">Daily Rate:</label>
+                <input type="text" class="form-control" name="DailyRate" id="Daily Rate" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="MonthlyPayment" class="form-label">Monthly Payment:</label>
-                <input type="text" class="form-control" id="MonthlyPayment">
+                <label for="MonthlyPayment" class="form-label">Monthly Rate:</label>
+                <input type="text" class="form-control" name="MonthlyRate" id="MonthlyRate">
             </div>
             <div class="mb-3">
                 <label for="Maintenance" class="form-label">Maintenance:</label>
-                <input type="text" class="form-control" id="Maintenance" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="Maintenance" id="Maintenance" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="Discount" class="form-label">Discount:</label>
-                <input type="text" class="form-control" id="ContactNumber" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="Discount" id="Discount" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="YearlyTotal" class="form-label">Yearly Total:</label>
-                <input type="text" class="form-control" id="YearlyTotal" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="YearlyTotal" id="YearlyTotal" aria-describedby="emailHelp">
             </div>
             <button type="button" class="btn btn-primary" name="Add" id="Add">Save</button>
         </form>
@@ -87,53 +87,16 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Vehicle Reg No</th>
-                <th scope="col">Daily Payment</th>
-                <th scope="col">Monthly Payment</th>
+                <th scope="col">Vehicle Id</th>
+                <th scope="col">Daily Rate</th>
+                <th scope="col">Monthly Rate</th>
                 <th scope="col">Maintenance</th>
                 <th scope="col">Discount</th>
                 <th scope="col">Yearly Total</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <tbody id="tblIncome">
+
             </tbody>
         </table>
     </section>

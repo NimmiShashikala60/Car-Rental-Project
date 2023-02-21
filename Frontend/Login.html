@@ -24,26 +24,23 @@
   <form class="mt-2 w-25 border border-2 rounded rounded-3 p-5">
     <div class="mb-3">
       <label for="UserName" class="form-label">User Name</label>
-      <input type="text" class="form-control" id="UserName" aria-describedby="emailHelp">
+      <input type="text" class="form-control" name="UserName" id="UserName" aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
       <label for="Password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="Password">
+      <input type="password" class="form-control" name="Password" id="Password">
     </div>
 
-    <button class="btn btn-primary"name="login" id="login">Login</button>
+    <button class="btn btn-primary"name="Login" id="Login">Login</button>
   </form>
 </section>
 <script src="assets/js/js/bootstrap.min.js"></script>
 <script src="assets/jquery-3.6.1.min.js"></script>
 <script>
   let baseUrl="http://localhost:8080/car_rental/";
-  function setTextFieldValues(vehicleregnum, vehicletype, vehclebrand, numberofpassenger, userid, usercontact, date) {
-    $("#txtVehicleRegNum").val(vehicleregnum);
-    $("#txtVehicleType").val(vehicletype);
-  }
 
-  $("#Save").on("click",function () {
+
+  $("#Login").on("click",function () {
 
     $.ajax({
       url:baseUrl+"login",
