@@ -48,8 +48,8 @@
         <form class="mt-2">
 
             <div class="mb-3">
-                <label for="NIC" class="form-label">NIC:</label>
-                <input type="text" class="form-control" name="NIC" id="NIC">
+                <label for="NIC" class="form-label">User NIC:</label>
+                <input type="text" class="form-control" name="User NIC" id="User NIC">
             </div>
             <div class="mb-3">
                 <label for="Name" class="form-label">Name:</label>
@@ -71,18 +71,6 @@
                 <label for="Address" class="form-label">Address:</label>
                 <input type="text" class="form-control" name="Address" id="Address" aria-describedby="emailHelp">
             </div>
-            <div class="mb-3 col col-5">
-                <label for="BankName" class="form-label">Date:</label>
-                <input type="text" class="form-control" name="Date" id="Date" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3 col col-5">
-                <label for="BankName" class="form-label">Time:</label>
-                <input type="text" class="form-control" name="Time" id="Time" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="Address" class="form-label">Payment:</label>
-                <input type="text" class="form-control" name="payment" id="payment" aria-describedby="emailHelp">
-            </div>
             <section class="d-flex gap-2">
             <button type="button" class="btn btn-primary" id="Save">Save</button>
             <button type="button" class="btn btn-primary" id="Update">Update</button>
@@ -98,15 +86,11 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">NIC</th>
+                <th scope="col">User NIC</th>
                 <th scope="col">Name</th>
                 <th scope="col">Password</th>
                 <th scope="col">Email</th>
-                <th scope="col">Contact</th>
-                <th scope="col">Address</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-                <th scope="col">Payment</th>
+                <th scope="col">Contact Number</th>
             </tr>
             </thead>
             <tbody id="tblUser">
@@ -132,13 +116,13 @@
                     data: formData,
                     dataType: "json",
                     success: function (res) {
-                        alert(res.message);
+                        alert(res.massage);
                         loadAllUser();
                     },
 
                     error: function (error) {
                         var jsObject = JSON.parse(error.responseText);
-                        alert(jsObject.message);
+                        alert(jsObject.massage);
                     }
                 });
             });
@@ -165,27 +149,20 @@
             });
             $("#Update").click(function () {
 
-                let UserNIC = $("#NIC").val();
-                let UserName = $("#Name").val();
-                let UserPassword = $("#Password").val();
-                let UserContact = $("#Contact").val();
-                let UserAddress = $("#Address").val();
-                let UserBankName = $("#BankName").val();
-                let UserDate = $("#Date").val();
-                let UserTime = $("#Time").val();
-                let UserPayment = $("#Payment").val();
+                let UserNIC = $("#UserNIC").val();
+                let Name = $("#Name").val();
+                let Password = $("#Password").val();
+                let Email = $("#Email").val();
+                let ContactNumber = $("#ContactNumber").val();
+                let Address = $("#Address").val();
 
                 var User = {
-                    id: UserNIC,
-                    name: UserName,
-                    password:UserPassword,
-                    email: UserEmail,
-                    contact: UserContact,
-                    address: UserAddress,
-                    bankname: UserBankName,
-                    date: UserDate,
-                    time: UserTime,
-                    payment: UserPayment,
+                    UserNIC: UserNIC,
+                    Name: Name,
+                    Password:Password,
+                    Email: Email,
+                    ContactNumber: ContactNumber,
+                    Address: Address,
                 }
 
                 $.ajax({
@@ -209,16 +186,16 @@
             function loadAllUser() {
                 $("#tblUser").empty();
                 $.ajax({
-                    url: baseUrl + "customer",
+                    url: baseUrl + "user",
                     dataType: "json",
                     success: function (resp) {
                         console.log(resp);
                         for (let usr of resp.data) {
-                            var row = '<tr><td>' + usr.nic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>' + usr.contact + '</td></tr>' + usr.address + '</td></tr>' + usr.bankname + '</td></tr>' + usr.date + '</td></tr>'+ usr.time + '</td></tr>'+ usr.payment + '</td></tr>';
+                            var row = '<tr><td>' + usr.UserNIC + '</td><td>' + usr.Name + '</td><td>' + usr.Password + '</td><td>' + usr.Email + '</td></tr>' + usr.ContactNumber + '</td></tr>' + usr.Address + '</td></tr>';
                             $("#tblUser").append(row);
                         }
                         bindRowClickEvents();
-                        setTextFieldValues("", "", "", "", "","","","","","");
+                        setTextFieldValues("", "", "", "", "","","");
                         $("#txtUser").focus();
                     }
                 });
@@ -227,42 +204,32 @@
 
             function bindRowClickEvents() {
                 $("#tblUser>tr").click(function () {
-                    let nic = $(this).children(":eq(0)").text();
-                    let name = $(this).children(":eq(1)").text();
-                    let password = $(this).children(":eq(2)").text();
-                    let email = $(this).children(":eq(3)").text();
-                    let contact = $(this).children(":eq(4)").text();
-                    let address = $(this).children(":eq(5)").text();
-                    let bankname = $(this).children(":eq(6)").text();
-                    let date = $(this).children(":eq(7)").text();
-                    let time = $(this).children(":eq(8)").text();
-                    let payment = $(this).children(":eq(9)").text();
+                    let UserNIC = $(this).children(":eq(0)").text();
+                    let Name = $(this).children(":eq(1)").text();
+                    let Password = $(this).children(":eq(2)").text();
+                    let Email = $(this).children(":eq(3)").text();
+                    let ContactNumber = $(this).children(":eq(4)").text();
+                    let Address = $(this).children(":eq(5)").text();
 
-                    $('#UserNIC').val(nic);
-                    $('#UserName').val(name);
-                    $('#Userpassword').val(password);
-                    $('#UserEmail').val(email);
-                    $('#UserContact').val(contact);
-                    $('#Useraddress').val(address);
-                    $('#Userbankname').val(bankname);
-                    $('#Userdate').val(date);
-                    $('#Usertime').val(time);
-                    $('#Userpayment').val(payment);
+                    $('#UserNIC').val(UserNIC);
+                    $('#Name').val(Name);
+                    $('#password').val(Password);
+                    $('#Email').val(Email);
+                    $('#ContactNumber').val(ContactNumber);
+                    $('#Address').val(Address);
 
                 });
             }
 
-            function setTextFieldValues(id, name,password, email, contact, address, bankname,date,time, payment) {
-                $("#UserID").val(id);
-                $("#UserName").val(name);
-                $("#UserPassword").val(password);
-                $("#UserEmail").val(email);
-                $("#UserContact").val(contact);
-                $("#UserAddress").val(address);
-                $("#UserBankname").val(bankname);
-                $("#UserDate").val(date);
-                $("#UserTime").val(bankname);
-                $("#UserPayment").val(payment);
+            function setTextFieldValues(UserId,Name,Password,Email,ContactNumber,Address) {
+                $("#UserID").val(UserId);
+                $("#Name").val(Name);
+                $("#Password").val(Password);
+                $("#Email").val(Email);
+                $("#ContactNumber").val(ContactNumber);
+                $("#Address").val(Address);
+
+
             }
     $("#Save").on("click",function () {
 
@@ -272,7 +239,7 @@
             url:baseUrl+"user",
             method:"post",
             data:formData,
-             dataType:"json",
+            dataType:"json",
             // contentType: "application/json",
             success:function (res) {
                 alert(res.massage)
