@@ -7,21 +7,20 @@ import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
-
-public class CarRoutes {
+public class ViewSchedule {
     @Id
-    private String VehicleId;
-    private String VehicleBrand;
-    private String VehicleType;
-    private String Occupied;
-    private String TransmissionType;
-    private String FuelType;
-    private String DailyRate;
-    private String MonthlyRate;
+    private String schduleId;
+    private String vehicleiId;
+    private String driverId;
+    private String userName;
+    private LocalDate date;
+    private LocalTime time;
 }

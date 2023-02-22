@@ -31,7 +31,7 @@
         <li><a href="Admin-Information.html" class="active"><i class="fa fa-user"></i>Admin Information </a><li>
         <li><a href="Daily-Summery.html" class="active"><i class="fa fa-user"></i>Daily Summary </a><li>
         <li><a href="Car-Booking.html" class="active"><i class="fa fa-car"></i>Car Booking</a><li>
-        <li><a href="Car-Routes.html" class="active"><i class="fa fa-car"></i>Car Routes</a><li>
+        <li><a href="Vehicle-Routes.html" class="active"><i class="fa fa-car"></i>Car Routes</a><li>
         <li><a href="User-Information.html" class="active"><i class="fa fa-user"></i>User Information </a><li>
         <li><a href="Driver-Information.html" class="active"><i class="fa fa-car"></i>Driver Information </a><li>
         <li><a href="View-Schedule.html" class="active"><i class="fa fa-admin"></i>View Schedule </a><li>
@@ -155,7 +155,6 @@
                 let address = $("#Address").val();
 
                 var User = {
-                    id:id,
                     userNic: userNic,
                     name: name,
                     password:password,
@@ -193,11 +192,11 @@
                     success: function (resp) {
                         console.log(resp);
                         for (let usr of resp.data) {
-                            var row = '<tr><td>' + usr.id +'<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>' + usr.contact + '</td></tr>' + usr.address + '</td></tr>';
+                            var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>' + usr.contact + '</td></tr>' + usr.address + '</td></tr>';
                             $("#tblUser").append(row);
                         }
                         bindRowClickEvents();
-                        setTextFieldValues("", "", "", "", "","","");
+                        setTextFieldValues("", "", "", "", "","");
                         $("#txtUser").focus();
                     }
                 });
@@ -206,7 +205,6 @@
 
             function bindRowClickEvents() {
                 $("#tblUserInformation>tr").click(function () {
-                    let id = $(this).children(":eq(0)").text();
                     let userNic = $(this).children(":eq(1)").text();
                     let name = $(this).children(":eq(2)").text();
                     let password = $(this).children(":eq(3)").text();
@@ -215,7 +213,6 @@
                     let address = $(this).children(":eq(6)").text();
 
 
-                    $('#id').val(id);
                     $('#userNIC').val(userNic);
                     $('#name').val(name);
                     $('#password').val(password);
@@ -226,8 +223,7 @@
                 });
             }
 
-            function setTextFieldValues(id,userNic,name,password,email,contact,address) {
-                $("#id").val(id);
+            function setTextFieldValues(userNic,name,password,email,contact,address) {
                 $("#userNic").val(userNic);
                 $("#name").val(name);
                 $("#password").val(password);
@@ -239,7 +235,7 @@
             }
     $("#Save").on("click",function () {
 
-        let formData = $("#UserForm").serialize();
+        let formData = $("#userForm").serialize();
 
         $.ajax({
             url:baseUrl+"user",

@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class UserDTO {
 
-        private String UserNic;
+        private String userNic;
         private String name;
         private String password;
         private String email;

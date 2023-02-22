@@ -15,12 +15,12 @@ import javax.persistence.Id;
 @ToString
 public class User {
         @Id
-        private String UserNic;
-        private String Name;
-        private String Password;
-        private String Email;
-        private String Contact;
-        private String Address;
+        private String userNic;
+        private String name;
+        private String password;
+        private String email;
+        private String contact;
+        private String address;
 
 
 

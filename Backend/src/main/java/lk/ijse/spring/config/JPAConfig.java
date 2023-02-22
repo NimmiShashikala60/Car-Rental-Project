@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement   //AOP usage
-@EnableJpaRepositories(basePackageClasses = {AdminRepo.class, DriverRepo.class, UserRepo.class, CarRoutesRepo.class, DailySummeryRepo.class})
+@EnableJpaRepositories(basePackageClasses = {AdminRepo.class, DriverRepo.class, UserRepo.class, VehicleRoutesRepo.class, DailySummeryRepo.class, ViewScheduleRepo.class})
 public class JPAConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource ds, JpaVendorAdapter ja){

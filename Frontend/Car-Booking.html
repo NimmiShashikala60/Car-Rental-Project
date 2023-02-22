@@ -31,7 +31,7 @@
         <li><a href="Admin-Information.html" class="active"><i class="fa fa-user"></i>Admin Information </a><li>
         <li><a href="Daily-Summery.html" class="active"><i class="fa fa-user"></i>Daily Summary </a><li>
         <li><a href="Car-Booking.html" class="active"><i class="fa fa-car"></i>Car Booking</a><li>
-        <li><a href="Car-Routes.html" class="active"><i class="fa fa-car"></i>Car Routes</a><li>
+        <li><a href="Vehicle-Routes.html" class="active"><i class="fa fa-car"></i>Car Routes</a><li>
         <li><a href="User-Information.html" class="active"><i class="fa fa-user"></i>User Information </a><li>
         <li><a href="Driver-Information.html" class="active"><i class="fa fa-car"></i>Driver Information </a><li>
         <li><a href="View-Schedule.html" class="active"><i class="fa fa-admin"></i>View Schedule </a><li>
@@ -45,28 +45,28 @@
         <h4>Car Booking</h4>
         <form class="mt-2 p-5 row w-50">
             <div class="mb-2">
-                <label for="UserNIC" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" name="UserNIC" id="UserNIC" aria-describedby="emailHelp">
+                <label for="UserNic" class="form-label">User Nic:</label>
+                <input type="text" class="form-control" name="UserNic" id="UserNic" aria-describedby="emailHelp">
             </div>
             <div class="mb-2">
-                <label for="DriverId" class="form-label">Driver Id:</label>
-                <input type="text" class="form-control" name="DriverId" id="DriverId">
+                <label for="driverName" class="form-label">Driver Name:</label>
+                <input type="text" class="form-control" name="driverName" id="driverName">
             </div>
             <div class="mb-2">
-                <label for="DriverId" class="form-label">Vehicle Id:</label>
-                <input type="text" class="form-control" name="VehicleId" id="VehicleId">
+                <label for="driverId" class="form-label">Vehicle Id:</label>
+                <input type="text" class="form-control" name="vehicleId" id="vehicleId">
             </div>
             <div class="mb-3 col col-5">
-                <label for="Address" class="form-label">Date:</label>
-                <input type="text" class="form-control" name="Date" id="Date" aria-describedby="emailHelp">
+                <label for="date" class="form-label">Date:</label>
+                <input type="text" class="form-control" name="date" id="date" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col col-5">
-                <label for="Address" class="form-label">Time:</label>
-                <input type="text" class="form-control" name="Time" id="Time" aria-describedby="emailHelp">
+                <label for="time" class="form-label">Time:</label>
+                <input type="text" class="form-control" name="time" id="time" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col col-5">
-                <label for="Address" class="form-label">Address:</label>
-                <input type="text" class="form-control" name="Address" id="Address" aria-describedby="emailHelp">
+                <label for="address" class="form-label">Address:</label>
+                <input type="text" class="form-control" name="address" id="address" aria-describedby="emailHelp">
             </div>
             <button type="button" class="btn btn-primary" id="Save">Save</button>
 
@@ -74,21 +74,21 @@
 
         <form class="mt-2 p-5 row">
             <div class="mb-3 col col-5">
-                <label for="Payment" class="form-label">Payment:</label>
-                <input type="text" class="form-control" name="Payment" id="Payment" aria-describedby="emailHelp">
+                <label for="payment" class="form-label">Payment:</label>
+                <input type="text" class="form-control" name="payment" id="payment" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col col-5">
-                <label for="Date" class="form-label">Date:</label>
-                <input type="date" class="form-control" name="Date" id="Date" aria-describedby="emailHelp">
+                <label for="Date" class="form-label">date:</label>
+                <input type="date" class="form-control" name="date" id="date" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col col-5">
-                <label for="Time" class="form-label">Time:</label>
-                <input type="time" class="form-control" name="Time" id="Time" aria-describedby="emailHelp">
+                <label for="time" class="form-label">Time:</label>
+                <input type="time" class="form-control" name="time" id="time" aria-describedby="emailHelp">
             </div>
 
             <div class="mb-3 col col-5">
-                <label for="BankName" class="form-label">Bank Name:</label>
-                <input type="text" class="form-control" name="BankName" id="BankName" aria-describedby="emailHelp">
+                <label for="bankName" class="form-label">Bank Name:</label>
+                <input type="text" class="form-control" name="bankName" id="bankName" aria-describedby="emailHelp">
             </div>
         </form>
     </section>
@@ -99,7 +99,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">User NIC</th>
-                <th scope="col">Driver Id</th>
+                <th scope="col">Driver Name</th>
                 <th scope="col">Vehicle Id</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
@@ -107,40 +107,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td colspan="2"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+
             </tbody>
         </table>
     </div>
