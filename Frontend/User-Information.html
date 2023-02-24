@@ -63,13 +63,14 @@
                 <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="contact" class="form-label">Contact:</label>
-                <input type="text" class="form-control" name="contact" id="contact" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
                 <label for="address" class="form-label">Address:</label>
                 <input type="text" class="form-control" name="address" id="address" aria-describedby="emailHelp">
             </div>
+            <div class="mb-3">
+                <label for="contact" class="form-label">Contact:</label>
+                <input type="text" class="form-control" name="contact" id="contact" aria-describedby="emailHelp">
+            </div>
+
             <section class="d-flex gap-2">
             <button type="button" class="btn btn-primary" id="Save">Save</button>
             <button type="button" class="btn btn-primary" id="Update">Update</button>
@@ -88,8 +89,8 @@
                 <th scope="col">Name</th>
                 <th scope="col">Password</th>
                 <th scope="col">Email</th>
-                <th scope="col">Contact</th>
                 <th scope="col">Address</th>
+                <th scope="col">Contact Number</th>
             </tr>
             </thead>
             <tbody id="tblUserInformation">
@@ -99,12 +100,12 @@
     </section>
 
 </div>
-</div>
+
 <script src="assets/js/js/bootstrap.min.js"></script>
 <script src="assets/jquery-3.6.1.min.js"></script>
 <script>
     let baseUrl="http://localhost:8080/car_rental/";
-
+    loadAllUserInformation();
 
             // $("#UserInformation").on("click", function () {
             //     var formData = $("#userForm").serialize();
@@ -150,16 +151,18 @@
                 let Name = $("#name").val();
                 let Password = $("#password").val();
                 let Email = $("#email").val();
-                let Contact = $("#contact").val();
                 let Address = $("#address").val();
+                let Contact = $("#contact").val();
+
 
                 var User = {
                     userNic: UserNic,
                     name: Name,
                     password:Password,
                     email: Email,
-                    contact: Contact,
                     address: Address,
+                    contact: Contact,
+
                 }
 
                 $.ajax({
@@ -191,7 +194,7 @@
                     success: function (resp) {
                         console.log(resp);
                         for (let usr of resp.data) {
-                            var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>' + usr.contact + '</td></tr>' + usr.address + '</td></tr>';
+                            var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>'+ usr.address + '</td></tr>' + usr.contact + '</td></tr>';
                             $("#tblUserInformation").append(row);
                         }
                         bindRowClickEvents();
@@ -208,29 +211,29 @@
                     let name = $(this).children(":eq(1)").text();
                     let password = $(this).children(":eq(2)").text();
                     let email = $(this).children(":eq(3)").text();
-                    let contact = $(this).children(":eq(4)").text();
                     let address = $(this).children(":eq(5)").text();
+                    let contact = $(this).children(":eq(4)").text();
+
 
 
                     $('#UserNic').val(userNic);
                     $('#Name').val(name);
                     $('#Password').val(password);
                     $('#Email').val(email);
-                    $('#Contact').val(contact);
                     $('#Address').val(address);
+                    $('#Contact').val(contact);
+
 
                 });
             }
 
-            function setTextFieldValues(userNic,name,password,email,contact,address) {
+            function setTextFieldValues(userNic,name,password,email,address,contact) {
                 $("#UserNic").val(userNic);
                 $("#Name").val(name);
                 $("#Password").val(password);
                 $("#Email").val(email);
-                $("#Contact").val(contact);
                 $("#Address").val(address);
-
-
+                $("#Contact").val(contact);
             }
     $("#Save").on("click",function () {
 
@@ -244,7 +247,7 @@
             // contentType: "application/json",
             success:function (res) {
                 alert(res.massage)
-                loadAllUserInformation();
+                //loadAllUserInformation();
             }
         })
 

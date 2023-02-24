@@ -36,35 +36,35 @@ public class ViewScheduleController {
         ViewSchedule map=mapper.map(dto,ViewSchedule.class);
         repo.save(map);
 
-        ViewSchedule viewSchedule = new Admin(dto.getScheduleId(), dto.getVehicleName(), dto.getDriverId(), dto.getUserName(),dto.getDate(),dto.getTime());
+        ViewSchedule viewSchedule = new ViewSchedule(dto.getScheduleId(), dto.getVehicleName(), dto.getDriverId(), dto.getUserName(),dto.getDate(),dto.getTime());
         repo.save(viewSchedule);
         return new ResponseUtil("OK","Successfully Registered!",null);
 
     }
     @GetMapping
-    public ResponseUtil getAllAdmin(){
-        List<Admin> all = repo.findAll();
-        ArrayList<AdminDTO> allList=mapper.map(all,new TypeToken<ArrayList<AdminDTO>>(){}.getType());
+    public ResponseUtil getAllViewSchedule(){
+        List<ViewSchedule> all = repo.findAll();
+        ArrayList<ViewScheduleDTO> allList=mapper.map(all,new TypeToken<ArrayList<ViewScheduleDTO>>(){}.getType());
         return new ResponseUtil("ok","Successfully  :",allList);
     }
 
     @PutMapping
-    public ResponseUtil updateAdmin(@RequestBody AdminDTO dto){
+    public ResponseUtil updateViewSchedule(@RequestBody ViewScheduleDTO dto){
         System.out.println(dto);
-        if (!repo.existsById(dto.getId())){
-            throw new RuntimeException("Admin doesn't exist");
+        if (!repo.existsById(dto.getScheduleId())){
+            throw new RuntimeException("Schedule doesn't exist");
         }
-        Admin map=mapper.map(dto,Admin.class);
+        ViewSchedule map=mapper.map(dto,ViewSchedule.class);
         repo.save(map);
 
-        Admin admin = new Admin(dto.getId(), dto.getName(), dto.getEmail(), dto.getContact());
-        repo.save(admin);
+        ViewSchedule viewSchedule = new ViewSchedule(dto.getScheduleId(), dto.getVehicleName(), dto.getDriverId(), dto.getUserName(),dto.getDate(),dto.getTime());
+        repo.save(viewSchedule);
 
         return new ResponseUtil("OK","Successfully Updated!",null);
     }
 
     @DeleteMapping(params = {"id"})
-    public ResponseUtil deleteAdmin(@RequestParam String id){
+    public ResponseUtil deleteViewSchedule(@RequestParam String id){
         repo.deleteById(id);
         return new ResponseUtil("OK","Successfully Deleted!",null);
     }

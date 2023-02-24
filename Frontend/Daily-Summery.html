@@ -44,9 +44,9 @@
 <div class="main-content d-flex w-100 justify-content-between align-items-center">
   <section class="w-25 h-100 p-5">
     <h4>Daily Summery</h4>
-    <form class="mt-2">
+    <form class="mt-2" id="dailySummeryForm">
       <div class="mb-3">
-        <label for="summeryId" class="form-label">Summery Id:</label>
+        <label for="summeryId" class="form-label">Summery id:</label>
         <input type="text" class="form-control" name="summeryId" id="summeryId">
       </div>
       <div class="mb-3">
@@ -138,7 +138,7 @@
     loadAllDailySummery();
   });
   $("#Delete").click(function () {
-    let id = $("#SummeryId").val();
+    let id = $("#summeryId").val();
     $.ajax({
       url: baseUrl+`summery?id=${id}`,
       method: "delete",
@@ -154,17 +154,17 @@
   });
   $("#Update").click(function () {
 
-    let SummeryId = $("#SummeryId").val();
-    let UserName = $("#UserName").val();
-    let VehicleId = $("#VehicleId").val();
-    let DriverName = $("#DriverName").val();
-    let Occupied = $("#Occupied").val();
-    let ActiveDay = $("#ActiveDay").val();
-    let ReservedCar = $("#ReservedCar").val();
+    let SummeryId = $("#summeryId").val();
+    let UserName = $("#userName").val();
+    let VehicleId = $("#vehicleId").val();
+    let DriverName = $("#driverName").val();
+    let Occupied = $("#occupied").val();
+    let ActiveDay = $("#activeDay").val();
+    let ReservedCar = $("#reservedCar").val();
 
     var Summery = {
       summeryId:SummeryId,
-      username:UserName,
+      userName:UserName,
       vehicleId:VehicleId,
       driverName:DriverName,
       occupied: Occupied,
@@ -197,7 +197,7 @@
       success: function (resp) {
         console.log(resp);
         for (let sum of resp.data) {
-          var row = '<tr><td>' + sum.summeryId +'<tr><td>' + sum.username + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverName + '</td><td>' + sum.occupied + '</td></tr>'+ sum.activeDay + '</td></tr>'+sum.reservedCar + '</td></tr>';
+          var row = '<tr><td>' + sum.summeryId +'<tr><td>' + sum.userName + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverName + '</td><td>' + sum.occupied + '</td></tr>'+ sum.activeDay + '</td></tr>'+sum.reservedCar + '</td></tr>';
           $("#tblDailySummery").append(row);
         }
         bindRowClickEvents();
@@ -238,7 +238,7 @@
   }
 
   $("#Save").on("click",function () {
-    let formData = $("#DailySummeryForm").serialize();
+    let formData = $("#dailySummeryForm").serialize();
 
     $.ajax({
       url:baseUrl+"summery",

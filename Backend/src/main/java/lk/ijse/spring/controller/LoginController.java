@@ -1,11 +1,31 @@
 package lk.ijse.spring.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.ijse.spring.dto.UserDTO;
+import lk.ijse.spring.entity.User;
+import lk.ijse.spring.repo.UserRepo;
+import lk.ijse.spring.util.ResponseUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/customer")
+@RequestMapping("/login")
 public class LoginController {
+
+    @Autowired
+    UserRepo userRepo;
+
+    @PostMapping
+    public ResponseUtil login(@RequestParam String userNic, @RequestParam String password){
+        User user = userRepo.findById(userNic).get();
+        System.out.println(user);
+        if (user.getPassword().equals(password)){
+            return new ResponseUtil("Ok","Loaded","Correct");
+        }else{
+            return new ResponseUtil("Ok","Loaded","Wrong");
+        }
+//        return new ResponseUtil("OK","Successfully Login",false);
+
+    }
+
 }
