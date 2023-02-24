@@ -35,7 +35,7 @@ public class AdminInformationController {
         Admin map=mapper.map(dto,Admin.class);
         repo.save(map);
 
-        Admin admin = new Admin(dto.getId(), dto.getName(), dto.getEmail(), dto.getContact());
+        Admin admin = new Admin(dto.getId(), dto.getName(), dto.getEmail(),dto.getPassword(), dto.getContact());
         repo.save(admin);
         return new ResponseUtil("OK","Successfully Registered!",null);
 
@@ -56,7 +56,7 @@ public class AdminInformationController {
         Admin map=mapper.map(dto,Admin.class);
         repo.save(map);
 
-        Admin admin = new Admin(dto.getId(), dto.getName(), dto.getEmail(), dto.getContact());
+        Admin admin = new Admin(dto.getId(), dto.getName(), dto.getEmail(), dto.getPassword(), dto.getContact());
         repo.save(admin);
 
         return new ResponseUtil("OK","Successfully Updated!",null);

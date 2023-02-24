@@ -64,9 +64,14 @@
                     <input type="email" class="form-control" name="email" id="AdminEmail" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
-                    <label for="ContactNumber" class="form-label">Contact Number</label>
-                    <input type="text" class="form-control" name="contact" id="ContactNumber" aria-describedby="emailHelp">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="text" class="form-control" name="password" id="Password" aria-describedby="emailHelp">
                 </div>
+                <div class="mb-3">
+                    <label for="Contact" class="form-label">Contact</label>
+                    <input type="text" class="form-control" name="contact" id="Contact" aria-describedby="emailHelp">
+                </div>
+
                 <section class="d-flex gap-2">
                     <button type="button" class="btn btn-primary" id="Save">Save</button>
                     <button type="button" class="btn btn-primary" id="Update">Update</button>
@@ -84,7 +89,9 @@
                     <th scope="col">Admin Id</th>
                     <th scope="col">Admin Name</th>
                     <th scope="col">Admin Email</th>
-                    <th scope="col">Contact Number</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Contact</th>
+
                 </tr>
                 </thead>
                 <tbody id="tblAdmin">
@@ -129,12 +136,14 @@
         let AdminID = $("#AdminId").val();
         let AdminName = $("#AdminName").val();
         let AdminEmail = $("#AdminEmail").val();
+        let Password = $("#Password").val();
         let AdminContact = $("#ContactNumber").val();
 
         var Admin = {
             id: AdminID,
             name: AdminName,
             email: AdminEmail,
+            password:Password,
             contact: AdminContact,
         }
 
@@ -165,11 +174,11 @@
             success: function (resp) {
                 console.log(resp);
                 for (let adm of resp.data) {
-                    var row = '<tr><td>' + adm.id + '</td><td>' + adm.name + '</td><td>' + adm.email + '</td><td>' + adm.contact + '</td></tr>';
+                    var row = '<tr><td>' + adm.id + '</td><td>' + adm.name + '</td><td>' + adm.email + '</td><td>' + adm.password + '</td></tr>' + adm.contact + '</td></tr>';
                     $("#tblAdmin").append(row);
                 }
                 bindRowClickEvents();
-                setTextFieldValues("","","","");
+                setTextFieldValues("","","","","");
                 $("#txtAdmin").focus();
             }
         });
@@ -180,20 +189,23 @@
             let id = $(this).children(":eq(0)").text();
             let name = $(this).children(":eq(1)").text();
             let email = $(this).children(":eq(2)").text();
-            let contact = $(this).children(":eq(3)").text();
+            let password = $(this).children(":eq(3)").text();
+            let contact = $(this).children(":eq(4)").text();
 
             $('#AdminId').val(id);
             $('#AdminName').val(name);
             $('#AdminEmail').val(email);
-            $('#ContactNumber').val(contact);
+            $('#Password').val(password);
+            $('#Contact').val(contact);
 
         });
     }
-    function setTextFieldValues(id, name, email, contact) {
+    function setTextFieldValues(id, name, email,password, contact) {
         $("#AdminId").val(id);
         $("#AdminName").val(name);
         $("#AdminEmail").val(email);
-        $("#ContactNumber").val(contact);
+        $("#Password").val(password);
+        $("#Contact").val(contact);
     }
 
     $("#Save").on("click",function () {
