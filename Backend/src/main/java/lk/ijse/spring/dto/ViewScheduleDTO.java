@@ -5,15 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
 public class ViewScheduleDTO {
-    private String schduleId;
-    private String vehicleiId;
+    private String scheduleId;
+    private String vehicleName;
     private String driverId;
     private String userName;
-    private String date;
-    private String time;
+    private LocalDate date;
+    private LocalTime time;
 }

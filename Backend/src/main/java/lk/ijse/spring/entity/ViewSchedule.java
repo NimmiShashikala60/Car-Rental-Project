@@ -17,8 +17,8 @@ import java.time.LocalTime;
 @ToString
 public class ViewSchedule {
     @Id
-    private String schduleId;
-    private String vehicleiId;
+    private String scheduleId;
+    private String vehicleName;
     private String driverId;
     private String userName;
     private LocalDate date;

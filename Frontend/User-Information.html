@@ -48,23 +48,23 @@
         <form class="mt-2" id="userForm">
             <div class="mb-3">
                 <label for="UserNic" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" name="UserNic" id="UserNic">
+                <input type="text" class="form-control" name="userNic" id="UserNic">
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
-                <input type="text" class="form-control" name="Name" id="name">
+                <input type="text" class="form-control" name="name" id="name">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
-                <input type="text" class="form-control" name="Password" id="password" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="password" id="password" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="text" class="form-control" name="Email" id="email" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="contact" class="form-label">Contact:</label>
-                <input type="text" class="form-control" name="Contact" id="contact" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="contact" id="contact" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address:</label>
@@ -84,13 +84,12 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Id</th>
                 <th scope="col">User NIC</th>
                 <th scope="col">Name</th>
                 <th scope="col">Password</th>
                 <th scope="col">Email</th>
                 <th scope="col">Contact</th>
+                <th scope="col">Address</th>
             </tr>
             </thead>
             <tbody id="tblUserInformation">
@@ -147,20 +146,20 @@
                 });
             });
             $("#Update").click(function () {
-                let userNic = $("#UserNic").val();
-                let name = $("#Name").val();
-                let password = $("#Password").val();
-                let email = $("#Email").val();
-                let contact = $("#Contact").val();
-                let address = $("#Address").val();
+                let UserNic = $("#userNic").val();
+                let Name = $("#name").val();
+                let Password = $("#password").val();
+                let Email = $("#email").val();
+                let Contact = $("#contact").val();
+                let Address = $("#address").val();
 
                 var User = {
-                    userNic: userNic,
-                    name: name,
-                    password:password,
-                    email: email,
-                    contact: contact,
-                    address: address,
+                    userNic: UserNic,
+                    name: Name,
+                    password:Password,
+                    email: Email,
+                    contact: Contact,
+                    address: Address,
                 }
 
                 $.ajax({
@@ -193,7 +192,7 @@
                         console.log(resp);
                         for (let usr of resp.data) {
                             var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>' + usr.contact + '</td></tr>' + usr.address + '</td></tr>';
-                            $("#tblUser").append(row);
+                            $("#tblUserInformation").append(row);
                         }
                         bindRowClickEvents();
                         setTextFieldValues("", "", "", "", "","");
@@ -205,17 +204,17 @@
 
             function bindRowClickEvents() {
                 $("#tblUserInformation>tr").click(function () {
-                    let userNic = $(this).children(":eq(1)").text();
-                    let name = $(this).children(":eq(2)").text();
-                    let password = $(this).children(":eq(3)").text();
-                    let email = $(this).children(":eq(4)").text();
-                    let contact = $(this).children(":eq(5)").text();
-                    let address = $(this).children(":eq(6)").text();
+                    let userNic = $(this).children(":eq(0)").text();
+                    let name = $(this).children(":eq(1)").text();
+                    let password = $(this).children(":eq(2)").text();
+                    let email = $(this).children(":eq(3)").text();
+                    let contact = $(this).children(":eq(4)").text();
+                    let address = $(this).children(":eq(5)").text();
 
 
-                    $('#userNIC').val(userNic);
-                    $('#name').val(name);
-                    $('#password').val(password);
+                    $('#UserNic').val(userNic);
+                    $('#Name').val(name);
+                    $('#Password').val(password);
                     $('#Email').val(email);
                     $('#Contact').val(contact);
                     $('#Address').val(address);
@@ -224,12 +223,12 @@
             }
 
             function setTextFieldValues(userNic,name,password,email,contact,address) {
-                $("#userNic").val(userNic);
-                $("#name").val(name);
-                $("#password").val(password);
-                $("#email").val(email);
-                $("#contact").val(contact);
-                $("#address").val(address);
+                $("#UserNic").val(userNic);
+                $("#Name").val(name);
+                $("#Password").val(password);
+                $("#Email").val(email);
+                $("#Contact").val(contact);
+                $("#Address").val(address);
 
 
             }

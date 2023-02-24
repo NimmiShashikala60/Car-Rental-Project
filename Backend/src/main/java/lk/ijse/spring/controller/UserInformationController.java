@@ -1,10 +1,6 @@
 package lk.ijse.spring.controller;
-
-import lk.ijse.spring.dto.DriverDTO;
 import lk.ijse.spring.dto.UserDTO;
-import lk.ijse.spring.entity.Driver;
 import lk.ijse.spring.entity.User;
-import lk.ijse.spring.repo.DriverRepo;
 import lk.ijse.spring.repo.UserRepo;
 import lk.ijse.spring.util.ResponseUtil;
 import org.modelmapper.ModelMapper;
