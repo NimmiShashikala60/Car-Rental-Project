@@ -33,8 +33,8 @@ public class UserInformationController {
         User map=mapper.map(dto, User.class);
         repo.save(map);
 
-//        User user = new User(dto.getUserNic(), dto.getName(), dto.getPassword(), dto.getEmail(),dto.getContact(),dto.getAddress());
-//        repo.save(user);
+       User user = new User(dto.getUserNic(), dto.getName(), dto.getPassword(), dto.getEmail(),dto.getUserAddress(),dto.getContact());
+       repo.save(user);
         return new ResponseUtil("OK","Successfully Registered!",null);
 
     }
@@ -54,7 +54,7 @@ public class UserInformationController {
         User map=mapper.map(dto,User.class);
         repo.save(map);
 
-        User user = new User(dto.getUserNic(), dto.getName(), dto.getPassword(), dto.getEmail(), dto.getContact(), dto.getAddress());
+        User user = new User(dto.getUserNic(), dto.getName(), dto.getPassword(), dto.getEmail(),dto.getUserAddress(), dto.getContact());
         repo.save(user);
 
         return new ResponseUtil("OK","Successfully Updated!",null);

@@ -63,8 +63,8 @@
                 <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="address" class="form-label">Address:</label>
-                <input type="text" class="form-control" name="address" id="address" aria-describedby="emailHelp">
+                <label for="UserAddress" class="form-label">Address:</label>
+                <input type="text" class="form-control" name="userAddress" id="userAddress" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="contact" class="form-label">Contact:</label>
@@ -151,7 +151,7 @@
                 let Name = $("#name").val();
                 let Password = $("#password").val();
                 let Email = $("#email").val();
-                let Address = $("#address").val();
+                let UserAddress = $("#userAddress").val();
                 let Contact = $("#contact").val();
 
 
@@ -160,7 +160,7 @@
                     name: Name,
                     password:Password,
                     email: Email,
-                    address: Address,
+                    userAddress: UserAddress,
                     contact: Contact,
 
                 }
@@ -194,7 +194,7 @@
                     success: function (resp) {
                         console.log(resp);
                         for (let usr of resp.data) {
-                            var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>'+ usr.address + '</td></tr>' + usr.contact + '</td></tr>';
+                            var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>'+ usr.userAddress + '</td></tr>' + usr.contact + '</td></tr>';
                             $("#tblUserInformation").append(row);
                         }
                         bindRowClickEvents();
@@ -211,8 +211,8 @@
                     let name = $(this).children(":eq(1)").text();
                     let password = $(this).children(":eq(2)").text();
                     let email = $(this).children(":eq(3)").text();
-                    let address = $(this).children(":eq(5)").text();
-                    let contact = $(this).children(":eq(4)").text();
+                    let userAddress = $(this).children(":eq(4)").text();
+                    let contact = $(this).children(":eq(5)").text();
 
 
 
@@ -220,19 +220,19 @@
                     $('#Name').val(name);
                     $('#Password').val(password);
                     $('#Email').val(email);
-                    $('#Address').val(address);
+                    $('#userAddress').val(userAddress);
                     $('#Contact').val(contact);
 
 
                 });
             }
 
-            function setTextFieldValues(userNic,name,password,email,address,contact) {
+            function setTextFieldValues(userNic,name,password,email,userAddress,contact) {
                 $("#UserNic").val(userNic);
                 $("#Name").val(name);
                 $("#Password").val(password);
                 $("#Email").val(email);
-                $("#Address").val(address);
+                $("#userAddress").val(address);
                 $("#Contact").val(contact);
             }
     $("#Save").on("click",function () {

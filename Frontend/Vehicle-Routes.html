@@ -43,40 +43,40 @@
         <h4>Car Routes</h4>
         <form class="mt-2" id="carRoutesForm">
             <div class="mb-3">
-                <label for="VehicleId" class="form-label">Vehicle Id</label>
-                <input type="text" class="form-control" name="VehicleId" id="VehicleId" aria-describedby="emailHelp">
+                <label for="vehicleId" class="form-label">Vehicle Id</label>
+                <input type="text" class="form-control" name="vehicleId" id="vehicleId" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="VehicleName" class="form-label">Vehicle Name</label>
-                <input type="text" class="form-control" name="VehicleName" id="VehicleName" aria-describedby="emailHelp">
+                <label for="vehicleName" class="form-label">Vehicle Name</label>
+                <input type="text" class="form-control" name="vehicleName" id="vehicleName" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="VehicleBrand" class="form-label">Vehicle Brand</label>
-                <input type="text" class="form-control" name="VehicleBrand" id="VehicleBrand">
+                <label for="vehicleBrand" class="form-label">Vehicle Brand</label>
+                <input type="text" class="form-control" name="vehicleBrand" id="vehicleBrand">
             </div>
             <div class="mb-3">
-                <label for="VehicleType" class="form-label">Vehicle Type</label>
-                <input type="text" class="form-control" name="VehicleType" id="VehicleType">
+                <label for="vehicleType" class="form-label">Vehicle Type</label>
+                <input type="text" class="form-control" name="vehicleType" id="vehicleType">
             </div>
             <div class="mb-3">
-                <label for="Occupied" class="form-label">Occupied</label>
-                <input type="text" class="form-control" name="Occupied" id="Occupied" aria-describedby="emailHelp">
+                <label for=occupied" class="form-label">Occupied</label>
+                <input type="text" class="form-control" name="occupied" id="occupied" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="TransmissionType" class="form-label">Transmission Type</label>
-                <input type="text" class="form-control" name="TransmissionType" id="TransmissionType" aria-describedby="emailHelp">
+                <label for="transmissionType" class="form-label">Transmission Type</label>
+                <input type="text" class="form-control" name="transmissionType" id="transmissionType" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="Fuel Type" class="form-label">Fuel Type</label>
-                <input type="text" class="form-control" name="FuelType" id="FuelType" aria-describedby="emailHelp">
+                <label for="fuel Type" class="form-label">Fuel Type</label>
+                <input type="text" class="form-control" name="fuelType" id="fuelType" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="ContactNumber" class="form-label">Daily Rate</label>
-                <input type="text" class="form-control" name="DailyRate" id="DailyRate" aria-describedby="emailHelp">
+                <label for="dailyRate" class="form-label">Daily Rate</label>
+                <input type="text" class="form-control" name="dailyRate" id="dailyRate" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="ContactNumber" class="form-label">Monthly Rate</label>
-                <input type="text" class="form-control" name="MonthlyRate" id="MonthlyRate" aria-describedby="emailHelp">
+                <label for="monthlyRate" class="form-label">Monthly Rate</label>
+                <input type="text" class="form-control" name="monthlyRate" id="monthlyRate" aria-describedby="emailHelp">
             </div>
             <section class="d-flex gap-2">
                 <button type="button" class="btn btn-primary" id="Save">Save</button>
@@ -109,8 +109,6 @@
             </tbody>
         </table>
     </section>
-
-
 </div>
 <section class="d-flex flex-column justify-content-start align-items-start gap-5" style="position: relative; margin-left: 300px">
     <div class="border border-1" style="width: 300px; height: 200px"></div>
@@ -148,7 +146,7 @@
         loadAllCarRoutes();
     });
     $("#Delete").click(function () {
-        let id = $("#txtVehicleId").val();
+        let id = $("#vehicleId").val();
         $.ajax({
             url: baseUrl+`vehicle?id=${id}`,
             method: "delete",
@@ -164,15 +162,15 @@
     });
     $("#Update").click(function () {
 
-        let VehicleId = $("#VehicleId").val();
-        let VehicleName = $("#VehicleName").val();
-        let VehicleBrand = $("#VehicleBrand").val();
-        let VehicleType = $("#VehicleType").val();
-        let Occupied = $("#Occupied").val();
-        let TransmissionType = $("#TransmissionType").val();
-        let FuelType = $("#FuelType").val();
-        let DailyType = $("#DailyType").val();
-        let MonthlyRate = $("#MonthlyRate").val();
+        let VehicleId = $("#vehicleId").val();
+        let VehicleName = $("#vehicleName").val();
+        let VehicleBrand = $("#vehicleBrand").val();
+        let VehicleType = $("#vehicleType").val();
+        let Occupied = $("#occupied").val();
+        let TransmissionType = $("#transmissionType").val();
+        let FuelType = $("#fuelType").val();
+        let DailyType = $("#dailyType").val();
+        let MonthlyRate = $("#monthlyRate").val();
 
         var Routes = {
             vehicleId: VehicleId,
@@ -224,37 +222,37 @@
     function bindRowClickEvents() {
         $("#tblCarRoutes>tr").click(function () {
             let vehicleId = $(this).children(":eq(0)").text();
-            let vehicleName = $(this).children(":eq(0)").text();
-            let vehicleBrand = $(this).children(":eq(1)").text();
-            let vehicleType = $(this).children(":eq(2)").text();
-            let occupied = $(this).children(":eq(3)").text();
-            let transmissionType = $(this).children(":eq(4)").text();
-            let fuelType = $(this).children(":eq(5)").text();
-            let dailyRate = $(this).children(":eq(6)").text();
-            let monthlyRate = $(this).children(":eq(7)").text();
+            let vehicleName = $(this).children(":eq(1)").text();
+            let vehicleBrand = $(this).children(":eq(2)").text();
+            let vehicleType = $(this).children(":eq(3)").text();
+            let occupied = $(this).children(":eq(4)").text();
+            let transmissionType = $(this).children(":eq(5)").text();
+            let fuelType = $(this).children(":eq(6)").text();
+            let dailyRate = $(this).children(":eq(7)").text();
+            let monthlyRate = $(this).children(":eq(8)").text();
 
-            $('#VehicleId ').val(vehicleId );
-            $('#VehicleName ').val(vehicleName );
-            $('#VehicleBrand').val(vehicleBrand);
-            $('#VehicleType').val(vehicleType);
-            $('#Occupied ').val(occupied );
-            $('#TransmissionType').val(transmissionType);
-            $('#FuelType').val(fuelType);
-            $('#DailyRate').val(dailyRate);
-            $('#MonthlyRate').val(monthlyRate);
+            $('#vehicleId ').val(vehicleId );
+            $('#vehicleName ').val(vehicleName );
+            $('#vehicleBrand').val(vehicleBrand);
+            $('#vehicleType').val(vehicleType);
+            $('#occupied ').val(occupied );
+            $('#transmissionType').val(transmissionType);
+            $('#fuelType').val(fuelType);
+            $('#dailyRate').val(dailyRate);
+            $('#monthlyRate').val(monthlyRate);
 
         });
     }
     function setTextFieldValues(vehicleId,vehicleName,vehicleBrand,vehicleType,occupied,transmissionType,fuelType,dailyRate,monthlyRate) {
-        $("#VehicleId").val(vehicleId);
-        $("#VehicleName").val(vehicleName);
-        $("#VehicleBrand").val(vehicleBrand);
-        $('#VehicleType').val(vehicleType);
-        $("#Occupied").val(occupied);
-        $("#TransmissionType").val(transmissionType);
-        $("#FuelType").val(fuelType);
-        $("#DailyRate").val(dailyRate);
-        $("#MonthlyRate").val(monthlyRate);
+        $("#vehicleId").val(vehicleId);
+        $("#vehicleName").val(vehicleName);
+        $("#vehicleBrand").val(vehicleBrand);
+        $('#vehicleType').val(vehicleType);
+        $("#occupied").val(occupied);
+        $("#transmissionType").val(transmissionType);
+        $("#fuelType").val(fuelType);
+        $("#dailyRate").val(dailyRate);
+        $("#monthlyRate").val(monthlyRate);
     }
 
     $("#Save").on("click",function () {

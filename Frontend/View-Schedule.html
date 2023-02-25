@@ -59,12 +59,12 @@
                 <input type="text" class="form-control" name="driverId" id="driverId" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="userNic" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" name="userNic" id="userNic" aria-describedby="emailHelp">
+                <label for="userNic" class="form-label">User Name:</label>
+                <input type="text" class="form-control" name="userName" id="userName" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="time" class="form-label">Time:</label>
-                <input type="text" class="form-control" name="time" id="time" aria-describedby="emailHelp">
+                <input type="time" class="form-control" name="time" id="time" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="date" class="form-label">Date:</label>
@@ -84,11 +84,10 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Schedule Id</th>
-                <th scope="col">Vehicle Id</th>
+                <th scope="col">Vehicle Name</th>
                 <th scope="col">Driver Id</th>
-                <th scope="col">User NIC</th>
+                <th scope="col">User Name</th>
                 <th scope="col">Time</th>
                 <th scope="col">Date</th>
             </tr>
@@ -150,19 +149,19 @@
     });
     $("#Update").click(function () {
 
-        let ScheduleId = $("#ScheduleId").val();
-        let VehicleName = $("#VehicleName").val();
-        let DriverName = $("#DriverName").val();
-        let UserNIC = $("#UserNIC").val();
-        let Time= $("#Time").val();
-        let Date = $("#Date").val();
+        let ScheduleId = $("#scheduleId").val();
+        let VehicleName = $("#vehicleName").val();
+        let DriverId = $("#driverId").val();
+        let UserName = $("#userName").val();
+        let Time= $("#time").val();
+        let Date = $("#date").val();
 
 
         var Schedule = {
             scheduleId :ScheduleId ,
             vehicleName: VehicleName,
-            driverName: DriverName,
-            userNic:  UserNIC,
+            driverId: DriverId,
+            userName:  UserName,
             time: Time,
             date:Date,
 
@@ -194,7 +193,7 @@
             success: function (resp) {
                 console.log(resp);
                 for (let shc of resp.data) {
-                    var row = '<tr><td>' + shc.scheduleId + '</td><td>' + shc.vehicleName + '</td><td>' + shc.driverId + '</td><td>' + shc.userNic + '</td></tr>'+ shc.time + '</td></tr>'+ shc.data + '</td></tr>';
+                    var row = '<tr><td>' + shc.scheduleId + '</td><td>' + shc.vehicleName + '</td><td>' + shc.driverId + '</td><td>' + shc.userName + '</td></tr>'+ shc.time + '</td></tr>'+ shc.date + '</td></tr>';
                     $("#tblViewSchedule").append(row);
                 }
                 bindRowClickEvents();
@@ -208,28 +207,28 @@
         $("#tblViewSchedule>tr").click(function () {
             let scheduleId = $(this).children(":eq(0)").text();
             let vehicleName = $(this).children(":eq(1)").text();
-            let driverName = $(this).children(":eq(2)").text();
-            let userNic = $(this).children(":eq(3)").text();
+            let driverId = $(this).children(":eq(2)").text();
+            let userName = $(this).children(":eq(3)").text();
             let time = $(this).children(":eq(4)").text();
             let date = $(this).children(":eq(5)").text();
 
 
-            $('#ScheduleId').val(scheduleId);
-            $('#VehicleName ').val(vehicleName );
-            $('#DriverName').val(driverName);
-            $('#UserNIC').val(userNic);
-            $('#Time').val(time);
-            $('#Date').val(date);
+            $('#scheduleId').val(scheduleId);
+            $('#vehicleName ').val(vehicleName );
+            $('#driverId').val(driverId);
+            $('#userName').val(userName);
+            $('#time').val(time);
+            $('#date').val(date);
 
         });
     }
     function setTextFieldValues(scheduleId,vehicleName,driverName,userNic,time,date) {
-        $("#ScheduleId").val(scheduleId);
-        $("#VehicleName").val(vehicleName);
-        $("#DriverName").val(driverName);
-        $('#UserNIC').val(userNic);
-        $('#Time').val(time);
-        $('#Date').val(date);
+        $("#scheduleId").val(scheduleId);
+        $("#vehicleName").val(vehicleName);
+        $("#driverId").val(driverId);
+        $('#userName').val(userName);
+        $('#time').val(time);
+        $('#date').val(date);
 
     }
     $("#Save").on("click",function () {

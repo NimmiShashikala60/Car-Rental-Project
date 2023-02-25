@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+</html>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -40,78 +41,195 @@
 
     </ul>
 </div>
+
+</body>
 <div class="main-content d-flex w-100 justify-content-between flex-column align-items-center">
     <section class="d-flex">
         <h4>Car Booking</h4>
         <form class="mt-2 p-5 row w-50">
-            <div class="mb-2">
-                <label for="UserNic" class="form-label">User Nic:</label>
-                <input type="text" class="form-control" name="UserNic" id="UserNic" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-2">
-                <label for="driverName" class="form-label">Driver Name:</label>
-                <input type="text" class="form-control" name="driverName" id="driverName">
-            </div>
-            <div class="mb-2">
-                <label for="driverId" class="form-label">Vehicle Id:</label>
-                <input type="text" class="form-control" name="vehicleId" id="vehicleId">
-            </div>
-            <div class="mb-3 col col-5">
-                <label for="date" class="form-label">Date:</label>
-                <input type="text" class="form-control" name="date" id="date" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3 col col-5">
-                <label for="time" class="form-label">Time:</label>
-                <input type="text" class="form-control" name="time" id="time" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3 col col-5">
-                <label for="address" class="form-label">Address:</label>
-                <input type="text" class="form-control" name="address" id="address" aria-describedby="emailHelp">
-            </div>
-            <button type="button" class="btn btn-primary" id="Save">Save</button>
-
         </form>
+            <main class="container mt-5">
+                <div class="position-absolute ">
+                    <button class="btn btn-primary bg-transparent border-0" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasWithBothOptions3" aria-controls="offcanvasWithBothOptions3"><i
+                            class="fa-solid fa-bars text-dark " style="font-size:30px;"></i></button>
+                    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions3"
+                         aria-labelledby="offcanvasWithBothOptionsLabel3">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel3">Menu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link home" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active customer" aria-current="page" href="#">Customers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link item" href="#">Items</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link order" href="#">Order</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="ms-5 position-relative" style="bottom: 3px; left: 10px;">ORDERS</h1>
+                <section class="row">
 
-        <form class="mt-2 p-5 row">
-            <div class="mb-3 col col-5">
-                <label for="payment" class="form-label">Payment:</label>
-                <input type="text" class="form-control" name="payment" id="payment" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3 col col-5">
-                <label for="Date" class="form-label">date:</label>
-                <input type="date" class="form-control" name="date" id="date" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3 col col-5">
-                <label for="time" class="form-label">Time:</label>
-                <input type="time" class="form-control" name="time" id="time" aria-describedby="emailHelp">
-            </div>
+                    <div class="row col-sm-12 col-12 col-lg-5 mt-5 ms-3 col-xl-4">
+                        <h4 class="rounded-3 p-2 bg-opacity-25 bg-success"
+                            style="border: 1px solid black; height: max-content; margin: 0;">Invoice Details</h4>
 
-            <div class="mb-3 col col-5">
-                <label for="bankName" class="form-label">Bank Name:</label>
-                <input type="text" class="form-control" name="bankName" id="bankName" aria-describedby="emailHelp">
-            </div>
-        </form>
+                        <div class="col-6">
+                            <div class="form-floating input-group mt-1 ">
+                                <input id="txtOrderId" type="text" class="form-control bg-transparent " id="invoiceID" placeholder="O00-001">
+                                <label for="invoiceID">Invoice ID</label>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-floating input-group mt-1 ">
+                                <input id="dtpckerODate" type="date" class="form-control bg-transparent " id="floatingInput2">
+                                <label for="floatingInput">Invoice Date</label>
+                            </div>
+                        </div>
+
+                        <div class=" col-6 mt-4 mb-5 ">
+                            <select id="cmbCustomers" class="form-select bg-transparent " aria-label="Default select example">
+                                <option selected class="col-6">Customer</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-floating input-group mt-1 ">
+                                <input id="txtOCName" disabled="disabled" type="text" class="form-control bg-transparent "
+                                       id="customerName2"
+                                       placeholder="H.K.Nimmi">
+                                <label for="customerName2">Customer Name</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12">
+                            <div class="form-floating input-group mt-1 mb-3">
+                                <input id="txtOCAddress" disabled="disabled" type="text" class="form-control bg-transparent "
+                                       id="customerAddress2"
+                                       placeholder="H.K.Nimmi">
+                                <label for="customerAddress2">Customer Address</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row col-sm-12 col-12 col-lg-5 mt-5 ms-3 col-xl-4 justify-content-end">
+                        <h4 class="rounded-3 p-2 bg-opacity-25 bg-success"
+                            style="border: 1px solid black; height: max-content; margin: 0;">Select Items</h4>
+                        <div class=" col-6 mt-4 mb-5 ">
+                            <select id="cmbItems" class="form-select bg-transparent " aria-label="Default select example">
+                                <option selected class="col-6">Item</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating input-group mt-1 ">
+                                <input id="txtOIName" type="text" disabled="disabled" class="form-control bg-transparent "
+                                       placeholder="Item Name">
+                                <label for="txtOIName">Item Name</label>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-floating input-group mt-1 mb-3">
+                                <input id="txtOIDesc" disabled="disabled" type="text" class="form-control bg-transparent "
+                                       placeholder="H.K.Nimii">
+                                <label for="txtOIDesc">Item Description</label>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-floating input-group mt-1 ">
+                                <input id="txtOIUnitPrice" disabled="disabled" type="text" class="form-control bg-transparent "
+                                       placeholder="100">
+                                <label for="txtOIUnitPrice">Unit Price</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-6">
+                            <div class="form-floating input-group mt-1 ">
+                                <input id="txtOIQty" disabled="disabled" type="text" class="form-control bg-transparent "
+                                       placeholder="100">
+                                <label for="txtOIQty">Qty On Hand</label>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-floating input-group mt-1 ">
+                                <input id="txtOQty" type="text" class="form-control bg-transparent " placeholder="10">
+                                <label for="txtOQty">Qty</label>
+                            </div>
+                        </div>
+                        <button id="btnOrderClear"  type="button" class="btn btn-secondary col-3 mt-3 me-3">Clear</button>
+                        <button id="btnAddToCart" disabled="true" type="button" class="btn btn-success col-4 mt-3">Add To Cart</button>
+                    </div>
+
+                    <div class="row col-sm-12  col-lg-6 col-xl-3 justify-content-center align-items-center ms-3 position-relative"
+                         style="top: 40px;">
+                        <h4 class="col-5">Total:</h4>
+                        <h4 id="lblTotal" class="col-5 text-danger text-start"></h4>
+
+                        <div class="col-12">
+                            <div class="form-floating input-group">
+                                <input id="txtCashAmount" type="text" class="form-control bg-transparent " id="cash" placeholder="H.K.Nimmi">
+                                <label  for="cash">Cash</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-floating input-group  ">
+                                <input id="txtDiscount" type="text" class="form-control bg-transparent " id="discount" placeholder="H.K.Nimmi">
+                                <label for="discount">Discount</label>
+                            </div>
+                        </div>
+
+                        <h4 class="col-5">Sub-Total:</h4>
+                        <h4 id="lblSubTotal" class="col-5 text-danger text-start"></h4>
+
+                        <h4 class="col-5">Balance:</h4>
+                        <h4 id="lblBalance" class="col-5 text-danger text-success"></h4>
+
+                        <button id="btnPlaceOrder"  type="button" class="btn btn-dark col-10 ">
+                            Place Order
+                        </button>
+                    </div>
+                </section>
+
+                <section class="row mt-sm-2 ">
+
+                    <div class="col-12 mt-5">
+                        <table id="orderTable" class="table mt-3 table-hover">
+                            <thead class="" style="border-radius: 5px; background-color: #5cb54c;">
+                            <tr>
+                                <th scope="col">NO</th>
+                                <th scope="col">Item Code</th>
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Item Description</th>
+                                <th scope="col">Unit Price</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Cost</th>
+                                <th scope="col"> --</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
     </section>
-
-    <div class="p-5 w-100">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">User NIC</th>
-                <th scope="col">Driver Name</th>
-                <th scope="col">Vehicle Id</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-                <th scope="col">Address</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-    </div>
-</div>
 <script src="assets/js/js/bootstrap.min.js"></script>
 <script src="assets/jquery-3.6.1.min.js"></script>
 
@@ -133,5 +251,4 @@
 
     })
 </script>
-</body>
-</html>
+</div>

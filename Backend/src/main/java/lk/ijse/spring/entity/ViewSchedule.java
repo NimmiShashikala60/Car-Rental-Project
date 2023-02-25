@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,6 +22,6 @@ public class ViewSchedule {
     private String vehicleName;
     private String driverId;
     private String userName;
-    private LocalDate date;
-    private LocalTime time;
+    private String Date;
+    private String Time;
 }

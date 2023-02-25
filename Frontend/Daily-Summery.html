@@ -210,12 +210,12 @@
   function bindRowClickEvents() {
     $("#tblDailySummery>tr").click(function () {
       let summeryId = $(this).children(":eq(0)").text();
-      let userName = $(this).children(":eq(0)").text();
-      let vehicleId = $(this).children(":eq(1)").text();
-      let driverName = $(this).children(":eq(2)").text();
-      let occupied = $(this).children(":eq(3)").text();
-      let activeDay = $(this).children(":eq(4)").text();
-      let reservedCars = $(this).children(":eq(5)").text();
+      let userName = $(this).children(":eq(1)").text();
+      let vehicleId = $(this).children(":eq(2)").text();
+      let driverName = $(this).children(":eq(3)").text();
+      let occupied = $(this).children(":eq(4)").text();
+      let activeDay = $(this).children(":eq(5)").text();
+      let reservedCars = $(this).children(":eq(6)").text();
 
       $('#SummeryId').val(summeryId);
       $('#UserName').val(userName);
