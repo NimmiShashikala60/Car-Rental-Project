@@ -41,7 +41,7 @@
 <div class="main-content d-flex justify-content-between gap-5 flex-column align-items-center">
     <section class="w-50 h-100 p-5">
         <h4>Car Routes</h4>
-        <form class="mt-2" id="carRoutesForm">
+        <form class="mt-2" id="vehicleRoutesForm">
             <div class="mb-3">
                 <label for="vehicleId" class="form-label">Vehicle Id</label>
                 <input type="text" class="form-control" name="vehicleId" id="vehicleId" aria-describedby="emailHelp">
@@ -92,7 +92,6 @@
         <table class="table col-10">
             <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Vehicle Id:</th>
                 <th scope="col">Vehicle Name:</th>
                 <th scope="col">Vehicle Brand:</th>
@@ -110,27 +109,27 @@
         </table>
     </section>
 </div>
-<section class="d-flex flex-column justify-content-start align-items-start gap-5" style="position: relative; margin-left: 300px">
-    <div class="border border-1" style="width: 300px; height: 200px"></div>
-    <button class="btn btn-primary">Save</button>
-</section>
+<!--<section class="d-flex flex-column justify-content-start align-items-start gap-5" style="position: relative; margin-left: 300px">-->
+<!--    <div class="border border-1" style="width: 300px; height: 200px"></div>-->
+<!--    <button class="btn btn-primary">Save</button>-->
+<!--</section>-->
 <script src="assets/js/js/bootstrap.min.js"></script>
 <script src="assets/jquery-3.6.1.min.js"></script>
 <script>
     let baseUrl="http://localhost:8080/car_rental/"
-    loadAllCarRoutes();
+    // loadAlLVehicleRoutes();
 
 
-    $("#CarRoutes").on("click", function () {
-        var formData = $("#carRoutesForm").serialize();
+    $("#VehicleRoutes").on("click", function () {
+        var formData = $("#VehicleRoutesForm").serialize();
         $.ajax({
-            url: baseUrl + "carRoute",
+            url: baseUrl + "vehicleRoute",
             method: "post",
             data: formData,
             dataType: "json",
             success: function (res) {
                 alert(res.massage);
-                loadAllCarRoutes();
+                loadAllVehicleRoutes();
             },
 
             error: function (error) {
@@ -143,7 +142,7 @@
 
     $("#GetAll").click(function () {
         //send ajax request to the customer servlet
-        loadAllCarRoutes();
+        loadAllVehicleRoutes();
     });
     $("#Delete").click(function () {
         let id = $("#vehicleId").val();
@@ -153,7 +152,7 @@
             dataType:"json",
             success: function (resp) {
                 alert(resp.massage);
-                loadAllCarRoutes();
+                loadAllVehicleRoutes();
             },
             // error:function (error){
             //     alert(JSON.parse(error.responseText).message);
@@ -185,14 +184,14 @@
         }
 
         $.ajax({
-            url: baseUrl+'carRoutes',
+            url: baseUrl+'vehicle',
             method: 'put',
             contentType:"application/json",
             data:JSON.stringify(Routes),
             dataType:"json",
             success: function (res) {
                 alert(res.massage);
-                loadAllCarRoutes();
+                // loadAllCarRoutes();
             },
             error:function (error){
                 let cause= JSON.parse(error.responseText).massage;
@@ -201,26 +200,27 @@
 
         });
     });
-    function loadAllCarRoutes() {
+    loadAllVehicleRoutes();
+    function loadAllVehicleRoutes() {
         $("#tblCarRoutes").empty();
         $.ajax({
-            url: baseUrl+"carRoutes",
+            url: baseUrl+"vehicle",
             dataType: "json",
             success: function (resp) {
                 console.log(resp);
                 for (let rou of resp.data) {
-                    var row = '<tr><td>' + rou.vehicleId + '</td><td>' + rou.vehicleName + '<tr><td>' + rou.vehicleBrand +'</td><td>' + rou.vehicleType + '</td><td>' + rou.occupied + '</td></tr>'+ rou.transmissionType + '</td></tr>'+ rou.fuelType + '</td></tr>'+ rou.dailyRate + '</td></tr>'+ rou.monthlyRate + '</td></tr>';
+                    var row = '<tr><td>' + rou.vehicleId + '</td><td>' + rou.vehicleName + '</td>><td>' + rou.vehicleBrand +'</td><td>' + rou.vehicleType + '</td><td>' + rou.occupied + '</td><td>'+ rou.transmissionType + '</td><td>'+ rou.fuelType + '</td><td>'+ rou.dailyRate + '</td><td>'+ rou.monthlyRate + '</td></tr>';
                     $("#tblCarRoutes").append(row);
                 }
                 bindRowClickEvents();
                 setTextFieldValues("","","","","","","","","");
-                $("#txtCarRoutes").focus();
+                $("#txtVehicleRoutes").focus();
             }
         });
-
+        bindRowClickEvents();
     }
     function bindRowClickEvents() {
-        $("#tblCarRoutes>tr").click(function () {
+        $("#tblCarRoutes > tr").on("click",function () {
             let vehicleId = $(this).children(":eq(0)").text();
             let vehicleName = $(this).children(":eq(1)").text();
             let vehicleBrand = $(this).children(":eq(2)").text();
@@ -231,11 +231,11 @@
             let dailyRate = $(this).children(":eq(7)").text();
             let monthlyRate = $(this).children(":eq(8)").text();
 
-            $('#vehicleId ').val(vehicleId );
-            $('#vehicleName ').val(vehicleName );
+            $('#vehicleId ').val(vehicleId);
+            $('#vehicleName ').val(vehicleName);
             $('#vehicleBrand').val(vehicleBrand);
             $('#vehicleType').val(vehicleType);
-            $('#occupied ').val(occupied );
+            $('#occupied ').val(occupied);
             $('#transmissionType').val(transmissionType);
             $('#fuelType').val(fuelType);
             $('#dailyRate').val(dailyRate);
@@ -257,10 +257,10 @@
 
     $("#Save").on("click",function () {
 
-        let formData = $("#carRoutesForm").serialize();
+        let formData = $("#vehicleRoutesForm").serialize();
 
         $.ajax({
-            url:baseUrl+"carRoutes",
+            url:baseUrl+"vehicle",
             method:"post",
             data:formData,
              dataType:"json",

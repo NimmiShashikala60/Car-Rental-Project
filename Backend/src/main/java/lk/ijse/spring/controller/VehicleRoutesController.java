@@ -31,7 +31,7 @@ public class VehicleRoutesController {
     public ResponseUtil saveVehicleRoutes(@ModelAttribute VehicleRoutesDTO dto) {
         System.out.println(dto.toString());
         if (repo.existsById(dto.getVehicleId())) {
-            throw new RuntimeException("Admin Already exist");
+            throw new RuntimeException("Vehicle Already exist");
             //mapper.map(dto,Admin.class);
         }
         VehicleRoutes map = mapper.map(dto, VehicleRoutes.class);

@@ -31,7 +31,7 @@ public class ViewScheduleController {
     public ResponseUtil saveViewSchedule(@ModelAttribute ViewScheduleDTO dto){
         System.out.println(dto.toString());
         if (repo.existsById(dto.getScheduleId())){
-            throw new RuntimeException("Admin Already exist");
+            throw new RuntimeException("schedule Already exist");
             //mapper.map(dto,Admin.class);
         }
         ViewSchedule map=mapper.map(dto,ViewSchedule.class);
