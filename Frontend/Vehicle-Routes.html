@@ -209,7 +209,7 @@
             success: function (resp) {
                 console.log(resp);
                 for (let rou of resp.data) {
-                    var row = '<tr><td>' + rou.vehicleId + '</td><td>' + rou.vehicleName + '</td>><td>' + rou.vehicleBrand +'</td><td>' + rou.vehicleType + '</td><td>' + rou.occupied + '</td><td>'+ rou.transmissionType + '</td><td>'+ rou.fuelType + '</td><td>'+ rou.dailyRate + '</td><td>'+ rou.monthlyRate + '</td></tr>';
+                    var row = '<tr><td>' + rou.vehicleId + '</td><td>' + rou.vehicleName + '</td><td>' + rou.vehicleBrand +'</td><td>' + rou.vehicleType + '</td><td>' + rou.occupied + '</td><td>'+ rou.transmissionType + '</td><td>'+ rou.fuelType + '</td><td>'+ rou.dailyRate + '</td><td>'+ rou.monthlyRate + '</td></tr>';
                     $("#tblCarRoutes").append(row);
                 }
                 bindRowClickEvents();

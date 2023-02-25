@@ -47,8 +47,8 @@
         <h4>User Information</h4>
         <form class="mt-2" id="userForm">
             <div class="mb-3">
-                <label for="UserNic" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" name="userNic" id="UserNic">
+                <label for="userNic" class="form-label">User NIC:</label>
+                <input type="text" class="form-control" name="userNic" id="userNic">
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
@@ -194,7 +194,7 @@
                     success: function (resp) {
                         console.log(resp);
                         for (let usr of resp.data) {
-                            var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td></tr>'+ usr.userAddress + '</td></tr>' + usr.contact + '</td></tr>';
+                            var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td><td>'+ usr.userAddress + '</td><td>' + usr.contact + '</td></tr>';
                             $("#tblUserInformation").append(row);
                         }
                         bindRowClickEvents();
@@ -215,14 +215,12 @@
                     let contact = $(this).children(":eq(5)").text();
 
 
-
                     $('#UserNic').val(userNic);
                     $('#Name').val(name);
                     $('#Password').val(password);
                     $('#Email').val(email);
                     $('#userAddress').val(userAddress);
                     $('#Contact').val(contact);
-
 
                 });
             }

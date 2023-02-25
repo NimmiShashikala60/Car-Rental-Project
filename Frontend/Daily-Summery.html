@@ -71,7 +71,7 @@
       </div>
       <div class="mb-3">
         <label for="reservedCar" class="form-label">Reserved Car:</label>
-        <input type="text" class="form-control" name="reservedCar" id="reservedCar" aria-describedby="emailHelp">
+        <input type="text" class="form-control" name="reservedCar" id="ReservedCar" aria-describedby="emailHelp">
       </div>
       <section class="d-flex gap-2">
       <button type="button" class="btn btn-primary" id="Save">Save</button>
@@ -87,7 +87,6 @@
     <table class="table">
       <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Summery Id</th>
         <th scope="col">Users name</th>
         <th scope="col">Vehicle Id</th>
@@ -98,7 +97,6 @@
       </tr>
       </thead>
       <tbody id="tblDailySummery">
-
       </tbody>
     </table>
   </section>
@@ -116,7 +114,7 @@
   $("#DailySummery").on("click", function () {
     var formData = $("#DailySummery").serialize();
     $.ajax({
-      url: baseUrl + "dailySummary",
+      url: baseUrl + "summary",
       method: "post",
       data: formData,
       dataType: "json",
@@ -173,7 +171,7 @@
     }
 
     $.ajax({
-      url: baseUrl+'dailySummery',
+      url: baseUrl+'summery',
       method: 'put',
       contentType:"application/json",
       data:JSON.stringify(Summery),
@@ -192,16 +190,16 @@
   function loadAllDailySummery() {
     $("#tblDailySummery").empty();
     $.ajax({
-      url: baseUrl+"dailySummery",
+      url: baseUrl+"summery",
       dataType: "json",
       success: function (resp) {
         console.log(resp);
         for (let sum of resp.data) {
-          var row = '<tr><td>' + sum.summeryId +'<tr><td>' + sum.userName + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverName + '</td><td>' + sum.occupied + '</td></tr>'+ sum.activeDay + '</td></tr>'+sum.reservedCar + '</td></tr>';
+          var row = '<tr><td>' + sum.summeryId +'</td><td>' + sum.userName + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverName + '</td><td>' + sum.occupied + '</td><td>'+ sum.activeDay + '</td><td>'+sum.reservedCar + '</td></tr>';
           $("#tblDailySummery").append(row);
         }
         bindRowClickEvents();
-        setTextFieldValues("","","","","","");
+        setTextFieldValues("","","","","","","");
         $("#txtDailySummery").focus();
       }
     });
@@ -215,7 +213,7 @@
       let driverName = $(this).children(":eq(3)").text();
       let occupied = $(this).children(":eq(4)").text();
       let activeDay = $(this).children(":eq(5)").text();
-      let reservedCars = $(this).children(":eq(6)").text();
+      let ReservedCars = $(this).children(":eq(6)").text();
 
       $('#SummeryId').val(summeryId);
       $('#UserName').val(userName);
@@ -223,18 +221,18 @@
       $('#DriverName').val(driverName);
       $('#Occupied').val(occupied);
       $('#ActiveDay').val(activeDay);
-      $('#ReservedCar').val(reservedCars);
+      $('#reservedCar').val(ReservedCars);
 
     });
   }
-  function setTextFieldValues(summeryId,userName,vehicleId,driverName,occupied,activeDay,reservedCar){
+  function setTextFieldValues(summeryId,userName,vehicleId,driverName,occupied,activeDay,ReservedCar){
     $("#SummeryId").val(summeryId);
     $("#UserName").val(userName);
     $("#VehicleId").val(vehicleId);
     $("#DriverName").val(driverName);
     $("#Occupied").val(occupied);
     $("#ActiveDay").val(activeDay);
-    $("#ReservedCar").val(reservedCar);
+    $("#ReservedCar").val(ReservedCar);
   }
 
   $("#Save").on("click",function () {

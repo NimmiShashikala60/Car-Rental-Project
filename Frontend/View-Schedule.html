@@ -59,7 +59,7 @@
                 <input type="text" class="form-control" name="driverId" id="driverId" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="userNic" class="form-label">User Name:</label>
+                <label for="userName" class="form-label">User Name:</label>
                 <input type="text" class="form-control" name="userName" id="userName" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
@@ -193,7 +193,7 @@
             success: function (resp) {
                 console.log(resp);
                 for (let shc of resp.data) {
-                    var row = '<tr><td>' + shc.scheduleId + '</td><td>' + shc.vehicleName + '</td><td>' + shc.driverId + '</td><td>' + shc.userName + '</td></tr>'+ shc.time + '</td></tr>'+ shc.date + '</td></tr>';
+                    var row = '<tr><td>' + shc.scheduleId + '</td><td>' + shc.vehicleName + '</td><td>' + shc.driverId + '</td><td>' + shc.userName + '</td><td>'+ shc.time + '</td><td>'+ shc.date + '</td></tr>';
                     $("#tblViewSchedule").append(row);
                 }
                 bindRowClickEvents();
@@ -222,7 +222,7 @@
 
         });
     }
-    function setTextFieldValues(scheduleId,vehicleName,driverName,userNic,time,date) {
+    function setTextFieldValues(scheduleId,vehicleName,driverId,userName,userNic,time,date) {
         $("#scheduleId").val(scheduleId);
         $("#vehicleName").val(vehicleName);
         $("#driverId").val(driverId);
