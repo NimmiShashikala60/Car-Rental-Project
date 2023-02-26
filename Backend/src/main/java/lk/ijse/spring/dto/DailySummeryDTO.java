@@ -17,5 +17,6 @@ public class DailySummeryDTO {
     private String driverName;
     private String occupied;
     private String activeDay;
-    private String ReservedDay;
+    private String reservedDay;
+    private String reservedCar;
 }

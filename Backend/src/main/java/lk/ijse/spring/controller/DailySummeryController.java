@@ -36,7 +36,7 @@ public class DailySummeryController {
         DailySummery map=mapper.map(dto,DailySummery.class);
         repo.save(map);
 
-        DailySummery dailySummery = new DailySummery(dto.getSummeryId(), dto.getUserName(), dto.getVehicleId(), dto.getDriverName(), dto.getOccupied(), dto.getActiveDay(), dto.getReservedDay());
+        DailySummery dailySummery = new DailySummery(dto.getSummeryId(), dto.getUserName(), dto.getVehicleId(), dto.getDriverName(), dto.getOccupied(), dto.getActiveDay(), dto.getReservedDay(), dto.getReservedCar());
         repo.save(dailySummery);
         return new ResponseUtil("OK","Successfully Registered!",null);
 
@@ -57,7 +57,7 @@ public class DailySummeryController {
         DailySummery map=mapper.map(dto,DailySummery.class);
         repo.save(map);
 
-        DailySummery dailySummery = new DailySummery(dto.getSummeryId(), dto.getUserName(), dto.getVehicleId(), dto.getDriverName(),dto.getOccupied(),dto.getActiveDay(), dto.getReservedDay());
+        DailySummery dailySummery = new DailySummery(dto.getSummeryId(), dto.getUserName(), dto.getVehicleId(), dto.getDriverName(),dto.getOccupied(),dto.getActiveDay(), dto.getReservedDay(), dto.getReservedCar());
         repo.save(dailySummery);
 
         return new ResponseUtil("OK","Successfully Updated!",null);

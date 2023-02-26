@@ -22,6 +22,7 @@ public class DailySummery {
     private String occupied;
     private String activeDay;
     private String reservedDay;
+    private String reservedCar;
 
 
 }

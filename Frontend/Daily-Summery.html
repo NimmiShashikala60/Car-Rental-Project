@@ -70,8 +70,12 @@
         <input type="text" class="form-control" name="activeDay" id="activeDay" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
+        <label for="reservedDay" class="form-label">Reserved Day:</label>
+        <input type="text" class="form-control" name="reservedDay" id="reservedDay" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
         <label for="reservedCar" class="form-label">Reserved Car:</label>
-        <input type="text" class="form-control" name="reservedCar" id="ReservedCar" aria-describedby="emailHelp">
+        <input type="text" class="form-control" name="reservedCar" id="reservedCar" aria-describedby="emailHelp">
       </div>
       <section class="d-flex gap-2">
       <button type="button" class="btn btn-primary" id="Save">Save</button>
@@ -93,6 +97,7 @@
         <th scope="col">Driver name</th>
         <th scope="col">Occupied</th>
         <th scope="col">Active Day</th>
+        <th scope="col">Reserved Day</th>
         <th scope="col">Reserved Car</th>
       </tr>
       </thead>
@@ -158,6 +163,7 @@
     let DriverName = $("#driverName").val();
     let Occupied = $("#occupied").val();
     let ActiveDay = $("#activeDay").val();
+    let ReservedDay = $("#reservedDay").val();
     let ReservedCar = $("#reservedCar").val();
 
     var Summery = {
@@ -167,6 +173,7 @@
       driverName:DriverName,
       occupied: Occupied,
       activeDay: ActiveDay,
+      reservedDay: ReservedDay,
       reservedCar: ReservedCar,
     }
 
@@ -195,11 +202,11 @@
       success: function (resp) {
         console.log(resp);
         for (let sum of resp.data) {
-          var row = '<tr><td>' + sum.summeryId +'</td><td>' + sum.userName + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverName + '</td><td>' + sum.occupied + '</td><td>'+ sum.activeDay + '</td><td>'+sum.reservedCar + '</td></tr>';
+          var row = '<tr><td>' + sum.summeryId +'</td><td>' + sum.userName + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverName + '</td><td>' + sum.occupied + '</td><td>'+ sum.activeDay + '</td><td>'+sum.reservedDay + '</td></tr>'+sum.reservedCar + '</td></tr>';
           $("#tblDailySummery").append(row);
         }
         bindRowClickEvents();
-        setTextFieldValues("","","","","","","");
+        setTextFieldValues("","","","","","","","");
         $("#txtDailySummery").focus();
       }
     });
@@ -213,26 +220,29 @@
       let driverName = $(this).children(":eq(3)").text();
       let occupied = $(this).children(":eq(4)").text();
       let activeDay = $(this).children(":eq(5)").text();
-      let ReservedCars = $(this).children(":eq(6)").text();
+      let reservedDay = $(this).children(":eq(6)").text();
+      let reservedCar = $(this).children(":eq(7)").text();
 
-      $('#SummeryId').val(summeryId);
-      $('#UserName').val(userName);
-      $('#VehicleId').val(vehicleId);
-      $('#DriverName').val(driverName);
-      $('#Occupied').val(occupied);
-      $('#ActiveDay').val(activeDay);
-      $('#reservedCar').val(ReservedCars);
+      $('#summeryId').val(summeryId);
+      $('#userName').val(userName);
+      $('#vehicleId').val(vehicleId);
+      $('#driverName').val(driverName);
+      $('#occupied').val(occupied);
+      $('#activeDay').val(activeDay);
+      $('#reservedDay').val(reservedDay);
+      $('#reservedCar').val(reservedCar);
 
     });
   }
-  function setTextFieldValues(summeryId,userName,vehicleId,driverName,occupied,activeDay,ReservedCar){
-    $("#SummeryId").val(summeryId);
-    $("#UserName").val(userName);
-    $("#VehicleId").val(vehicleId);
-    $("#DriverName").val(driverName);
-    $("#Occupied").val(occupied);
-    $("#ActiveDay").val(activeDay);
-    $("#ReservedCar").val(ReservedCar);
+  function setTextFieldValues(summeryId,userName,vehicleId,driverName,occupied,activeDay,reservedDay,reservedCar){
+    $("#summeryId").val(summeryId);
+    $("#userName").val(userName);
+    $("#vehicleId").val(vehicleId);
+    $("#driverName").val(driverName);
+    $("#occupied").val(occupied);
+    $("#activeDay").val(activeDay);
+    $("#reservedDay").val(reservedDay);
+    $("#reservedCar").val(reservedCar);
   }
 
   $("#Save").on("click",function () {

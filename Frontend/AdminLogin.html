@@ -44,7 +44,7 @@
     $("#Login").on("click",function () {
 
         $.ajax({
-            url:baseUrl+"login?userNic="+$("#userName").val()+"&password="+$("#password").val(),
+            url:baseUrl+"login/admin?userNic="+$("#userName").val()+"&password="+$("#password").val(),
             method:"post",
             dataType:"json",
             // contentType: "application/json",
@@ -59,7 +59,12 @@
                 }
                 //
 
-            }});
+            },
+            error:function () {
+                alert("Wrong Details")
+            }
+
+        });
     })
 </script>
 </body>
