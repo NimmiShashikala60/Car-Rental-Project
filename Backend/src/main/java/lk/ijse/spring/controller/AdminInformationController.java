@@ -50,8 +50,8 @@ public class AdminInformationController {
     @PutMapping
     public ResponseUtil updateAdmin(@RequestBody AdminDTO dto){
         System.out.println(dto);
-        if (!repo.existsById(dto.getId())){
-            throw new RuntimeException("Admin doesn't exist");
+       if (!repo.existsById(dto.getId())){
+           throw new RuntimeException("Admin doesn't exist");
         }
         Admin map=mapper.map(dto,Admin.class);
         repo.save(map);

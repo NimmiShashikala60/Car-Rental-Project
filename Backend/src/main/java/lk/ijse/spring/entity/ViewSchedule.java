@@ -16,12 +16,13 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Data
 @ToString
+
 public class ViewSchedule {
     @Id
     private String scheduleId;
     private String vehicleName;
     private String driverId;
     private String userName;
-    private String Date;
-    private String Time;
+    private String date;
+    private String time;
 }

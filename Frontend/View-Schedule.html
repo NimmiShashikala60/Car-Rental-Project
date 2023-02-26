@@ -109,9 +109,9 @@
 
 
     $("#ViewSchedule").on("click", function () {
-        var formData = $("#viewScheduleForm").serialize();
+        var formData = $("#scheduleForm").serialize();
         $.ajax({
-            url: baseUrl + "viewSchedule",
+            url: baseUrl + "schedule",
             method: "post",
             data: formData,
             dataType: "json",
@@ -133,7 +133,7 @@
         loadAllViewSchedule();
     });
     $("#Delete").click(function () {
-        let id = $("#viewScheduleForm").val();
+        let id = $("#scheduleId").val();
         $.ajax({
             url: baseUrl+`schedule?id=${id}`,
             method: "delete",

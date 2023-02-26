@@ -17,6 +17,6 @@ public class ViewScheduleDTO {
     private String vehicleName;
     private String driverId;
     private String userName;
-    private String Date;
-    private String Time;
+    private String date;
+    private String time;
 }

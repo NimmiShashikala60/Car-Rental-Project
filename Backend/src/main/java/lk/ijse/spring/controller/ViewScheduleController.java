@@ -52,9 +52,9 @@ public class ViewScheduleController {
     @PutMapping
     public ResponseUtil updateViewSchedule(@RequestBody ViewScheduleDTO dto){
         System.out.println(dto);
-        if (!repo.existsById(dto.getScheduleId())){
-            throw new RuntimeException("Schedule doesn't exist");
-        }
+//        if (!repo.existsById(dto.getScheduleId())){
+//            throw new RuntimeException("Schedule doesn't exist");
+//        }
         ViewSchedule map=mapper.map(dto,ViewSchedule.class);
         repo.save(map);
 

@@ -47,24 +47,24 @@
         <h4>User Information</h4>
         <form class="mt-2" id="userForm">
             <div class="mb-3">
-                <label for="UserNic" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" name="userNic" id="UserNic">
+                <label for="userNic" class="form-label">User NIC:</label>
+                <input type="text" class="form-control" name="userNic" id="userNic">
             </div>
             <div class="mb-3">
-                <label for="Username" class="form-label">Name:</label>
-                <input type="text" class="form-control" name="name" id="Username">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" name="name" id="name">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
-                <input type="text" class="form-control" name="password" id="Password" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="password" id="password" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
                 <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="UserAddress" class="form-label">Address:</label>
-                <input type="text" class="form-control" name="userAddress" id="userAddress" aria-describedby="emailHelp">
+                <label for="address" class="form-label">Address:</label>
+                <input type="text" class="form-control" name="address" id="address" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="contact" class="form-label">Contact:</label>
@@ -132,7 +132,7 @@
                 loadAllUserInformation();
             });
             $("#Delete").click(function () {
-                let id = $("#UserNic").val();
+                let nic = $("#nic").val();
                 $.ajax({
                     url: baseUrl+`user?nic=${nic}`,
                     method: "delete",
@@ -151,7 +151,7 @@
                 let Name = $("#name").val();
                 let Password = $("#password").val();
                 let Email = $("#email").val();
-                let UserAddress = $("#userAddress").val();
+                let Address = $("#address").val();
                 let Contact = $("#contact").val();
 
 
@@ -160,7 +160,7 @@
                     name: Name,
                     password:Password,
                     email: Email,
-                    userAddress: UserAddress,
+                    address: Address,
                     contact: Contact,
 
                 }
@@ -194,7 +194,7 @@
                     success: function (resp) {
                         console.log(resp);
                         for (let usr of resp.data) {
-                            var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td><td>'+ usr.userAddress + '</td><td>' + usr.contact + '</td></tr>';
+                            var row ='<tr><td>' + usr.userNic + '</td><td>' + usr.name + '</td><td>' + usr.password + '</td><td>' + usr.email + '</td><td>'+ usr.address + '</td><td>' + usr.contact + '</td></tr>';
                             $("#tblUserInformation").append(row);
                         }
                         bindRowClickEvents();
@@ -211,27 +211,27 @@
                     let name = $(this).children(":eq(1)").text();
                     let password = $(this).children(":eq(2)").text();
                     let email = $(this).children(":eq(3)").text();
-                    let userAddress = $(this).children(":eq(4)").text();
+                    let address = $(this).children(":eq(4)").text();
                     let contact = $(this).children(":eq(5)").text();
 
 
-                    $('#UserNic').val(userNic);
-                    $('#Name').val(name);
-                    $('#Password').val(password);
-                    $('#Email').val(email);
-                    $('#userAddress').val(userAddress);
-                    $('#Contact').val(contact);
+                    $('#userNic').val(userNic);
+                    $('#name').val(name);
+                    $('#password').val(password);
+                    $('#email').val(email);
+                    $('#address').val(address);
+                    $('#contact').val(contact);
 
                 });
             }
 
-            function setTextFieldValues(userNic,name,password,email,userAddress,contact) {
-                $("#UserNic").val(userNic);
-                $("#Name").val(name);
-                $("#Password").val(password);
-                $("#Email").val(email);
-                $("#userAddress").val(address);
-                $("#Contact").val(contact);
+            function setTextFieldValues(userNic,name,password,email,address,contact) {
+                $("#userNic").val(userNic);
+                $("#name").val(name);
+                $("#password").val(password);
+                $("#email").val(email);
+                $("#address").val(address);
+                $("#contact").val(contact);
             }
     $("#Save").on("click",function () {
 

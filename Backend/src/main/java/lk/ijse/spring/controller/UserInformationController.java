@@ -33,7 +33,7 @@ public class UserInformationController {
         User map=mapper.map(dto, User.class);
         repo.save(map);
 
-       User user = new User(dto.getUserNic(), dto.getName(), dto.getPassword(), dto.getEmail(),dto.getUserAddress(),dto.getContact());
+       User user = new User(dto.getUserNic(), dto.getName(), dto.getPassword(), dto.getEmail(),dto.getAddress(),dto.getContact());
        repo.save(user);
         return new ResponseUtil("OK","Successfully Registered!",null);
 
@@ -54,15 +54,15 @@ public class UserInformationController {
         User map=mapper.map(dto,User.class);
         repo.save(map);
 
-        User user = new User(dto.getUserNic(), dto.getName(), dto.getPassword(), dto.getEmail(),dto.getUserAddress(), dto.getContact());
+        User user = new User(dto.getUserNic(), dto.getName(), dto.getPassword(), dto.getEmail(),dto.getAddress(), dto.getContact());
         repo.save(user);
 
         return new ResponseUtil("OK","Successfully Updated!",null);
     }
 
-    @DeleteMapping(params = {"id"})
-    public ResponseUtil deleteUser(@RequestParam String id){
-        repo.deleteById(id);
+    @DeleteMapping(params = {"nic"})
+    public ResponseUtil deleteUser(@RequestParam String nic){
+        repo.deleteById(nic);
         return new ResponseUtil("OK","Successfully Deleted!",null);
     }
 }
