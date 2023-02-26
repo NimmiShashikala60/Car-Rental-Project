@@ -31,7 +31,7 @@
         <li><a href="Admin-Information.html" class="active"><i class="fa fa-user"></i>Admin Information </a><li>
         <li><a href="Daily-Summery.html" class="active"><i class="fa fa-user"></i>Daily Summary </a><li>
         <li><a href="Car-Booking.html" class="active"><i class="fa fa-car"></i>Car Booking</a><li>
-        <li><a href="Vehicle-Routes.html" class="active"><i class="fa fa-car"></i>Car Routes</a><li>
+        <li><a href="Vehicle-Routes.html" class="active"><i class="fa fa-car"></i>Vehicle Routes</a><li>
         <li><a href="User-Information.html" class="active"><i class="fa fa-user"></i>User Information </a><li>
         <li><a href="Driver-Information.html" class="active"><i class="fa fa-car"></i>Driver Information </a><li>
         <li><a href="View-Schedule.html" class="active"><i class="fa fa-admin"></i>View Schedule </a><li>
@@ -70,7 +70,11 @@
                 <input type="text" class="form-control" name="transmissionType" id="transmissionType" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="fuel Type" class="form-label">Fuel Type</label>
+                <label for="color" class="form-label">Color</label>
+                <input type="text" class="form-control" name="color" id="color" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="fuelType" class="form-label">Fuel Type</label>
                 <input type="text" class="form-control" name="fuelType" id="fuelType" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
@@ -101,6 +105,7 @@
                 <th scope="col">Vehicle Type:</th>
                 <th scope="col">Occupied</th>
                 <th scope="col">Transmission Type</th>
+                <th scope="col">Color</th>
                 <th scope="col">Fuel Type</th>
                 <th scope="col">Daily Rate</th>
                 <th scope="col">Monthly Rate</th>
@@ -170,8 +175,9 @@
         let VehicleType = $("#vehicleType").val();
         let Occupied = $("#occupied").val();
         let TransmissionType = $("#transmissionType").val();
+        let Color = $("#color").val();
         let FuelType = $("#fuelType").val();
-        let DailyType = $("#dailyType").val();
+        let DailyRate = $("#dailyRate").val();
         let MonthlyRate = $("#monthlyRate").val();
 
         var Routes = {
@@ -181,8 +187,9 @@
             vehicleType: VehicleType,
             occupied: Occupied,
             transmissionType: TransmissionType,
+            color: Color,
             fuelType: FuelType,
-            dailyRate: DailyType,
+            dailyRate: DailyRate,
             monthlyRate: MonthlyRate,
         }
 
@@ -212,11 +219,11 @@
             success: function (resp) {
                 console.log(resp);
                 for (let rou of resp.data) {
-                    var row = '<tr><td>' + rou.vehicleId + '</td><td>' + rou.vehicleName + '</td><td>' + rou.vehicleBrand +'</td><td>' + rou.vehicleType + '</td><td>' + rou.occupied + '</td><td>'+ rou.transmissionType + '</td><td>'+ rou.fuelType + '</td><td>'+ rou.dailyRate + '</td><td>'+ rou.monthlyRate + '</td></tr>';
+                    var row = '<tr><td>' + rou.vehicleId + '</td><td>' + rou.vehicleName + '</td><td>' + rou.vehicleBrand +'</td><td>' + rou.vehicleType + '</td><td>' + rou.occupied + '</td><td>'+ rou.transmissionType + '</td><td>'+ rou.color + '</td><td>'+ rou.fuelType + '</td><td>'+ rou.dailyRate + '</td><td>'+ rou.monthlyRate + '</td></tr>';
                     $("#tblCarRoutes").append(row);
                 }
                 bindRowClickEvents();
-                setTextFieldValues("","","","","","","","","");
+                setTextFieldValues("","","","","","","","","","");
                 $("#txtVehicleRoutes").focus();
             }
         });
@@ -230,9 +237,10 @@
             let vehicleType = $(this).children(":eq(3)").text();
             let occupied = $(this).children(":eq(4)").text();
             let transmissionType = $(this).children(":eq(5)").text();
-            let fuelType = $(this).children(":eq(6)").text();
-            let dailyRate = $(this).children(":eq(7)").text();
-            let monthlyRate = $(this).children(":eq(8)").text();
+            let color = $(this).children(":eq(6)").text();
+            let fuelType = $(this).children(":eq(7)").text();
+            let dailyRate = $(this).children(":eq(8)").text();
+            let monthlyRate = $(this).children(":eq(9)").text();
 
             $('#vehicleId ').val(vehicleId);
             $('#vehicleName ').val(vehicleName);
@@ -240,19 +248,21 @@
             $('#vehicleType').val(vehicleType);
             $('#occupied ').val(occupied);
             $('#transmissionType').val(transmissionType);
+            $('#color').val(color);
             $('#fuelType').val(fuelType);
             $('#dailyRate').val(dailyRate);
             $('#monthlyRate').val(monthlyRate);
 
         });
     }
-    function setTextFieldValues(vehicleId,vehicleName,vehicleBrand,vehicleType,occupied,transmissionType,fuelType,dailyRate,monthlyRate) {
+    function setTextFieldValues(vehicleId,vehicleName,vehicleBrand,vehicleType,occupied,transmissionType,color,fuelType,dailyRate,monthlyRate) {
         $("#vehicleId").val(vehicleId);
         $("#vehicleName").val(vehicleName);
         $("#vehicleBrand").val(vehicleBrand);
         $('#vehicleType').val(vehicleType);
         $("#occupied").val(occupied);
         $("#transmissionType").val(transmissionType);
+        $("#color").val(color);
         $("#fuelType").val(fuelType);
         $("#dailyRate").val(dailyRate);
         $("#monthlyRate").val(monthlyRate);
@@ -269,7 +279,7 @@
              dataType:"json",
             // contentType: "application/json",
             success:function (res) {
-                alert(res.massege)
+                alert(res.massage)
             }
         })
 

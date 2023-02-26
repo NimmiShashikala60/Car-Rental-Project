@@ -66,4 +66,11 @@ public class DriverInformationController {
         repo.deleteById(id);
         return new ResponseUtil("OK","Successfully Deleted!",null);
     }
+
+    @GetMapping(path = "/getById")
+    public ResponseUtil getDriverById(@RequestParam String driverId){
+         ;
+        return new ResponseUtil("OK","Successfully Deleted!",repo.findById(driverId).get());
+    }
+
 }

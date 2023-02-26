@@ -17,6 +17,7 @@ public class VehicleRoutesDTO {
     private String vehicleType;
     private String occupied;
     private String transmissionType;
+    private String color;
     private String fuelType;
     private String dailyRate;
     private String monthlyRate;

@@ -37,7 +37,7 @@ public class VehicleRoutesController {
         VehicleRoutes map = mapper.map(dto, VehicleRoutes.class);
         repo.save(map);
 
-        VehicleRoutes vehicleRoutes = new VehicleRoutes(dto.getVehicleId(), dto.getVehicleName(), dto.getVehicleBrand(), dto.getVehicleType(), dto.getOccupied(), dto.getTransmissionType(), dto.getFuelType(), dto.getDailyRate(), dto.getMonthlyRate());
+        VehicleRoutes vehicleRoutes = new VehicleRoutes(dto.getVehicleId(), dto.getVehicleName(), dto.getVehicleBrand(), dto.getVehicleType(), dto.getOccupied(), dto.getTransmissionType(), dto.getColor(), dto.getFuelType(), dto.getDailyRate(), dto.getMonthlyRate());
         repo.save(vehicleRoutes);
         return new ResponseUtil("OK", "Successfully Registered!", null);
 
@@ -60,7 +60,7 @@ public class VehicleRoutesController {
         VehicleRoutes map = mapper.map(dto, VehicleRoutes.class);
         repo.save(map);
 
-        VehicleRoutes vehicleRoutes = new VehicleRoutes(dto.getVehicleId(), dto.getVehicleName(), dto.getVehicleBrand(), dto.getVehicleType(), dto.getOccupied(), dto.getTransmissionType(), dto.getFuelType(), dto.getDailyRate(), dto.getMonthlyRate());
+        VehicleRoutes vehicleRoutes = new VehicleRoutes(dto.getVehicleId(), dto.getVehicleName(), dto.getVehicleBrand(), dto.getVehicleType(), dto.getOccupied(), dto.getTransmissionType(), dto.getColor(), dto.getFuelType(), dto.getDailyRate(), dto.getMonthlyRate());
         repo.save(vehicleRoutes);
 
         return new ResponseUtil("OK", "Successfully Updated!", null);
@@ -70,6 +70,12 @@ public class VehicleRoutesController {
     public ResponseUtil deleteVehicleRoutes(@RequestParam String id) {
         repo.deleteById(id);
         return new ResponseUtil("OK", "Successfully Deleted!", null);
+    }
+
+    @GetMapping(path = "/getById")
+    public ResponseUtil getVehicleById(@RequestParam String driverId){
+        ;
+        return new ResponseUtil("OK","Successfully Deleted!",repo.findById(driverId).get());
     }
 
 }

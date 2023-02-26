@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 
 @Entity
@@ -27,5 +28,8 @@ public class Booking {
     private BigDecimal cost;
     private LocalDate date;
     private LocalTime time;
+
+    @OneToMany(mappedBy = "booking",cascade = CascadeType.ALL)
+    List<BookingDetail> bookingDetails;
 
 }
