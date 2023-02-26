@@ -202,7 +202,7 @@
       success: function (resp) {
         console.log(resp);
         for (let sum of resp.data) {
-          var row = '<tr><td>' + sum.summeryId +'</td><td>' + sum.userName + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverName + '</td><td>' + sum.occupied + '</td><td>'+ sum.activeDay + '</td><td>'+sum.reservedDay + '</td></tr>'+sum.reservedCar + '</td></tr>';
+          var row = '<tr><td>' + sum.summeryId +'</td><td>' + sum.userName + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverName + '</td><td>' + sum.occupied + '</td><td>'+ sum.activeDay + '</td><td>'+sum.reservedDay + '</td><td>'+sum.reservedCar + '</td></tr>';
           $("#tblDailySummery").append(row);
         }
         bindRowClickEvents();
