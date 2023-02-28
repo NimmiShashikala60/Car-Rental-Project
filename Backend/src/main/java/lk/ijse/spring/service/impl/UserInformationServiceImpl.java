@@ -39,8 +39,8 @@ public class UserInformationServiceImpl implements UserInformationService {
     }
 
     @Override
-    public void deleteUser(String nic) {
-        repo.deleteById(nic);
+    public void deleteUser(String Nic) {
+        repo.deleteById(Nic);
 
     }
 

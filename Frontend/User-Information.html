@@ -132,7 +132,7 @@
                 loadAllUserInformation();
             });
             $("#Delete").click(function () {
-                let nic = $("#Nic").val();
+                let nic = $("#userNic").val();
                 $.ajax({
                     url: baseUrl+`user?nic=${nic}`,
                     method: "delete",
