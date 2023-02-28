@@ -35,7 +35,7 @@ public class DriverInformationController {
         repo.save(map);
 
 //        Driver driver = new Driver(dto.getDriverId(), dto.getDriverName(), dto.getDriverAddress(), dto.getDriverContact(),dto.getDriverSalary());
-//        repo.save(driver);
+//       repo.save(driver);
         return new ResponseUtil("OK","Successfully Registered!",null);
 
     }

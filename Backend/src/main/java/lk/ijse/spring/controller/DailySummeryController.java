@@ -6,6 +6,8 @@ import lk.ijse.spring.entity.Admin;
 import lk.ijse.spring.entity.DailySummery;
 import lk.ijse.spring.repo.AdminRepo;
 import lk.ijse.spring.repo.DailySummeryRepo;
+import lk.ijse.spring.service.AdminService;
+import lk.ijse.spring.service.DailySummeryService;
 import lk.ijse.spring.util.ResponseUtil;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -21,51 +23,29 @@ import java.util.List;
 @RequestMapping("/summery")
 public class DailySummeryController {
     @Autowired
-    private DailySummeryRepo repo;
-
-    @Autowired
-    private ModelMapper mapper;
+    private DailySummeryService service;
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil saveDailySummery(@ModelAttribute DailySummeryDTO dto){
-        System.out.println(dto.toString());
-        if (repo.existsById(dto.getSummeryId())){
-            throw new RuntimeException("Summery Already exist");
-            //mapper.map(dto,Admin.class);
-        }
-        DailySummery map=mapper.map(dto,DailySummery.class);
-        repo.save(map);
-
-        DailySummery dailySummery = new DailySummery(dto.getSummeryId(), dto.getUserName(), dto.getVehicleId(), dto.getDriverName(), dto.getOccupied(), dto.getActiveDay(), dto.getReservedDay(), dto.getReservedCar());
-        repo.save(dailySummery);
+       service.saveDailySummery(dto);
         return new ResponseUtil("OK","Successfully Registered!",null);
 
     }
     @GetMapping
-    public ResponseUtil getAllAdmin(){
-        List<DailySummery> all = repo.findAll();
-        ArrayList<DailySummeryDTO> allList=mapper.map(all,new TypeToken<ArrayList<DailySummeryDTO>>(){}.getType());
-        return new ResponseUtil("ok","Successfully  :",allList);
+    public ResponseUtil getAllDailySummery(){
+        return new ResponseUtil("ok","Successfully  :", service.getAllDailySummery());
     }
 
     @PutMapping
     public ResponseUtil updateDailySummery(@RequestBody DailySummeryDTO dto){
-        System.out.println(dto);
-        if (!repo.existsById(dto.getSummeryId())){
-            throw new RuntimeException("DailySummery doesn't exist");
-        }
-        DailySummery map=mapper.map(dto,DailySummery.class);
-        repo.save(map);
-
-        DailySummery dailySummery = new DailySummery(dto.getSummeryId(), dto.getUserName(), dto.getVehicleId(), dto.getDriverName(),dto.getOccupied(),dto.getActiveDay(), dto.getReservedDay(), dto.getReservedCar());
-        repo.save(dailySummery);
+        service.updateDailySummery(dto);
 
         return new ResponseUtil("OK","Successfully Updated!",null);
     }
 
     @DeleteMapping(params = {"id"})
-    public ResponseUtil deleteAdmin(@RequestParam String id){
-        repo.deleteById(id);
+    public ResponseUtil deleteDailySummery(@RequestParam String id){
+        service.deleteDailySummery(id);
         return new ResponseUtil("OK","Successfully Deleted!",null);
     }
 

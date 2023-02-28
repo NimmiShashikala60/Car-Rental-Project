@@ -18,7 +18,7 @@ public class DailySummery {
     private String summeryId;
     private String userName;
     private String vehicleId;
-    private String driverName;
+    private String driverId;
     private String occupied;
     private String activeDay;
     private String reservedDay;

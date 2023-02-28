@@ -58,8 +58,8 @@
         <input type="text" class="form-control" name="vehicleId" id="vehicleId" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
-        <label for="driverName" class="form-label">Driver Name:</label>
-        <input type="text" class="form-control" name="driverName" id="driverName" aria-describedby="emailHelp">
+        <label for="driverId" class="form-label">Driver Id:</label>
+        <input type="text" class="form-control" name="driverId" id="driverId" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
         <label for="occupied" class="form-label">Occupied:</label>
@@ -94,7 +94,7 @@
         <th scope="col">Summery Id</th>
         <th scope="col">Users name</th>
         <th scope="col">Vehicle Id</th>
-        <th scope="col">Driver name</th>
+        <th scope="col">Driver Id</th>
         <th scope="col">Occupied</th>
         <th scope="col">Active Day</th>
         <th scope="col">Reserved Day</th>
@@ -160,7 +160,7 @@
     let SummeryId = $("#summeryId").val();
     let UserName = $("#userName").val();
     let VehicleId = $("#vehicleId").val();
-    let DriverName = $("#driverName").val();
+    let DriverId = $("#driverId").val();
     let Occupied = $("#occupied").val();
     let ActiveDay = $("#activeDay").val();
     let ReservedDay = $("#reservedDay").val();
@@ -170,7 +170,7 @@
       summeryId:SummeryId,
       userName:UserName,
       vehicleId:VehicleId,
-      driverName:DriverName,
+      driverId:DriverId,
       occupied: Occupied,
       activeDay: ActiveDay,
       reservedDay: ReservedDay,
@@ -202,7 +202,7 @@
       success: function (resp) {
         console.log(resp);
         for (let sum of resp.data) {
-          var row = '<tr><td>' + sum.summeryId +'</td><td>' + sum.userName + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverName + '</td><td>' + sum.occupied + '</td><td>'+ sum.activeDay + '</td><td>'+sum.reservedDay + '</td><td>'+sum.reservedCar + '</td></tr>';
+          var row = '<tr><td>' + sum.summeryId +'</td><td>' + sum.userName + '</td><td>' + sum.vehicleId + '</td><td>' + sum.driverId + '</td><td>' + sum.occupied + '</td><td>'+ sum.activeDay + '</td><td>'+sum.reservedDay + '</td><td>'+sum.reservedCar + '</td></tr>';
           $("#tblDailySummery").append(row);
         }
         bindRowClickEvents();
@@ -217,7 +217,7 @@
       let summeryId = $(this).children(":eq(0)").text();
       let userName = $(this).children(":eq(1)").text();
       let vehicleId = $(this).children(":eq(2)").text();
-      let driverName = $(this).children(":eq(3)").text();
+      let driverId = $(this).children(":eq(3)").text();
       let occupied = $(this).children(":eq(4)").text();
       let activeDay = $(this).children(":eq(5)").text();
       let reservedDay = $(this).children(":eq(6)").text();
@@ -226,7 +226,7 @@
       $('#summeryId').val(summeryId);
       $('#userName').val(userName);
       $('#vehicleId').val(vehicleId);
-      $('#driverName').val(driverName);
+      $('#driverId').val(driverId);
       $('#occupied').val(occupied);
       $('#activeDay').val(activeDay);
       $('#reservedDay').val(reservedDay);
@@ -234,11 +234,11 @@
 
     });
   }
-  function setTextFieldValues(summeryId,userName,vehicleId,driverName,occupied,activeDay,reservedDay,reservedCar){
+  function setTextFieldValues(summeryId,userName,vehicleId,driverId,occupied,activeDay,reservedDay,reservedCar){
     $("#summeryId").val(summeryId);
     $("#userName").val(userName);
     $("#vehicleId").val(vehicleId);
-    $("#driverName").val(driverName);
+    $("#driverId").val(driverId);
     $("#occupied").val(occupied);
     $("#activeDay").val(activeDay);
     $("#reservedDay").val(reservedDay);
