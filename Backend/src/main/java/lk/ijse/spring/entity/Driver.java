@@ -17,6 +17,7 @@ import javax.persistence.Id;
 public class Driver {
     @Id
     private String DriverId;
+
     private String DriverName;
     private String DriverAddress;
     private String DriverContact;

@@ -1,7 +1,6 @@
 package lk.ijse.spring.config;
 
-import lk.ijse.spring.service.impl.AdminServiceImpl;
-import lk.ijse.spring.service.impl.DailySummeryImpl;
+import lk.ijse.spring.service.impl.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +10,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import(JPAConfig.class)
-@ComponentScan(basePackageClasses = {AdminServiceImpl.class, DailySummeryImpl.class})
+@ComponentScan(basePackageClasses = {AdminServiceImpl.class, DailySummeryImpl.class, DriverInformationServiceImpl.class, UserInformationServiceImpl.class, VehicleRoutesServiceImpl.class, ViewScheduleServiceImpl.class})
 public class WebRootConfig {
 
     @Bean

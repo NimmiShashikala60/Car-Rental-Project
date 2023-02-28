@@ -48,7 +48,7 @@
         <form class="mt-2" id="userForm">
             <div class="mb-3">
                 <label for="userNic" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" name="userNic" id="userNic">
+                <input type="text" class="form-control" name=userNic" id="userNic">
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
@@ -132,7 +132,7 @@
                 loadAllUserInformation();
             });
             $("#Delete").click(function () {
-                let nic = $("#userNic").val();
+                let nic = $("#Nic").val();
                 $.ajax({
                     url: baseUrl+`user?nic=${nic}`,
                     method: "delete",

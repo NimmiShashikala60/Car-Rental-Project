@@ -6,6 +6,7 @@ import lk.ijse.spring.entity.Admin;
 import lk.ijse.spring.entity.ViewSchedule;
 import lk.ijse.spring.repo.AdminRepo;
 import lk.ijse.spring.repo.ViewScheduleRepo;
+import lk.ijse.spring.service.ViewScheduleService;
 import lk.ijse.spring.util.ResponseUtil;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -22,51 +23,33 @@ import java.util.List;
 @RequestMapping("schedule")
 public class ViewScheduleController {
     @Autowired
-    private ViewScheduleRepo repo;
+    private ViewScheduleService service;
 
-    @Autowired
-    private ModelMapper mapper;
+//    @Autowired
+//    private ViewScheduleRepo repo;
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil saveViewSchedule(@ModelAttribute ViewScheduleDTO dto){
-        System.out.println(dto.toString());
-        if (repo.existsById(dto.getScheduleId())){
-            throw new RuntimeException("schedule Already exist");
-            //mapper.map(dto,Admin.class);
-        }
-        ViewSchedule map=mapper.map(dto,ViewSchedule.class);
-        repo.save(map);
-
-        ViewSchedule viewSchedule = new ViewSchedule(dto.getScheduleId(), dto.getVehicleName(), dto.getDriverId(), dto.getUserName(),dto.getDate(),dto.getTime());
-        repo.save(viewSchedule);
+        service.saveViewSchedule(dto);
         return new ResponseUtil("OK","Successfully Registered!",null);
 
     }
     @GetMapping
     public ResponseUtil getAllViewSchedule(){
-        List<ViewSchedule> all = repo.findAll();
-        ArrayList<ViewScheduleDTO> allList=mapper.map(all,new TypeToken<ArrayList<ViewScheduleDTO>>(){}.getType());
-        return new ResponseUtil("ok","Successfully  :",allList);
+        return new ResponseUtil("ok","Successfully  :", service.getAllViewSchedule());
     }
 
     @PutMapping
     public ResponseUtil updateViewSchedule(@RequestBody ViewScheduleDTO dto){
-        System.out.println(dto);
-//        if (!repo.existsById(dto.getScheduleId())){
-//            throw new RuntimeException("Schedule doesn't exist");
-//        }
-        ViewSchedule map=mapper.map(dto,ViewSchedule.class);
-        repo.save(map);
-
-        ViewSchedule viewSchedule = new ViewSchedule(dto.getScheduleId(), dto.getVehicleName(), dto.getDriverId(), dto.getUserName(),dto.getDate(),dto.getTime());
-        repo.save(viewSchedule);
+        service.updateViewSchedule(dto);
 
         return new ResponseUtil("OK","Successfully Updated!",null);
     }
 
     @DeleteMapping(params = {"id"})
     public ResponseUtil deleteViewSchedule(@RequestParam String id){
-        repo.deleteById(id);
+        service.deleteViewSchedule(id);
         return new ResponseUtil("OK","Successfully Deleted!",null);
     }
 

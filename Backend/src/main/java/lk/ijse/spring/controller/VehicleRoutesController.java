@@ -6,6 +6,7 @@ import lk.ijse.spring.entity.Admin;
 import lk.ijse.spring.entity.VehicleRoutes;
 import lk.ijse.spring.repo.AdminRepo;
 import lk.ijse.spring.repo.VehicleRoutesRepo;
+import lk.ijse.spring.service.VehicleRoutesService;
 import lk.ijse.spring.util.ResponseUtil;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -24,56 +25,37 @@ public class VehicleRoutesController {
     private VehicleRoutesRepo repo;
 
     @Autowired
-    private ModelMapper mapper;
+    private VehicleRoutesService service;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil saveVehicleRoutes(@ModelAttribute VehicleRoutesDTO dto) {
-        System.out.println(dto.toString());
-        if (repo.existsById(dto.getVehicleId())) {
-            throw new RuntimeException("Vehicle Already exist");
-            //mapper.map(dto,Admin.class);
-        }
-        VehicleRoutes map = mapper.map(dto, VehicleRoutes.class);
-        repo.save(map);
-
-        VehicleRoutes vehicleRoutes = new VehicleRoutes(dto.getVehicleId(), dto.getVehicleName(), dto.getVehicleBrand(), dto.getVehicleType(), dto.getOccupied(), dto.getTransmissionType(), dto.getColor(), dto.getFuelType(), dto.getDailyRate(), dto.getMonthlyRate());
-        repo.save(vehicleRoutes);
+        service.saveVehicleRoutes(dto);
         return new ResponseUtil("OK", "Successfully Registered!", null);
 
     }
 
     @GetMapping
     public ResponseUtil getAllVehicleRoutes() {
-        List<VehicleRoutes> all = repo.findAll();
-        ArrayList<VehicleRoutesDTO> allList = mapper.map(all, new TypeToken<ArrayList<VehicleRoutesDTO>>() {
-        }.getType());
-        return new ResponseUtil("ok", "Successfully  :", allList);
+        return new ResponseUtil("ok", "Successfully  :",  service.getAllVehicleRoutes());
     }
 
     @PutMapping
     public ResponseUtil updateVehicleRoutes(@RequestBody VehicleRoutesDTO dto) {
-        System.out.println(dto);
-        if (!repo.existsById(dto.getVehicleId())) {
-            throw new RuntimeException("Vehicle doesn't exist");
-        }
-        VehicleRoutes map = mapper.map(dto, VehicleRoutes.class);
-        repo.save(map);
-
-        VehicleRoutes vehicleRoutes = new VehicleRoutes(dto.getVehicleId(), dto.getVehicleName(), dto.getVehicleBrand(), dto.getVehicleType(), dto.getOccupied(), dto.getTransmissionType(), dto.getColor(), dto.getFuelType(), dto.getDailyRate(), dto.getMonthlyRate());
-        repo.save(vehicleRoutes);
-
+        service.updateVehicleRoutes(dto);
         return new ResponseUtil("OK", "Successfully Updated!", null);
     }
 
     @DeleteMapping(params = {"id"})
     public ResponseUtil deleteVehicleRoutes(@RequestParam String id) {
-        repo.deleteById(id);
+        service.deleteVehicleRoutes(id);
+        //repo.deleteById(id);
         return new ResponseUtil("OK", "Successfully Deleted!", null);
     }
 
     @GetMapping(path = "/getById")
     public ResponseUtil getVehicleById(@RequestParam String driverId){
+
         ;
         return new ResponseUtil("OK","Successfully Deleted!",repo.findById(driverId).get());
     }
