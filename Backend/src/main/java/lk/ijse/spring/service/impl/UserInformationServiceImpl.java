@@ -27,11 +27,12 @@ public class UserInformationServiceImpl implements UserInformationService {
     @Override
     public void saveUser(UserDTO dto) {
         System.out.println(dto.toString());
-        if (repo.existsById(dto.getUserNic())){
-            throw new RuntimeException("User Already exist");
+     if (repo.existsById(dto.getUserNic())){
+           throw new RuntimeException("User Already exist");
             //mapper.map(dto,Admin.class);
         }
         User map=mapper.map(dto, User.class);
+        System.out.println(map);
         repo.save(map);
 
 //        User user = new User(dto.getUserNic(), dto.getName(), dto.getPassword(), dto.getEmail(),dto.getAddress(),dto.getContact());

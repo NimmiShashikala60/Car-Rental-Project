@@ -27,8 +27,9 @@ public class UserInformationController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseUtil saveUser(@ModelAttribute UserDTO dto){
+    public ResponseUtil saveUser(@RequestParam String userNic, @ModelAttribute UserDTO dto){
       service.saveUser(dto);
+        System.out.println(userNic);
         return new ResponseUtil("OK","Successfully Registered!",null);
 
     }
@@ -43,7 +44,7 @@ public class UserInformationController {
         return new ResponseUtil("OK","Successfully Updated!",null);
     }
 
-    @DeleteMapping(params = {"nic"})
+    @DeleteMapping(params = {"Nic"})
     public ResponseUtil deleteUser(@RequestParam String Nic){
         //repo.deleteById(Nic);
         service.deleteUser(Nic);

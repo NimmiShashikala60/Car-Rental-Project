@@ -35,7 +35,7 @@
         <li><a href="User-Information.html" class="active"><i class="fa fa-user"></i>User Information </a><li>
         <li><a href="Driver-Information.html" class="active"><i class="fa fa-car"></i>Driver Information </a><li>
         <li><a href="View-Schedule.html" class="active"><i class="fa fa-admin"></i>View Schedule </a><li>
-        <li><a href="Income.html" class="active"><i class="fa fa-admin"></i>Income</a><li>
+
 
 
     </ul>
@@ -48,7 +48,7 @@
         <form class="mt-2" id="userForm">
             <div class="mb-3">
                 <label for="userNic" class="form-label">User NIC:</label>
-                <input type="text" class="form-control" name=userNic" id="userNic">
+                <input type="text" class="form-control" name="userNic" id="userNic">
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
@@ -100,7 +100,6 @@
     </section>
 
 </div>
-
 <script src="assets/js/js/bootstrap.min.js"></script>
 <script src="assets/jquery-3.6.1.min.js"></script>
 <script>
@@ -134,7 +133,7 @@
             $("#Delete").click(function () {
                 let nic = $("#userNic").val();
                 $.ajax({
-                    url: baseUrl+`user?nic=${nic}`,
+                    url: baseUrl+`user?Nic=${nic}`,
                     method: "delete",
                     dataType: "json",
                     success: function (resp) {
@@ -182,7 +181,7 @@
 
                 });
             });
-    loadAllUserInformation();
+    // loadAllUserInformation();
 
 
     function loadAllUserInformation() {
