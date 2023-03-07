@@ -20,29 +20,30 @@ public class LoginController {
     @Autowired
     AdminRepo adminRepo;
 
-    @PostMapping
-    public ResponseUtil login(@RequestParam String userNic, @RequestParam String password){
+    @PostMapping(path = "/user")
+    public ResponseUtil login(@RequestParam String userNic, @RequestParam String password) {
         User user = userRepo.findById(userNic).get();
         System.out.println(user);
-        if (user.getPassword().equals(password)){
-            return new ResponseUtil("Ok","Loaded","Correct");
-        }else{
-            return new ResponseUtil("Ok","Loaded","Wrong");
+        if (user.getPassword().equals(password)) {
+            return new ResponseUtil("Ok", "Loaded", "Correct");
+        } else {
+            return new ResponseUtil("Ok", "Loaded", "Wrong");
         }
-//        return new ResponseUtil("OK","Successfully Login",false);
-
+       // return new ResponseUtil("OK", "Successfully Login", false);
     }
+
+
 
     @PostMapping(path = "/admin")
     public ResponseUtil loginAdmin(@RequestParam String userNic, @RequestParam String password){
-        Admin user = adminRepo.findById(userNic).get();
-        System.out.println(user);
-        if (user.getPassword().equals(password)){
+        Admin admin = adminRepo.findById(userNic).get();
+        System.out.println(admin);
+        if (admin.getPassword().equals(password)){
             return new ResponseUtil("Ok","Loaded","Correct");
-        }else{
+        }else {
             return new ResponseUtil("Ok","Loaded","Wrong");
         }
-//        return new ResponseUtil("OK","Successfully Login",false);
+      // return new ResponseUtil("OK","Successfully Login",false);
 
     }
 

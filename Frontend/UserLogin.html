@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>User</title>
 
   <!-- Font -->
   <link rel="stylesheet" href="assets/css/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
   $("#Login").on("click",function () {
 
     $.ajax({
-      url:baseUrl+"login?userNic="+$("#userName").val()+"&password="+$("#password").val(),
+      url:baseUrl+"login/user?userNic="+$("#userName").val()+"&password="+$("#password").val(),
       method:"post",
       dataType:"json",
       // contentType: "application/json",
